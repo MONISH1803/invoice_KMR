@@ -66,6 +66,8 @@ export default function App() {
     gammaM2: 1.25,
     fo: 250,
     foMode: 'Auto',
+    considerHAZ: false,
+    rho: 1.0,
   });
 
   const [derived, setDerived] = useState({
@@ -87,7 +89,12 @@ export default function App() {
     const { name, value, type } = e.target;
     
     setInputs((prev) => {
-      const parsedValue = ['id', 'sectionType', 'connection', 'alloy', 'betaMode', 'sigmaAtMode', 'foMode'].includes(name) ? value : Number(value);
+      let parsedValue: any = value;
+      if (type === 'checkbox') {
+        parsedValue = (e.target as HTMLInputElement).checked;
+      } else {
+        parsedValue = ['id', 'sectionType', 'connection', 'alloy', 'betaMode', 'sigmaAtMode', 'foMode'].includes(name) ? value : Number(value);
+      }
       const newInputs = { ...prev, [name]: parsedValue };
 
       if (name === 'fy' && newInputs.foMode === 'Auto') {
@@ -184,19 +191,30 @@ export default function App() {
 
   useEffect(() => {
     calculateResults();
-  }, [derived, inputs.fy, inputs.fu, inputs.fo, inputs.alloy, inputs.connection, inputs.s, inputs.g, inputs.e, inputs.rows, inputs.thickness, inputs.holeDia, inputs.sigma_at, inputs.sigma_at_rupture, inputs.gammaM0, inputs.gammaM1, inputs.gammaM2, inputs.sectionType]);
+  }, [derived, inputs.fy, inputs.fu, inputs.fo, inputs.alloy, inputs.connection, inputs.s, inputs.g, inputs.e, inputs.rows, inputs.thickness, inputs.holeDia, inputs.sigma_at, inputs.sigma_at_rupture, inputs.gammaM0, inputs.gammaM1, inputs.gammaM2, inputs.sectionType, inputs.considerHAZ, inputs.rho]);
 
   const calculateResults = () => {
     const { ag, an, aeff, beta, holeDia } = derived;
-    const { fy, fu, fo, alloy, connection, s, g, e, thickness, rows, sigma_at, sigma_at_rupture, gammaM0, gammaM1, gammaM2, sectionType } = inputs;
+    const { fy, fu, fo, alloy, connection, s, g, e, thickness, rows, sigma_at, sigma_at_rupture, gammaM0, gammaM1, gammaM2, sectionType, considerHAZ, rho } = inputs;
+
+    // Apply HAZ for Eurocode if applicable
+    let fy_eff = fy;
+    let fu_eff = fu;
+    let fo_eff = fo;
+
+    if (connection === 'Welded' && considerHAZ) {
+      fy_eff = fy * rho;
+      fu_eff = fu * rho;
+      fo_eff = fo * rho;
+    }
 
     // IS 8147 Calculations
     const is_yield = is8147Yield(ag, sigma_at);
     const is_rupture = is8147Rupture(an, sigma_at_rupture);
     
     // Eurocode Calculations
-    const ec_yield = euroYield(ag, fy, gammaM0);
-    const ec_rupture = euroRupture(aeff, fu, gammaM2);
+    const ec_yield = euroYield(ag, fy_eff, gammaM0);
+    const ec_rupture = euroRupture(aeff, fu_eff, gammaM2);
 
     // Block Shear Calculation
     let is_bs = 0;
@@ -211,7 +229,7 @@ export default function App() {
       const agt = Math.max(0, g * thickness) * multiplier;
       
       is_bs = is8147BlockShear(sigma_at, agv, anv, agt, ant);
-      ec_bs = eurocodeBlockShear(fu, fo, ant, agv, anv, gammaM1, gammaM2);
+      ec_bs = eurocodeBlockShear(fu_eff, fo_eff, ant, agv, anv, gammaM1, gammaM2);
     }
 
     // Final Capacities
@@ -442,6 +460,50 @@ export default function App() {
                   </div>
                   <p className="text-[10px] text-indigo-600 mt-2 flex items-center gap-1">
                     <Info className="w-3 h-3" /> Block shear is computed as per Eurocode EN 1999 block tearing formulation.
+                  </p>
+                </div>
+
+                <div className="space-y-1 md:col-span-2 lg:col-span-3 p-4 bg-orange-50 border border-orange-200 rounded-xl mt-2">
+                  <div className="flex justify-between items-center mb-4">
+                    <label className="text-xs font-bold text-orange-800 uppercase flex items-center gap-1">
+                      Heat Affected Zone (HAZ) - Eurocode
+                    </label>
+                  </div>
+                  
+                  {inputs.connection === 'Bolted' ? (
+                    <p className="text-sm text-orange-700 font-medium">HAZ applicable only for welded connections.</p>
+                  ) : (
+                    <div className="space-y-4">
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input type="checkbox" name="considerHAZ" checked={inputs.considerHAZ} onChange={handleInputChange} className="w-4 h-4 text-orange-600 rounded focus:ring-orange-500" />
+                        <span className="text-sm font-medium text-orange-900">Consider HAZ effects</span>
+                      </label>
+                      
+                      {inputs.considerHAZ && (
+                        <>
+                          <div className="space-y-1">
+                            <label className="text-xs font-semibold text-orange-700 uppercase">Reduction Factor ρ (0.6 - 1.0)</label>
+                            <input type="number" step="0.01" min="0.6" max="1.0" name="rho" value={inputs.rho} onChange={handleInputChange} className="w-full px-3 py-2 bg-white border border-orange-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none" />
+                            {(inputs.rho < 0.6 || inputs.rho > 1.0) && (
+                              <p className="text-[10px] text-rose-600 mt-1 flex items-center gap-1 font-medium">
+                                <AlertCircle className="w-3 h-3" /> Warning: ρ should be between 0.6 and 1.0.
+                              </p>
+                            )}
+                          </div>
+                          
+                          <div className="bg-orange-100 p-3 rounded-lg border border-orange-200">
+                            <p className="text-xs font-semibold text-orange-800 mb-2">Reduced strength due to HAZ applied:</p>
+                            <div className="grid grid-cols-2 gap-2 text-sm text-orange-900">
+                              <div>fy: {inputs.fy} → <span className="font-bold">{(inputs.fy * inputs.rho).toFixed(1)}</span> MPa</div>
+                              <div>fu: {inputs.fu} → <span className="font-bold">{(inputs.fu * inputs.rho).toFixed(1)}</span> MPa</div>
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  )}
+                  <p className="text-[10px] text-orange-600 mt-2 flex items-center gap-1">
+                    <Info className="w-3 h-3" /> HAZ reduces strength in welded aluminium connections.
                   </p>
                 </div>
 
