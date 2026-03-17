@@ -37,7 +37,7 @@ const eurocodeBlockShear = (fu: number, fo: number, Ant: number, Agv: number, An
 };
 
 interface NetAreaPath { id: string; an: number; description: string; }
-interface BlockShearPath { id: string; agv: number; anv: number; agt: number; ant: number; }
+interface BlockShearPath { id: string; agv: number; anv: number; agt: number; ant: number; description: string; }
 
 const getGrossArea = (inputs: any) => {
   let ag = 0;
@@ -51,69 +51,118 @@ const getGrossArea = (inputs: any) => {
   return ag;
 };
 
-const getNetAreaPaths = (inputs: any, holeDia: number, ag: number): NetAreaPath[] => {
-  const paths: NetAreaPath[] = [];
+const getStraightNetArea = (inputs: any, holeDia: number, ag: number) => {
   let multiplier = inputs.sectionType === 'Double Angle' ? 2 : 1;
+  let holesArea = inputs.connection === 'Welded' ? 0 : (inputs.noOfHoles * holeDia * inputs.thickness * multiplier);
+  return Math.max(0, ag - holesArea);
+};
 
-  // Path 1: Straight
-  let holesAreaStraight = inputs.connection === 'Welded' ? 0 : (inputs.noOfHoles * holeDia * inputs.thickness * multiplier);
+const getStaggeredRupturePaths = (inputs: any, holeDia: number, ag: number): NetAreaPath[] => {
+  const paths: NetAreaPath[] = [];
   paths.push({
-    id: 'Straight',
-    an: Math.max(0, ag - holesAreaStraight),
-    description: 'Straight cross-section'
+    id: 'Path R1',
+    description: 'Straight cross-section',
+    an: getStraightNetArea(inputs, holeDia, ag)
   });
 
-  // Path 2 to noOfHoles: Staggered
   if (inputs.connection === 'Bolted' && inputs.holePattern === 'Staggered') {
-    const safeGauge = Math.max(0.001, inputs.g);
-    const s_stag = inputs.s_stag; 
-    
-    // Generate paths for zig-zagging across 2 to noOfHoles lines
-    for (let i = 2; i <= inputs.noOfHoles; i++) {
-      const z = i - 1; // number of staggers
-      const staggerAddition = z * (Math.pow(s_stag, 2) / (4 * safeGauge)) * inputs.thickness * multiplier;
-      const holesAreaStaggered = (i * holeDia * inputs.thickness * multiplier);
-      paths.push({
-        id: `Zig-Zag (${i} holes)`,
-        an: Math.max(0, ag - holesAreaStaggered + staggerAddition),
-        description: `Zig-zag across ${i} holes with ${z} staggers`
-      });
-    }
-  }
+    let multiplier = inputs.sectionType === 'Double Angle' ? 2 : 1;
+    const p = inputs.stagger_p;
+    const g = Math.max(0.001, inputs.stagger_g);
+    const t = inputs.thickness;
 
+    const n_holes = inputs.noOfHoles + 1;
+    const n_staggers = inputs.noOfHoles;
+    
+    const staggerAddition = n_staggers * (Math.pow(p, 2) / (4 * g)) * t * multiplier;
+    const holesDeduction = n_holes * holeDia * t * multiplier;
+    
+    paths.push({
+      id: 'Path R2',
+      description: `Zig-zag (${n_holes} holes, ${n_staggers} staggers)`,
+      an: Math.max(0, ag - holesDeduction + staggerAddition)
+    });
+  }
   return paths;
 };
 
-const getBlockShearPaths = (inputs: any, holeDia: number): BlockShearPath[] => {
+const getCriticalNetArea = (paths: NetAreaPath[]) => {
+  let minAn = Infinity;
+  let criticalPath = paths[0];
+  paths.forEach(p => {
+    if (p.an < minAn) {
+      minAn = p.an;
+      criticalPath = p;
+    }
+  });
+  return criticalPath;
+};
+
+const getBlockPaths = (inputs: any, holeDia: number): BlockShearPath[] => {
   const paths: BlockShearPath[] = [];
   if (inputs.connection !== 'Bolted' || inputs.s <= 0 || inputs.rows <= 0) return paths;
 
   let multiplier = inputs.sectionType === 'Double Angle' ? 2 : 1;
   const t = inputs.thickness;
 
-  // Path 1: Straight
+  // Path B1: Straight
   const anv1 = Math.max(0, ((inputs.rows - 1) * inputs.s + inputs.e - (inputs.rows - 0.5) * holeDia) * t) * multiplier;
   const ant1 = Math.max(0, (inputs.g - 0.5 * holeDia) * t) * multiplier;
   const agv1 = Math.max(0, ((inputs.rows - 1) * inputs.s + inputs.e) * t) * multiplier;
   const agt1 = Math.max(0, inputs.g * t) * multiplier;
 
-  paths.push({ id: 'Straight Tension', agv: agv1, anv: anv1, agt: agt1, ant: ant1, description: 'Shear along outer line, straight tension' } as any);
+  paths.push({
+    id: 'Path B1',
+    description: 'Straight block shear',
+    agv: agv1, anv: anv1, agt: agt1, ant: ant1
+  });
 
-  // Path 2: Staggered
-  if (inputs.holePattern === 'Staggered' && inputs.noOfHoles > 1) {
-    const safeGauge = Math.max(0.001, inputs.g);
-    const s_stag = inputs.s_stag;
+  // Path B2: Staggered
+  if (inputs.holePattern === 'Staggered') {
+    const p = inputs.stagger_p;
+    const g = Math.max(0.001, inputs.stagger_g);
     
-    const agv2 = Math.max(0, ((inputs.rows - 1) * inputs.s + inputs.e - s_stag) * t) * multiplier;
-    const anv2 = Math.max(0, agv2 - (inputs.rows - 1) * holeDia * t * multiplier);
+    const agv2 = agv1;
+    const anv2 = anv1;
     const agt2 = Math.max(0, inputs.g * t) * multiplier;
-    const staggerAddition = 1 * (Math.pow(s_stag, 2) / (4 * safeGauge)) * t * multiplier;
+    
+    const staggerAddition = 1 * (Math.pow(p, 2) / (4 * g)) * t * multiplier;
     const ant2 = Math.max(0, agt2 - (1.5 * holeDia * t * multiplier) + staggerAddition);
 
-    paths.push({ id: 'Zig-Zag Tension', agv: agv2, anv: anv2, agt: agt2, ant: ant2, description: 'Shear along inner line, zig-zag tension' } as any);
+    paths.push({
+      id: 'Path B2',
+      description: 'Staggered block shear (zig-zag tension)',
+      agv: agv2, anv: anv2, agt: agt2, ant: ant2
+    });
   }
 
   return paths;
+};
+
+const getCriticalISBlockShear = (paths: BlockShearPath[], sigma_at: number) => {
+  let minBs = Infinity;
+  let criticalPath: any = null;
+  paths.forEach(p => {
+    const bs = is8147BlockShear(sigma_at, p.agv, p.anv, p.agt, p.ant);
+    if (bs > 0 && bs < minBs) {
+      minBs = bs;
+      criticalPath = { ...p, bs };
+    }
+  });
+  return criticalPath;
+};
+
+const getCriticalEuroBlockTearing = (paths: BlockShearPath[], fu: number, fo: number, gammaM1: number, gammaM2: number) => {
+  let minBs = Infinity;
+  let criticalPath: any = null;
+  paths.forEach(p => {
+    const bs = eurocodeBlockShear(fu, fo, p.ant, p.agv, p.anv, gammaM1, gammaM2);
+    if (bs > 0 && bs < minBs) {
+      minBs = bs;
+      criticalPath = { ...p, bs };
+    }
+  });
+  return criticalPath;
 };
 
 export default function App() {
@@ -149,7 +198,8 @@ export default function App() {
     considerHAZ: false,
     rho: 1.0,
     holePattern: 'Straight',
-    s_stag: 25,
+    stagger_p: 25,
+    stagger_g: 50,
   });
 
   const [derived, setDerived] = useState({
@@ -240,17 +290,10 @@ export default function App() {
     const ag = getGrossArea(inputs);
     
     // Net Area Calculation
-    const anPaths = getNetAreaPaths(inputs, holeDia, ag);
-    let minAn = Infinity;
-    let criticalAnPath = '';
-    
-    anPaths.forEach(path => {
-      if (path.an < minAn) {
-        minAn = path.an;
-        criticalAnPath = path.id;
-      }
-    });
-    const an = minAn === Infinity ? 0 : minAn;
+    const anPaths = getStaggeredRupturePaths(inputs, holeDia, ag);
+    const criticalAn = getCriticalNetArea(anPaths);
+    const an = criticalAn ? criticalAn.an : 0;
+    const criticalAnPath = criticalAn ? criticalAn.id : '';
 
     // Shear Lag Factor (Beta)
     let beta = 1.0;
@@ -303,34 +346,26 @@ export default function App() {
     let bsPathsList: any[] = [];
 
     if (connection === 'Bolted' && s > 0 && rows > 0) {
-      const bsPaths = getBlockShearPaths(inputs, holeDia);
+      const bsPaths = getBlockPaths(inputs, holeDia);
       
-      let min_is_bs = Infinity;
-      let min_ec_bs = Infinity;
+      const critIS = getCriticalISBlockShear(bsPaths, sigma_at);
+      if (critIS) {
+        is_bs = critIS.bs;
+        is_bs_path = critIS.id;
+      }
 
-      bsPaths.forEach(path => {
-        const current_is_bs = is8147BlockShear(sigma_at, path.agv, path.anv, path.agt, path.ant);
-        const current_ec_bs = eurocodeBlockShear(fu_eff, fo_eff, path.ant, path.agv, path.anv, gammaM1, gammaM2);
-        
-        bsPathsList.push({
-          id: path.id,
-          is_bs: current_is_bs,
-          ec_bs: current_ec_bs,
-          description: (path as any).description
-        });
+      const critEC = getCriticalEuroBlockTearing(bsPaths, fu_eff, fo_eff, gammaM1, gammaM2);
+      if (critEC) {
+        ec_bs = critEC.bs;
+        ec_bs_path = critEC.id;
+      }
 
-        if (current_is_bs > 0 && current_is_bs < min_is_bs) {
-          min_is_bs = current_is_bs;
-          is_bs_path = path.id;
-        }
-        if (current_ec_bs > 0 && current_ec_bs < min_ec_bs) {
-          min_ec_bs = current_ec_bs;
-          ec_bs_path = path.id;
-        }
-      });
-
-      is_bs = min_is_bs === Infinity ? 0 : min_is_bs;
-      ec_bs = min_ec_bs === Infinity ? 0 : min_ec_bs;
+      bsPathsList = bsPaths.map(p => ({
+        id: p.id,
+        description: p.description,
+        is_bs: is8147BlockShear(sigma_at, p.agv, p.anv, p.agt, p.ant),
+        ec_bs: eurocodeBlockShear(fu_eff, fo_eff, p.ant, p.agv, p.anv, gammaM1, gammaM2)
+      }));
     }
 
     // Final Capacities
@@ -483,9 +518,14 @@ export default function App() {
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-1">
-                        <label className="text-xs font-semibold text-purple-700 uppercase">Stagger Offset (s_stag) mm</label>
-                        <input type="number" name="s_stag" value={inputs.s_stag} onChange={handleInputChange} className="w-full px-3 py-2 bg-white border border-purple-300 rounded-lg outline-none" />
+                        <label className="text-xs font-semibold text-purple-700 uppercase">Stagger Pitch p (mm)</label>
+                        <input type="number" name="stagger_p" value={inputs.stagger_p} onChange={handleInputChange} className="w-full px-3 py-2 bg-white border border-purple-300 rounded-lg outline-none" />
                         <p className="text-[10px] text-purple-600 mt-1">Longitudinal distance between staggered holes.</p>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-purple-700 uppercase">Stagger Gauge g (mm)</label>
+                        <input type="number" name="stagger_g" value={inputs.stagger_g} onChange={handleInputChange} className="w-full px-3 py-2 bg-white border border-purple-300 rounded-lg outline-none" />
+                        <p className="text-[10px] text-purple-600 mt-1">Transverse distance between staggered holes.</p>
                       </div>
                     </div>
                   </div>
