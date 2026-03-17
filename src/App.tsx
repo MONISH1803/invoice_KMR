@@ -2,171 +2,85 @@ import React, { useState, useEffect } from 'react';
 import { Calculator, AlertCircle, Info, ChevronDown, ChevronUp } from 'lucide-react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-// IS 8147:1976 Clause 4.1.1 and Table 9: Permissible Stresses
-// IS 8147:1976 Working Stress Method: No partial safety factors used
-const is8147Yield = (ag: number, sigma_at: number) => {
-  return (sigma_at * ag) / 1000;
-};
+// Calculation Logic strictly adhering to EN 1999-1-1 and IS 8147:1976
+export function calculateConnectionCapacities(inputs: any) {
+  const {
+    width, thickness, dia, noOfHoles: n, rows: n_line,
+    g, s: p, e, fy, fu, gammaM0, gammaM1, gammaM2,
+    sigma_at, sigma_at_rupture, tau_a, connection, considerHAZ, rho
+  } = inputs;
 
-// IS 8147:1976 Clause 4.1.1 and Table 9: Permissible Stresses
-const is8147Rupture = (an: number, sigma_at_rupture: number) => {
-  return (sigma_at_rupture * an) / 1000;
-};
-
-// IS 8147:1976 Block Shear: Sum of allowable shear strength on failure planes and allowable tensile strength on perpendicular plane
-const is8147BlockShear = (sigma_at: number, tau_a: number, agv: number, anv: number, agt: number, ant: number) => {
-  if (agv <= 0 || anv <= 0 || agt <= 0 || ant <= 0) return 0;
-  const bs1 = (tau_a * agv) + (sigma_at * ant);
-  const bs2 = (tau_a * anv) + (sigma_at * agt);
-  return Math.min(bs1, bs2) / 1000;
-};
-
-// EN 1999-1-1:2007 Clause 6.2.3(2)a: Yielding N_pl,Rd = (Ag * fy) / gammaM0
-const euroYield = (ag: number, fy: number, gammaM0: number) => {
-  return (ag * fy) / gammaM0 / 1000;
-};
-
-// EN 1999-1-1:2007 Clause 6.2.3(2)b: Rupture N_u,Rd = (0.9 * A_net * fu) / gammaM2
-const euroRupture = (aeff: number, fu: number, gammaM2: number) => {
-  return (0.9 * fu * aeff) / gammaM2 / 1000;
-};
-
-// EN 1999-1-1:2007 Clause 8.5.2.3: Block Tearing V_eff,Rd = (fu * Ant / gammaM2) + (fy * Anv) / (sqrt(3) * gammaM1)
-const eurocodeBlockShear = (fu: number, fy: number, Ant: number, Agv: number, Anv: number, gammaM1: number, gammaM2: number) => {
-  if (Agv <= 0 || Anv <= 0 || Ant <= 0) return 0;
-  const shearTerm = (fy * Anv) / (Math.sqrt(3) * gammaM1);
-  const tensionTerm = (fu * Ant) / gammaM2;
-  return (tensionTerm + shearTerm) / 1000;
-};
-
-interface NetAreaPath { id: string; an: number; description: string; }
-interface BlockShearPath { id: string; agv: number; anv: number; agt: number; ant: number; description: string; }
-
-const getGrossArea = (inputs: any) => {
-  let ag = 0;
-  if (inputs.sectionType === 'Plate') {
-    ag = Math.max(0, inputs.width * inputs.thickness);
-  } else if (inputs.sectionType === 'Single Angle') {
-    ag = Math.max(0, (inputs.leg1 + inputs.leg2 - inputs.thickness) * inputs.thickness);
-  } else if (inputs.sectionType === 'Double Angle') {
-    ag = Math.max(0, 2 * (inputs.leg1 + inputs.leg2 - inputs.thickness) * inputs.thickness);
-  }
-  return ag;
-};
-
-const getStraightNetArea = (inputs: any, holeDia: number, ag: number) => {
-  let multiplier = inputs.sectionType === 'Double Angle' ? 2 : 1;
-  let holesArea = inputs.connection === 'Welded' ? 0 : (inputs.noOfHoles * holeDia * inputs.thickness * multiplier);
-  return Math.max(0, ag - holesArea);
-};
-
-const getStaggeredRupturePaths = (inputs: any, holeDia: number, ag: number): NetAreaPath[] => {
-  const paths: NetAreaPath[] = [];
-  paths.push({
-    id: 'Path R1',
-    description: 'Straight cross-section',
-    an: getStraightNetArea(inputs, holeDia, ag)
-  });
-
-  if (inputs.connection === 'Bolted' && inputs.holePattern === 'Staggered') {
-    let multiplier = inputs.sectionType === 'Double Angle' ? 2 : 1;
-    const p = inputs.stagger_p;
-    const g = Math.max(0.001, inputs.stagger_g);
-    const t = inputs.thickness;
-
-    const n_holes = inputs.noOfHoles + 1;
-    const n_staggers = inputs.noOfHoles;
-    
-    const staggerAddition = n_staggers * (Math.pow(p, 2) / (4 * g)) * t * multiplier;
-    const holesDeduction = n_holes * holeDia * t * multiplier;
-    
-    paths.push({
-      id: 'Path R2',
-      description: `Zig-zag (${n_holes} holes, ${n_staggers} staggers)`,
-      an: Math.max(0, ag - holesDeduction + staggerAddition)
-    });
-  }
-  return paths;
-};
-
-const getCriticalNetArea = (paths: NetAreaPath[]) => {
-  let minAn = Infinity;
-  let criticalPath = paths[0];
-  paths.forEach(p => {
-    if (p.an < minAn) {
-      minAn = p.an;
-      criticalPath = p;
-    }
-  });
-  return criticalPath;
-};
-
-const getBlockPaths = (inputs: any, holeDia: number): BlockShearPath[] => {
-  const paths: BlockShearPath[] = [];
-  if (inputs.connection !== 'Bolted' || inputs.s <= 0 || inputs.rows <= 0) return paths;
-
-  let multiplier = inputs.sectionType === 'Double Angle' ? 2 : 1;
-  const t = inputs.thickness;
-
-  // Path B1: Straight
-  const anv1 = Math.max(0, ((inputs.rows - 1) * inputs.s + inputs.e - (inputs.rows - 0.5) * holeDia) * t) * multiplier;
-  const ant1 = Math.max(0, (inputs.g - 0.5 * holeDia) * t) * multiplier;
-  const agv1 = Math.max(0, ((inputs.rows - 1) * inputs.s + inputs.e) * t) * multiplier;
-  const agt1 = Math.max(0, inputs.g * t) * multiplier;
-
-  paths.push({
-    id: 'Path B1',
-    description: 'Straight block shear',
-    agv: agv1, anv: anv1, agt: agt1, ant: ant1
-  });
-
-  // Path B2: Staggered
-  if (inputs.holePattern === 'Staggered') {
-    const p = inputs.stagger_p;
-    const g = Math.max(0.001, inputs.stagger_g);
-    
-    const agv2 = agv1;
-    const anv2 = anv1;
-    const agt2 = Math.max(0, inputs.g * t) * multiplier;
-    
-    const staggerAddition = 1 * (Math.pow(p, 2) / (4 * g)) * t * multiplier;
-    const ant2 = Math.max(0, agt2 - (1.5 * holeDia * t * multiplier) + staggerAddition);
-
-    paths.push({
-      id: 'Path B2',
-      description: 'Staggered block shear (zig-zag tension)',
-      agv: agv2, anv: anv2, agt: agt2, ant: ant2
-    });
+  let fy_eff = fy;
+  let fu_eff = fu;
+  if (connection === 'Welded' && considerHAZ) {
+    fy_eff = fy * rho;
+    fu_eff = fu * rho;
   }
 
-  return paths;
-};
+  // 1. Geometric Variables & Area Logic
+  const dh = dia + 2; // Hole Diameter: Bolt Diameter + 2mm
+  const Ag = width * thickness; // Gross Area: Width * Thickness
+  const An = (width - (n * dh)) * thickness; // Net Area: (Width - (n * dh)) * Thickness
+  
+  // Net Tension Area for Block Shear (Ant): (Gauge - dh) * Thickness
+  const Ant = (g - dh) * thickness;
+  
+  // Net Shear Area for Block Shear (Anv): 2 * (Edge + Pitch * (n_line - 1) - (n_line - 0.5) * dh) * Thickness
+  const Anv = 2 * (e + p * (n_line - 1) - (n_line - 0.5) * dh) * thickness;
 
-const getCriticalISBlockShear = (paths: BlockShearPath[], sigma_at: number, tau_a: number) => {
-  let minBs = Infinity;
-  let criticalPath: any = null;
-  paths.forEach(p => {
-    const bs = is8147BlockShear(sigma_at, tau_a, p.agv, p.anv, p.agt, p.ant);
-    if (bs > 0 && bs < minBs) {
-      minBs = bs;
-      criticalPath = { ...p, bs };
-    }
-  });
-  return criticalPath;
-};
+  // 2. Eurocode 9 (EN 1999-1-1) Implementation
+  // Yielding (N_pl,Rd): (Ag * fy) / gammaM0
+  const ecYield = (Ag * fy_eff) / gammaM0 / 1000;
+  
+  // Constraint: Apply beta (Shear Lag) ONLY to Rupture. beta = 0.65 for 2 bolts/line and 0.70 for 3+ bolts/line.
+  let beta = 1.0;
+  if (connection === 'Bolted') {
+    beta = n_line >= 3 ? 0.70 : (n_line === 2 ? 0.65 : 1.0);
+  }
+  
+  // Rupture (N_u,Rd): (0.9 * Anet * fu * beta) / gammaM2
+  const ecRupture = (0.9 * An * fu_eff * beta) / gammaM2 / 1000;
+  
+  // Block Shear (V_eff,Rd): (fu * Ant / gammaM2) + (fy * Anv / (sqrt(3) * gammaM1))
+  // Constraint: Do NOT apply beta to Block Shear. Use uniform tension distribution factor (u_bs = 1.0).
+  let ecBlockShear = 0;
+  if (connection === 'Bolted' && n_line > 0 && p > 0) {
+    ecBlockShear = ((fu_eff * Ant) / gammaM2 + (fy_eff * Anv) / (Math.sqrt(3) * gammaM1)) / 1000;
+  }
 
-const getCriticalEuroBlockTearing = (paths: BlockShearPath[], fu: number, fy: number, gammaM1: number, gammaM2: number) => {
-  let minBs = Infinity;
-  let criticalPath: any = null;
-  paths.forEach(p => {
-    const bs = eurocodeBlockShear(fu, fy, p.ant, p.agv, p.anv, gammaM1, gammaM2);
-    if (bs > 0 && bs < minBs) {
-      minBs = bs;
-      criticalPath = { ...p, bs };
-    }
-  });
-  return criticalPath;
-};
+  // 3. IS 8147:1976 (Working Stress) Implementation
+  // Yielding: Ag * sigma_at
+  const isYield = (Ag * sigma_at) / 1000;
+  
+  // Rupture: An * sigma_at_rupture
+  const isRupture = (An * sigma_at_rupture) / 1000;
+  
+  // Block Shear: (tau_a * Anv) + (sigma_at * Ant)
+  // Constraint: Use the user-defined permissible stresses directly. Do NOT use gamma factors here.
+  let isBlockShear = 0;
+  if (connection === 'Bolted' && n_line > 0 && p > 0) {
+    isBlockShear = ((tau_a * Anv) + (sigma_at * Ant)) / 1000;
+  }
+
+  // 4. Output Requirements
+  const ecFinal = ecBlockShear > 0 ? Math.min(ecYield, ecRupture, ecBlockShear) : Math.min(ecYield, ecRupture);
+  let ecMode = ecFinal === ecYield ? 'Yielding' : (ecFinal === ecRupture ? 'Rupture' : 'Block Shear');
+
+  const isFinal = isBlockShear > 0 ? Math.min(isYield, isRupture, isBlockShear) : Math.min(isYield, isRupture);
+  let isMode = isFinal === isYield ? 'Yielding' : (isFinal === isRupture ? 'Rupture' : 'Block Shear');
+
+  return {
+    eurocode: { yield: ecYield, rupture: ecRupture, blockShear: ecBlockShear, final: ecFinal, mode: ecMode, bsPath: 'Standard' },
+    is8147: { yield: isYield, rupture: isRupture, blockShear: isBlockShear, final: isFinal, mode: isMode, bsPath: 'Standard' },
+    derived: { holeDia: dh, ag: Ag, an: An, beta, aeff: An * beta, criticalAnPath: 'Standard', rupturePaths: [] },
+    bsPathsList: [{
+      id: 'Standard',
+      description: 'Standard block shear',
+      is_bs: isBlockShear,
+      ec_bs: ecBlockShear
+    }]
+  };
+}
 
 export default function App() {
   const [inputs, setInputs] = useState({
@@ -298,106 +212,14 @@ export default function App() {
   };
 
   useEffect(() => {
-    // Derived Geometry
-    // EN 1999-1-1:2007 Clause 8.1.4.2.4: Hole diameter d_0 = d + 2mm
-    const holeDia = inputs.dia + 2;
-    const ag = getGrossArea(inputs);
-    
-    // Net Area Calculation
-    const anPaths = getStaggeredRupturePaths(inputs, holeDia, ag);
-    const criticalAn = getCriticalNetArea(anPaths);
-    const an = criticalAn ? criticalAn.an : 0;
-    const criticalAnPath = criticalAn ? criticalAn.id : '';
-
-    // Shear Lag Factor (Beta)
-    // EN 1999-1-1:2007 Clause 6.2.3(3): Shear Lag Factor (beta) based on connection length/bolts
-    let beta = 1.0;
-    if (inputs.betaMode === 'Auto') {
-      if (inputs.L > 0) {
-        beta = Math.max(0.7, Math.min(1.0, 1 - (inputs.x / inputs.L)));
-      }
-    } else {
-      beta = Math.max(0.7, Math.min(1.0, inputs.manualBeta));
-    }
-
-    // Effective Area
-    const aeff = Math.max(0, beta * an);
-
-    setDerived({ holeDia, ag, an, beta, aeff, criticalAnPath, rupturePaths: anPaths });
-  }, [inputs]);
-
-  useEffect(() => {
-    calculateResults();
-  }, [derived, inputs]);
-
-  const calculateResults = () => {
-    const { ag, an, aeff, beta, holeDia } = derived;
-    const { fy, fu, fo, alloy, connection, s, g, e, thickness, rows, sigma_at, tau_a, sigma_at_rupture, gammaM0, gammaM1, gammaM2, sectionType, considerHAZ, rho } = inputs;
-
-    // Apply HAZ for Eurocode if applicable
-    let fy_eff = fy;
-    let fu_eff = fu;
-    let fo_eff = fo;
-
-    if (connection === 'Welded' && considerHAZ) {
-      fy_eff = fy * rho;
-      fu_eff = fu * rho;
-      fo_eff = fo * rho;
-    }
-
-    // IS 8147 Calculations
-    const is_yield = is8147Yield(ag, sigma_at);
-    const is_rupture = is8147Rupture(an, sigma_at_rupture);
-    
-    // Eurocode Calculations
-    const ec_yield = euroYield(ag, fy_eff, gammaM0);
-    const ec_rupture = euroRupture(aeff, fu_eff, gammaM2);
-
-    // Block Shear Calculation
-    let is_bs = 0;
-    let ec_bs = 0;
-    let is_bs_path = '';
-    let ec_bs_path = '';
-    let bsPathsList: any[] = [];
-
-    if (connection === 'Bolted' && s > 0 && rows > 0) {
-      const bsPaths = getBlockPaths(inputs, holeDia);
-      
-      const critIS = getCriticalISBlockShear(bsPaths, sigma_at, tau_a);
-      if (critIS) {
-        is_bs = critIS.bs;
-        is_bs_path = critIS.id;
-      }
-
-      const critEC = getCriticalEuroBlockTearing(bsPaths, fu_eff, fy_eff, gammaM1, gammaM2);
-      if (critEC) {
-        ec_bs = critEC.bs;
-        ec_bs_path = critEC.id;
-      }
-
-      bsPathsList = bsPaths.map(p => ({
-        id: p.id,
-        description: p.description,
-        is_bs: is8147BlockShear(sigma_at, tau_a, p.agv, p.anv, p.agt, p.ant),
-        ec_bs: eurocodeBlockShear(fu_eff, fy_eff, p.ant, p.agv, p.anv, gammaM1, gammaM2)
-      }));
-    }
-
-    // Final Capacities
-    const is_final = is_bs > 0 ? Math.min(is_yield, is_rupture, is_bs) : Math.min(is_yield, is_rupture);
-    let is_mode = is_yield < is_rupture ? 'Yielding' : 'Rupture';
-    if (is_bs > 0 && is_bs < Math.min(is_yield, is_rupture)) is_mode = 'Block Shear';
-
-    const ec_final = ec_bs > 0 ? Math.min(ec_yield, ec_rupture, ec_bs) : Math.min(ec_yield, ec_rupture);
-    let ec_mode = ec_yield < ec_rupture ? 'Yielding' : 'Rupture';
-    if (ec_bs > 0 && ec_bs < Math.min(ec_yield, ec_rupture)) ec_mode = 'Block Shear';
-
+    const results = calculateConnectionCapacities(inputs);
+    setDerived(results.derived as any);
     setResults({
-      is8147: { yield: is_yield, rupture: is_rupture, blockShear: is_bs, final: is_final, mode: is_mode, bsPath: is_bs_path },
-      eurocode: { yield: ec_yield, rupture: ec_rupture, blockShear: ec_bs, final: ec_final, mode: ec_mode, bsPath: ec_bs_path },
-      bsPathsList
+      is8147: results.is8147,
+      eurocode: results.eurocode,
+      bsPathsList: results.bsPathsList
     });
-  };
+  }, [inputs]);
 
   const chartData = [
     { name: 'Yield', 'IS 8147': results.is8147.yield, 'Eurocode': results.eurocode.yield },
