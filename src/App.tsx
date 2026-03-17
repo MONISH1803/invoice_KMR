@@ -81,15 +81,33 @@ export default function App() {
     const calculatedAg = inputs.width * inputs.thickness;
     
     // Staggered Net Area (An)
-    const staggerTerm = (inputs.s > 0 && inputs.g > 0) ? (inputs.s * inputs.s) / (4 * inputs.g) : 0;
-    const calculatedAn = (inputs.width - (inputs.noOfHoles * calculatedHoleDia) + staggerTerm) * inputs.thickness;
+    const staggerTerm = (inputs.noOfHoles > 1 && inputs.s > 0 && inputs.g > 0) ? (inputs.noOfHoles - 1) * (inputs.s * inputs.s) / (4 * inputs.g) : 0;
+    let calculatedAn = inputs.connection === 'Welded' 
+      ? calculatedAg 
+      : (inputs.width - (inputs.noOfHoles * calculatedHoleDia) + staggerTerm) * inputs.thickness;
+
+    if (['Single Angles', 'Double Angles', 'Channels'].includes(inputs.sectionType)) {
+      // For IS 8147, An = A1 + k * A2
+      const holesArea = inputs.connection === 'Welded' ? 0 : (inputs.noOfHoles * calculatedHoleDia);
+      const A1 = Math.max(0, (inputs.width / 2 - holesArea + staggerTerm) * inputs.thickness);
+      const A2 = (inputs.width / 2) * inputs.thickness;
+      const k = (3 * A1 + A2) > 0 ? (3 * A1) / (3 * A1 + A2) : 0;
+      calculatedAn = A1 + k * A2;
+    }
 
     // Effective Area (Aeff)
     let calculatedAeff = calculatedAn;
     if (['Single Angles', 'Double Angles', 'Channels'].includes(inputs.sectionType)) {
-      calculatedAeff = calculatedBeta * calculatedAn;
-    } else if (inputs.connection === 'Welded' && inputs.includeHaz) {
-      calculatedAeff = calculatedRho * calculatedAg;
+      // Eurocode uses beta for effective area
+      const rawAn = inputs.connection === 'Welded' 
+        ? calculatedAg 
+        : (inputs.width - (inputs.noOfHoles * calculatedHoleDia) + staggerTerm) * inputs.thickness;
+      calculatedAeff = calculatedBeta * rawAn;
+    }
+    
+    if (inputs.connection === 'Welded' && inputs.includeHaz) {
+      // Apply HAZ reduction (rho) on top of any shear lag
+      calculatedAeff = calculatedAeff * calculatedRho;
     }
 
     setInputs((prev) => ({
