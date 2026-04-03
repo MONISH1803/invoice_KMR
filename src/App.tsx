@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Calculator, AlertCircle, Info, ChevronDown, ChevronUp, BookOpen, LineChart as LineChartIcon, Sliders } from 'lucide-react';
-import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { useState, useEffect, useMemo } from 'react';
+import { Calculator, AlertCircle, Info, ChevronDown, ChevronUp, BookOpen, LineChart as LineChartIcon, Sliders, Presentation } from 'lucide-react';
+import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ComposedChart, ReferenceLine, Area } from 'recharts';
 
 const EUROCODE_ALLOYS = [
   // Eurocode EN 1999-1-1 Table 3.2a thickness limits + characteristic strengths (sheet/strip/plate)
@@ -379,16 +379,55 @@ export default function App() {
       }
 
       const results = calculateConnectionCapacities(testInputs);
+      const ec = Number(results.eurocode.final.toFixed(2));
+      const isv = Number(results.is8147.final.toFixed(2));
+      const gap = Number((ec - isv).toFixed(2));
+      const ratioPct = isv > 0 ? Number(((ec / isv - 1) * 100).toFixed(1)) : 0;
       data.push({
         paramValue: paramVar === 'noOfHoles' ? val : Number(val.toFixed(2)),
-        Eurocode: Number(results.eurocode.final.toFixed(2)),
-        IS8147: Number(results.is8147.final.toFixed(2)),
+        Eurocode: ec,
+        IS8147: isv,
+        gap,
+        ratioPct,
       });
     }
     return data;
   };
 
-  const parametricData = activeTab === 'parametric' ? generateParametricData() : [];
+  const parametricData = useMemo(
+    () => (activeTab === 'parametric' ? generateParametricData() : []),
+    [activeTab, inputs, paramVar]
+  );
+
+  const parametricInsight = useMemo(() => {
+    if (!parametricData.length) return null;
+    const gaps = parametricData.map((d) => d.gap);
+    const minG = Math.min(...gaps);
+    const maxG = Math.max(...gaps);
+    const avgG = gaps.reduce((a, b) => a + b, 0) / gaps.length;
+    const ecVals = parametricData.map((d) => d.Eurocode);
+    const isVals = parametricData.map((d) => d.IS8147);
+    const ecHigherCount = gaps.filter((g) => g > 0.01).length;
+    const isHigherCount = gaps.filter((g) => g < -0.01).length;
+    let dominance: string;
+    if (ecHigherCount === gaps.length) dominance = 'Eurocode EN 1999 predicts a higher governing capacity than IS 8147 across the entire swept range.';
+    else if (isHigherCount === gaps.length) dominance = 'IS 8147 predicts a higher governing capacity than Eurocode EN 1999 across the entire swept range.';
+    else dominance = 'The comparison changes along the sweep: neither code is uniformly more conservative for all parameter values shown.';
+    return {
+      minG,
+      maxG,
+      avgG,
+      ecMin: Math.min(...ecVals),
+      ecMax: Math.max(...ecVals),
+      isMin: Math.min(...isVals),
+      isMax: Math.max(...isVals),
+      dominance,
+      rangeLabel:
+        paramVar === 'noOfHoles'
+          ? `bolts ${parametricData[0].paramValue}–${parametricData[parametricData.length - 1].paramValue}`
+          : `about ${((parametricData[parametricData.length - 1].paramValue as number) / (parametricData[0].paramValue as number || 1)).toFixed(2)}× the starting value (±50% of current)`,
+    };
+  }, [parametricData, paramVar]);
 
   return (
     <div className="min-h-screen bg-neutral-100 text-neutral-900 font-sans p-4 md:p-8">
@@ -1078,13 +1117,23 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="h-[500px] w-full mt-8">
+              <div className="h-[520px] w-full mt-8">
                 <ResponsiveContainer width="100%" height="100%">
-                  <LineChart
+                  <ComposedChart
                     data={parametricData}
                     margin={{ top: 20, right: 30, left: 20, bottom: 20 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e5e5" />
+                    <defs>
+                      <linearGradient id="ecFill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#4f46e5" stopOpacity={0.18} />
+                        <stop offset="95%" stopColor="#4f46e5" stopOpacity={0.02} />
+                      </linearGradient>
+                      <linearGradient id="isFill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#e11d48" stopOpacity={0.16} />
+                        <stop offset="95%" stopColor="#e11d48" stopOpacity={0.02} />
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
                     <XAxis 
                       dataKey="paramValue" 
                       label={{ value: paramVar === 'thickness' ? 'Thickness (mm)' : paramVar === 'width' ? 'Width (mm)' : paramVar === 'dia' ? 'Bolt Diameter (mm)' : 'Number of Bolts', position: 'insideBottom', offset: -10 }} 
@@ -1097,25 +1146,63 @@ export default function App() {
                     />
                     <Tooltip 
                       contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' }}
-                      formatter={(value) => [`${value} kN`]}
+                      formatter={(value, name) => {
+                        if (name === 'Gap (EC - IS)') return [`${Number(value).toFixed(2)} kN`, name];
+                        if (name === 'Difference (%)') return [`${Number(value).toFixed(1)} %`, name];
+                        return [`${Number(value).toFixed(2)} kN`, name];
+                      }}
                       labelFormatter={(label) => `${paramVar === 'thickness' ? 'Thickness' : paramVar === 'width' ? 'Width' : paramVar === 'dia' ? 'Diameter' : 'Bolts'}: ${label}`}
+                      itemSorter={(item) => {
+                        const order: Record<string, number> = { 'Eurocode EN 1999': 0, 'IS 8147:1976': 1, 'Gap (EC - IS)': 2, 'Difference (%)': 3 };
+                        return order[item.name as string] ?? 99;
+                      }}
                     />
                     <Legend verticalAlign="top" height={36} iconType="circle" />
+                    <ReferenceLine
+                      x={paramVar === 'noOfHoles' ? Math.round(inputs.noOfHoles) : Number(inputs[paramVar].toFixed?.(2) ?? inputs[paramVar])}
+                      stroke="#6b7280"
+                      strokeDasharray="4 4"
+                      label={{ value: 'Current input', position: 'insideTopRight', fill: '#4b5563', fontSize: 12 }}
+                    />
+                    <Area type="monotone" dataKey="Eurocode" stroke="none" fill="url(#ecFill)" fillOpacity={1} legendType="none" />
+                    <Area type="monotone" dataKey="IS8147" stroke="none" fill="url(#isFill)" fillOpacity={1} legendType="none" />
                     <Line type="monotone" dataKey="Eurocode" stroke="#4f46e5" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} name="Eurocode EN 1999" />
                     <Line type="monotone" dataKey="IS8147" stroke="#e11d48" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} name="IS 8147:1976" />
-                  </LineChart>
+                    <Line type="monotone" dataKey="gap" stroke="#0f766e" strokeDasharray="6 4" strokeWidth={2} dot={false} name="Gap (EC - IS)" />
+                    <Line type="monotone" dataKey="ratioPct" stroke="#d97706" strokeDasharray="3 3" strokeWidth={2} dot={false} name="Difference (%)" yAxisId={1} />
+                    <YAxis hide yAxisId={1} domain={['auto', 'auto']} />
+                  </ComposedChart>
                 </ResponsiveContainer>
               </div>
               
-              <div className="mt-6 bg-indigo-50 rounded-xl p-4 border border-indigo-100">
-                <h3 className="text-sm font-bold text-indigo-900 mb-2 flex items-center gap-2">
-                  <Info className="w-4 h-4" />
-                  Analysis Insights
-                </h3>
-                <p className="text-sm text-indigo-800">
-                  This graph displays the governing design capacity (minimum of Yield, Rupture, and Block Shear) for both standards as the selected parameter varies from -50% to +50% of its current value ({inputs[paramVar]}). 
-                  {paramVar === 'thickness' && " Note that changing thickness may also alter the material properties (fy, fu, permissible stresses) based on the selected alloys' specifications."}
-                </p>
+              <div className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                <div className="bg-indigo-50 rounded-xl p-4 border border-indigo-100">
+                  <h3 className="text-sm font-bold text-indigo-900 mb-2 flex items-center gap-2">
+                    <Info className="w-4 h-4" />
+                    How to read this graph
+                  </h3>
+                  <p className="text-sm text-indigo-800">
+                    The solid lines show the governing design capacity for each code while varying one parameter around the current input. 
+                    The teal dashed line shows absolute gap (Eurocode - IS 8147), and the amber dashed line shows percentage difference. 
+                    The vertical dashed marker indicates your current input value ({inputs[paramVar]}).
+                    {paramVar === 'thickness' && " For thickness sweeps, alloy-dependent strengths can change with thickness limits, so local bends in the curve are expected."}
+                  </p>
+                </div>
+                <div className="bg-emerald-50 rounded-xl p-4 border border-emerald-100">
+                  <h3 className="text-sm font-bold text-emerald-900 mb-2 flex items-center gap-2">
+                    <Presentation className="w-4 h-4" />
+                    Presentation-ready insights
+                  </h3>
+                  {parametricInsight && (
+                    <ul className="text-sm text-emerald-800 space-y-1">
+                      <li>• Sweep range: {parametricInsight.rangeLabel}</li>
+                      <li>• Eurocode capacity band: {parametricInsight.ecMin.toFixed(2)} to {parametricInsight.ecMax.toFixed(2)} kN</li>
+                      <li>• IS 8147 capacity band: {parametricInsight.isMin.toFixed(2)} to {parametricInsight.isMax.toFixed(2)} kN</li>
+                      <li>• Gap (EC - IS): min {parametricInsight.minG.toFixed(2)} kN, max {parametricInsight.maxG.toFixed(2)} kN, mean {parametricInsight.avgG.toFixed(2)} kN</li>
+                      <li>• {parametricInsight.dominance}</li>
+                    </ul>
+                  )}
+                </div>
               </div>
             </div>
           </div>
