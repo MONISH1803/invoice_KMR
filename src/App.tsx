@@ -145,14 +145,10 @@ export function calculateConnectionCapacities(inputs: any) {
       else isK = (3 * a1) / (3 * a1 + a2);
       isAeff = a1 + a2 * isK;
     } else if (inputs.sectionType === 'Double Angle') {
-      const a1 = 2 * ((inputs.leg1 - thickness / 2) * thickness - (n * dh * thickness));
-      const a2 = 2 * (inputs.leg2 - thickness / 2) * thickness;
-      // IS 800 Cl. 6.3.3 bolt-count rules for double-angle (user-requested):
-      // 1 bolt: kt=0.5, 2 bolts: kt=0.6, 3+ bolts: formula
-      if (n <= 1) isK = 0.5;
-      else if (n === 2) isK = 0.6;
-      else isK = (5 * a1) / (5 * a1 + a2);
-      isAeff = a1 + a2 * isK;
+      // Keep IS rupture consistent with displayed net area for double angles:
+      // use An directly and avoid hidden k-based reductions.
+      isK = 1.0;
+      isAeff = An;
     }
   }
   const isRupture = (isAeff * sigma_at_rupture) / 1000;
@@ -332,6 +328,7 @@ export default function App() {
     { name: 'Block Shear', 'IS 8147': results.is8147.blockShear, 'Eurocode': results.eurocode.blockShear },
     { name: 'Final', 'IS 8147': results.is8147.final, 'Eurocode': results.eurocode.final },
   ];
+  const isRuptureAreaLabel = inputs.connection === 'Bolted' && inputs.sectionType === 'Single Angle' ? 'Aeff_IS' : 'An';
 
   const selectedEcAlloy = EUROCODE_ALLOYS.find(a => a.name === inputs.eurocodeAlloy);
 
@@ -760,11 +757,14 @@ export default function App() {
                     </div>
                     <div className="space-y-1">
                       <label className="text-xs font-bold text-emerald-800 uppercase flex items-center gap-1">
-                        Effective Area (Aeff) mm²
+                        Effective Area (EC Aeff) mm²
                       </label>
                       <input type="number" value={derived.aeff.toFixed(2)} readOnly className="w-full px-3 py-2 bg-emerald-100 border-2 border-emerald-300 rounded-lg text-emerald-900 outline-none font-mono text-lg cursor-not-allowed" />
                     </div>
                   </div>
+                  <p className="text-xs text-emerald-800 mt-2">
+                    IS rupture uses <span className="font-mono">{isRuptureAreaLabel}</span> = <span className="font-mono">{derived.isAeff.toFixed(2)} mm²</span>.
+                  </p>
                   
                   {inputs.holePattern === 'Staggered' && inputs.connection === 'Bolted' && (
                     <div className="mt-4 p-3 bg-emerald-100/50 rounded-lg border border-emerald-200">
@@ -880,7 +880,7 @@ export default function App() {
                   <input type="number" value={derived.beta.toFixed(3)} readOnly className="w-full px-3 py-2 bg-indigo-50 border-2 border-indigo-200 rounded-lg font-mono text-lg text-indigo-900 outline-none cursor-not-allowed" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-indigo-800 uppercase">Effective Area (Aeff) mm²</label>
+                  <label className="text-xs font-bold text-indigo-800 uppercase">Effective Area (EC Aeff) mm²</label>
                   <input type="number" value={derived.aeff.toFixed(2)} readOnly className="w-full px-3 py-2 bg-indigo-50 border-2 border-indigo-200 rounded-lg font-mono text-lg text-indigo-900 outline-none cursor-not-allowed" />
                 </div>
               </div>
@@ -901,7 +901,11 @@ export default function App() {
                     <h3 className="font-bold text-neutral-900 mb-2">IS 8147:1976 (Working Stress)</h3>
                     <ul className="list-disc pl-5 space-y-1">
                       <li><strong>Yield:</strong> P_y = σ_at × Ag</li>
-                      <li><strong>Rupture:</strong> P_u = σ_at_rupture × An</li>
+                      <li><strong>Rupture:</strong> P_u = σ_at_rupture × {isRuptureAreaLabel}</li>
+                      <li className="font-mono text-emerald-700">Substituted: P_u = {inputs.sigma_at_rupture.toFixed(2)} × {derived.isAeff.toFixed(2)} / 1000 = {results.is8147.rupture.toFixed(2)} kN</li>
+                      {inputs.connection === 'Bolted' && inputs.sectionType === 'Single Angle' && (
+                        <li className="text-xs text-neutral-600">For single angle: Aeff_IS = a1 + a2 × k, with k = {derived.isK.toFixed(3)}.</li>
+                      )}
                       <li className="text-blue-700">Note: σ_at and σ_at_rupture are tabulated permissible stresses.</li>
                     </ul>
                   </div>
@@ -911,6 +915,7 @@ export default function App() {
                       <li><strong>Yield:</strong> N_pl,Rd = (Ag × fy) / γM0</li>
                       <li><strong>Rupture:</strong> N_u,Rd = (fu × Aeff) / γM2</li>
                       <li><strong>Effective Area:</strong> Aeff = β × An</li>
+                      <li className="font-mono text-indigo-700">Substituted: N_u,Rd = ({inputs.fu.toFixed(2)} × {derived.aeff.toFixed(2)}) / {inputs.gammaM2.toFixed(2)} / 1000 = {results.eurocode.rupture.toFixed(2)} kN</li>
                     </ul>
                   </div>
                   <div>
@@ -1045,6 +1050,7 @@ export default function App() {
                   <span className="text-neutral-500 text-xs mt-1">Clause 6.2.3 (2) b</span>
                   <span className="font-mono bg-neutral-50 p-2 rounded mt-1 border border-neutral-100">N_u,Rd = (Aeff × fu) / γM2</span>
                   <span className="text-xs text-neutral-500 mt-1">Where Aeff = An * β (Shear lag factor β = {derived.beta})</span>
+                  <span className="font-mono text-xs text-indigo-700 mt-1">Substituted: ({inputs.fu.toFixed(2)} × {derived.aeff.toFixed(2)}) / {inputs.gammaM2.toFixed(2)} / 1000 = {results.eurocode.rupture.toFixed(2)} kN</span>
                 </li>
                 {inputs.connection === 'Bolted' && (
                   <li className="flex flex-col">
@@ -1067,11 +1073,15 @@ export default function App() {
                   <span className="font-medium text-neutral-900">Axial Tension (Rupture)</span>
                   <span className="text-neutral-500 text-xs mt-1">Clause 5.1.2</span>
                   <span className="font-mono bg-neutral-50 p-2 rounded mt-1 border border-neutral-100">P = Aeff * σ_at_rupture</span>
-                  {inputs.connection === 'Bolted' && inputs.sectionType !== 'Plate' && (
+                  {inputs.connection === 'Bolted' && inputs.sectionType === 'Single Angle' && (
                     <span className="text-xs text-neutral-500 mt-1">
                       Where Aeff = a1 + a2 * k (k = {derived.isK.toFixed(3)})
                     </span>
                   )}
+                  {!(inputs.connection === 'Bolted' && inputs.sectionType === 'Single Angle') && (
+                    <span className="text-xs text-neutral-500 mt-1">For this case, Aeff = An (no hidden reduction).</span>
+                  )}
+                  <span className="font-mono text-xs text-emerald-700 mt-1">Substituted: {inputs.sigma_at_rupture.toFixed(2)} × {derived.isAeff.toFixed(2)} / 1000 = {results.is8147.rupture.toFixed(2)} kN</span>
                 </li>
                 {inputs.connection === 'Bolted' && (
                   <li className="flex flex-col">
