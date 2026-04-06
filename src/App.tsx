@@ -44,13 +44,124 @@ const EUROCODE_ALLOYS = [
   { id: 'Generic/Unspecified', name: 'Generic/Unspecified', getProps: (t: number, sectionType: string) => { return { fo: 250, fu: 290, rho_o: 1.0, rho_u: 1.0 }; } }
 ];
 
-const IS8147_ALLOYS = [
-  { id: 'IS-64430-WP', name: 'IS 64430 (H30) WP', getProps: (t: number, sectionType: string) => { if (sectionType === 'Plate') { if (t <= 6.3) return { sigma_at: 250, sigma_at_rupture: 295 }; return { sigma_at: 240, sigma_at_rupture: 285 }; } else { if (t <= 6.3) return { sigma_at: 255, sigma_at_rupture: 295 }; return { sigma_at: 270, sigma_at_rupture: 310 }; } } },
-  { id: 'IS-65032-WP', name: 'IS 65032 (H20) WP', getProps: (t: number, sectionType: string) => { return { sigma_at: 235, sigma_at_rupture: 280 }; } },
-  { id: 'IS-63400-P', name: 'IS 63400 (H9) P', getProps: (t: number, sectionType: string) => { if (t <= 3.15) return { sigma_at: 140, sigma_at_rupture: 175 }; return { sigma_at: 110, sigma_at_rupture: 155 }; } },
-  { id: 'IS-63400-M', name: 'IS 63400 (H9) M', getProps: (t: number, sectionType: string) => { if (sectionType === 'Plate') { return { sigma_at: 125, sigma_at_rupture: 280 }; } else { return { sigma_at: 130, sigma_at_rupture: 275 }; } } },
-  { id: 'IS-54300-O', name: 'IS 54300 (N8) O', getProps: (t: number, sectionType: string) => { if (sectionType === 'Plate') { if (t <= 6.3) return { sigma_at: 130, sigma_at_rupture: 265 }; return { sigma_at: 115, sigma_at_rupture: 270 }; } else { return { sigma_at: 130, sigma_at_rupture: 280 }; } } },
-  { id: 'Generic/Unspecified', name: 'Generic/Unspecified', getProps: (t: number, sectionType: string) => { return { sigma_at: 105, sigma_at_rupture: 105 }; } }
+// IS 8147:1976 — split data sources (see comments).
+// Table 1 / alloy characteristic data → material fy, fu (getMaterialProps).
+// Table 4 → permissible axial tension (pt) N/mm² — IS 8147 Table 4 "Axial" column; used for σ_at and σ_at,rupture in this app.
+// Table 4 gives a single axial tension allowable per cell; both yield and rupture permissible inputs use that pt unless you extend with separate rupture rules later.
+type IS8147AlloyEntry = {
+  id: string;
+  name: string;
+  /** IS 8147 Table 1–style characteristic strengths (MPa) from alloy backend. */
+  getMaterialProps: (t: number, sectionType: string) => { fy: number; fu: number };
+  /** IS 8147 Table 4 permissible stresses (MPa) from thickness + form (Plate = sheet/plate; else extrusion / angle). */
+  getPermissibleTable4: (t: number, sectionType: string) => { sigmaAtYield: number | null; sigmaAtRupture: number | null };
+};
+
+/** Map Table 4 axial pt (N/mm²) to both working-stress limits; tension member checks use the same tabulated pt. */
+function ptBoth(pt: number): { sigmaAtYield: number; sigmaAtRupture: number } {
+  return { sigmaAtYield: pt, sigmaAtRupture: pt };
+}
+
+/** IS 8147 Table 4 — 64430 (H30) WP: extrusions vs sheet/plate bands. */
+function table4_64430_WP(t: number, sectionType: string) {
+  if (sectionType === 'Plate') {
+    if (t <= 6.3) return ptBoth(137);
+    if (t <= 25) return ptBoth(132);
+    return ptBoth(132);
+  }
+  if (t <= 6.3) return ptBoth(139);
+  if (t <= 150) return ptBoth(147);
+  return ptBoth(147);
+}
+
+/** IS 8147 Table 4 — 65032 (H20) WP. */
+function table4_65032_WP(t: number, sectionType: string) {
+  if (sectionType === 'Plate') {
+    if (t <= 25) return ptBoth(129);
+    return ptBoth(129);
+  }
+  if (t <= 150) return ptBoth(129);
+  return ptBoth(129);
+}
+
+/** IS 8147 Table 4 — 63400 (H9) P extrusion thickness bands. */
+function table4_63400_P(t: number) {
+  if (t <= 3.15) return ptBoth(77);
+  if (t <= 12.5) return ptBoth(62);
+  return ptBoth(62);
+}
+
+/** IS 8147 Table 4 — 63400 (H9) M: no separate M row in excerpt; use WP extrusion value 85 N/mm² (conservative). */
+function table4_63400_M(t: number, sectionType: string) {
+  if (sectionType === 'Plate') {
+    if (t <= 12.5) return ptBoth(85);
+    return ptBoth(85);
+  }
+  return ptBoth(85);
+}
+
+/** IS 8147 Table 4 — 54300 (N8) O: extrusion vs sheet/plate; tension uses pt column. */
+function table4_54300_O(t: number, sectionType: string) {
+  if (sectionType === 'Plate') {
+    if (t <= 6.3) return ptBoth(81);
+    if (t <= 25) return ptBoth(75);
+    return ptBoth(75);
+  }
+  if (t <= 150) return ptBoth(82);
+  return ptBoth(82);
+}
+
+const IS8147_ALLOYS: IS8147AlloyEntry[] = [
+  {
+    id: 'IS-64430-WP',
+    name: 'IS 64430 (H30) WP',
+    getMaterialProps: (t, sectionType) => {
+      if (sectionType === 'Plate') {
+        if (t <= 6.3) return { fy: 250, fu: 295 };
+        return { fy: 240, fu: 285 };
+      }
+      if (t <= 6.3) return { fy: 255, fu: 295 };
+      return { fy: 270, fu: 310 };
+    },
+    getPermissibleTable4: (t, sectionType) => table4_64430_WP(t, sectionType),
+  },
+  {
+    id: 'IS-65032-WP',
+    name: 'IS 65032 (H20) WP',
+    getMaterialProps: () => ({ fy: 235, fu: 280 }),
+    getPermissibleTable4: (t, sectionType) => table4_65032_WP(t, sectionType),
+  },
+  {
+    id: 'IS-63400-P',
+    name: 'IS 63400 (H9) P',
+    getMaterialProps: (t) => (t <= 3.15 ? { fy: 140, fu: 175 } : { fy: 110, fu: 155 }),
+    getPermissibleTable4: (t) => table4_63400_P(t),
+  },
+  {
+    id: 'IS-63400-M',
+    name: 'IS 63400 (H9) M',
+    getMaterialProps: (_, sectionType) =>
+      sectionType === 'Plate' ? { fy: 125, fu: 280 } : { fy: 130, fu: 275 },
+    getPermissibleTable4: (t, sectionType) => table4_63400_M(t, sectionType),
+  },
+  {
+    id: 'IS-54300-O',
+    name: 'IS 54300 (N8) O',
+    getMaterialProps: (t, sectionType) => {
+      if (sectionType === 'Plate') {
+        if (t <= 6.3) return { fy: 130, fu: 265 };
+        return { fy: 115, fu: 270 };
+      }
+      return { fy: 130, fu: 280 };
+    },
+    getPermissibleTable4: (t, sectionType) => table4_54300_O(t, sectionType),
+  },
+  {
+    id: 'Generic/Unspecified',
+    name: 'Generic/Unspecified',
+    getMaterialProps: () => ({ fy: 105, fu: 105 }),
+    getPermissibleTable4: () => ptBoth(105),
+  },
 ];
 
 
@@ -60,8 +171,11 @@ export function calculateConnectionCapacities(inputs: any) {
   const {
     width, thickness, dia, noOfHoles: n, rows: n_line,
     g, s: p, e, fy, fu, gammaM0, gammaM1, gammaM2,
-    sigma_at, sigma_at_rupture, tau_a, connection, considerHAZ, rho_o, rho_u
+    sigmaAtYieldIS, sigmaAtRuptureIS, tau_a, connection, considerHAZ, rho_o, rho_u
   } = inputs;
+  // IS 8147 working-stress capacities use Table 4 permissible stresses only — never fyIS8147/fuIS8147.
+  const sigma_at = sigmaAtYieldIS == null ? 0 : Number(sigmaAtYieldIS);
+  const sigma_at_rupture = sigmaAtRuptureIS == null ? 0 : Number(sigmaAtRuptureIS);
 
   let fy_eff = fy;
   let fu_eff = fu;
@@ -216,8 +330,10 @@ export default function App() {
     manualBeta: 0.8,
     fy: 250,
     fu: 290,
-    sigma_at: 105,
-    sigma_at_rupture: 105,
+    fyIS8147: 105,
+    fuIS8147: 105,
+    sigmaAtYieldIS: null as number | null,
+    sigmaAtRuptureIS: null as number | null,
     tau_a: 65,
     sigmaAtMode: 'Auto',
     gammaM0: 1.1,
@@ -261,6 +377,9 @@ export default function App() {
       let parsedValue: any = value;
       if (type === 'checkbox') {
         parsedValue = (e.target as HTMLInputElement).checked;
+      } else if (name === 'sigmaAtYieldIS' || name === 'sigmaAtRuptureIS') {
+        const raw = (e.target as HTMLInputElement).value;
+        parsedValue = raw === '' || raw === '-' ? null : Number(raw);
       } else {
         parsedValue = ['id', 'sectionType', 'connection', 'holePattern', 'eurocodeAlloy', 'is8147Alloy', 'betaMode', 'sigmaAtMode', 'foMode'].includes(name) ? value : Number(value);
       }
@@ -296,19 +415,24 @@ export default function App() {
         const sectionTypeVal = name === 'sectionType' ? parsedValue : prev.sectionType;
 
         const isAlloyData = IS8147_ALLOYS.find(a => a.name === isAlloyVal) || IS8147_ALLOYS.find(a => a.id === 'Generic/Unspecified');
-        if (isAlloyData && newInputs.sigmaAtMode === 'Auto') {
-          const isProps = isAlloyData.getProps(tVal, sectionTypeVal);
-          newInputs.sigma_at = isProps.sigma_at;
-          newInputs.sigma_at_rupture = isProps.sigma_at_rupture;
+        if (isAlloyData) {
+          const mat = isAlloyData.getMaterialProps(tVal, sectionTypeVal);
+          newInputs.fyIS8147 = mat.fy;
+          newInputs.fuIS8147 = mat.fu;
+          if (newInputs.sigmaAtMode === 'Auto') {
+            const p = isAlloyData.getPermissibleTable4(tVal, sectionTypeVal);
+            newInputs.sigmaAtYieldIS = p.sigmaAtYield;
+            newInputs.sigmaAtRuptureIS = p.sigmaAtRupture;
+          }
         }
       }
 
       if (name === 'sigmaAtMode' && parsedValue === 'Auto') {
         const isAlloyData = IS8147_ALLOYS.find(a => a.name === newInputs.is8147Alloy) || IS8147_ALLOYS.find(a => a.id === 'Generic/Unspecified');
         if (isAlloyData) {
-          const isProps = isAlloyData.getProps(newInputs.thickness, newInputs.sectionType);
-          newInputs.sigma_at = isProps.sigma_at;
-          newInputs.sigma_at_rupture = isProps.sigma_at_rupture;
+          const p = isAlloyData.getPermissibleTable4(newInputs.thickness, newInputs.sectionType);
+          newInputs.sigmaAtYieldIS = p.sigmaAtYield;
+          newInputs.sigmaAtRuptureIS = p.sigmaAtRupture;
         }
       }
 
@@ -333,6 +457,8 @@ export default function App() {
     { name: 'Final', 'IS 8147': results.is8147.final, 'Eurocode': results.eurocode.final },
   ];
   const usesIsEffectiveArea = inputs.connection === 'Bolted' && inputs.sectionType !== 'Plate';
+  const sigmaYieldDisp = inputs.sigmaAtYieldIS == null ? '—' : inputs.sigmaAtYieldIS.toFixed(2);
+  const sigmaRuptureDisp = inputs.sigmaAtRuptureIS == null ? '—' : inputs.sigmaAtRuptureIS.toFixed(2);
 
   const selectedEcAlloy = EUROCODE_ALLOYS.find(a => a.name === inputs.eurocodeAlloy);
 
@@ -372,10 +498,15 @@ export default function App() {
         }
 
         const isAlloyData = IS8147_ALLOYS.find(a => a.name === testInputs.is8147Alloy) || IS8147_ALLOYS.find(a => a.id === 'Generic/Unspecified');
-        if (isAlloyData && testInputs.sigmaAtMode === 'Auto') {
-          const isProps = isAlloyData.getProps(val, testInputs.sectionType);
-          testInputs.sigma_at = isProps.sigma_at;
-          testInputs.sigma_at_rupture = isProps.sigma_at_rupture;
+        if (isAlloyData) {
+          const mat = isAlloyData.getMaterialProps(val, testInputs.sectionType);
+          testInputs.fyIS8147 = mat.fy;
+          testInputs.fuIS8147 = mat.fu;
+          if (testInputs.sigmaAtMode === 'Auto') {
+            const p = isAlloyData.getPermissibleTable4(val, testInputs.sectionType);
+            testInputs.sigmaAtYieldIS = p.sigmaAtYield;
+            testInputs.sigmaAtRuptureIS = p.sigmaAtRupture;
+          }
         }
       }
 
@@ -602,18 +733,37 @@ export default function App() {
                 )}
 
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-neutral-500 uppercase">fy (MPa) - Eurocode</label>
+                  <label className="text-xs font-semibold text-neutral-500 uppercase">FY (MPA) - EUROCODE</label>
                   <input type="number" name="fy" value={inputs.fy} onChange={handleInputChange} className="w-full px-3 py-2 bg-neutral-50 border border-neutral-300 rounded-lg outline-none" />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-semibold text-neutral-500 uppercase">fu (MPa) - Eurocode</label>
+                  <label className="text-xs font-semibold text-neutral-500 uppercase">FU (MPA) - EUROCODE</label>
                   <input type="number" name="fu" value={inputs.fu} onChange={handleInputChange} className="w-full px-3 py-2 bg-neutral-50 border border-neutral-300 rounded-lg outline-none" />
+                </div>
+
+                <div className="space-y-1 md:col-span-2 lg:col-span-3 p-4 bg-slate-50 border border-slate-200 rounded-xl mt-2">
+                  <label className="text-xs font-bold text-slate-800 uppercase flex items-center gap-1 mb-3">
+                    IS 8147 material properties (Table 1 / alloy data)
+                  </label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-700 uppercase">FY (MPA) - IS 8147</label>
+                      <input type="number" name="fyIS8147" value={inputs.fyIS8147} onChange={handleInputChange} className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg outline-none" />
+                    </div>
+                    <div className="space-y-1">
+                      <label className="text-xs font-semibold text-slate-700 uppercase">FU (MPA) - IS 8147</label>
+                      <input type="number" name="fuIS8147" value={inputs.fuIS8147} onChange={handleInputChange} className="w-full px-3 py-2 bg-white border border-slate-300 rounded-lg outline-none" />
+                    </div>
+                  </div>
+                  <p className="text-[10px] text-slate-600 mt-2 flex items-center gap-1">
+                    <Info className="w-3 h-3" /> Auto-filled from the selected IS 8147 alloy (characteristic / Table 1 style data). Not used in working-stress capacity formulas — those use Table 4 permissible stresses below.
+                  </p>
                 </div>
 
                 <div className="space-y-1 md:col-span-2 lg:col-span-3 p-4 bg-blue-50 border border-blue-200 rounded-xl mt-2">
                   <div className="flex justify-between items-center mb-4">
                     <label className="text-xs font-bold text-blue-800 uppercase flex items-center gap-1">
-                      Permissible Stresses - IS 8147
+                      PERMISSIBLE STRESSES - IS 8147 (TABLE 4)
                     </label>
                     <div className="flex gap-3">
                       <label className="flex items-center gap-1 cursor-pointer">
@@ -629,27 +779,43 @@ export default function App() {
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-blue-700 uppercase">Yield (σ_at) MPa</label>
-                      <input type="number" name="sigma_at" value={inputs.sigma_at} onChange={handleInputChange} readOnly={inputs.sigmaAtMode === 'Auto'} className={`w-full px-3 py-2 border border-blue-300 rounded-lg outline-none ${inputs.sigmaAtMode === 'Auto' ? 'bg-blue-100 text-blue-800 cursor-not-allowed' : 'bg-white focus:ring-2 focus:ring-blue-500'}`} />
+                      <label className="text-xs font-semibold text-blue-700 uppercase">YIELD PERMISSIBLE STRESS (σ_at) MPA</label>
+                      <input
+                        type="number"
+                        name="sigmaAtYieldIS"
+                        value={inputs.sigmaAtYieldIS === null ? '' : inputs.sigmaAtYieldIS}
+                        onChange={handleInputChange}
+                        readOnly={inputs.sigmaAtMode === 'Auto'}
+                        placeholder={inputs.sigmaAtMode === 'Auto' ? 'Awaiting Table 4 mapping' : ''}
+                        className={`w-full px-3 py-2 border border-blue-300 rounded-lg outline-none ${inputs.sigmaAtMode === 'Auto' ? 'bg-blue-100 text-blue-800 cursor-not-allowed placeholder:text-blue-500/80' : 'bg-white focus:ring-2 focus:ring-blue-500'}`}
+                      />
                     </div>
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-blue-700 uppercase">Rupture (σ_at_rupture) MPa</label>
-                      <input type="number" name="sigma_at_rupture" value={inputs.sigma_at_rupture} onChange={handleInputChange} readOnly={inputs.sigmaAtMode === 'Auto'} className={`w-full px-3 py-2 border border-blue-300 rounded-lg outline-none ${inputs.sigmaAtMode === 'Auto' ? 'bg-blue-100 text-blue-800 cursor-not-allowed' : 'bg-white focus:ring-2 focus:ring-blue-500'}`} />
+                      <label className="text-xs font-semibold text-blue-700 uppercase">RUPTURE PERMISSIBLE STRESS (σ_at, rupture) MPA</label>
+                      <input
+                        type="number"
+                        name="sigmaAtRuptureIS"
+                        value={inputs.sigmaAtRuptureIS === null ? '' : inputs.sigmaAtRuptureIS}
+                        onChange={handleInputChange}
+                        readOnly={inputs.sigmaAtMode === 'Auto'}
+                        placeholder={inputs.sigmaAtMode === 'Auto' ? 'Awaiting Table 4 mapping' : ''}
+                        className={`w-full px-3 py-2 border border-blue-300 rounded-lg outline-none ${inputs.sigmaAtMode === 'Auto' ? 'bg-blue-100 text-blue-800 cursor-not-allowed placeholder:text-blue-500/80' : 'bg-white focus:ring-2 focus:ring-blue-500'}`}
+                      />
                     </div>
                   </div>
 
-                  <p className="text-[10px] text-blue-600 mt-2 flex items-center gap-1">
-                    <Info className="w-3 h-3" /> Using IS 8147 tabulated permissible stresses.
+                  <p className="text-[10px] text-blue-700 mt-2 flex items-center gap-1">
+                    <Info className="w-3 h-3" /> Material fy/fu values are stored separately. Permissible stresses must come from IS 8147 Table 4.
                   </p>
                   
-                  {inputs.sigma_at >= inputs.fu && (
+                  {inputs.sigmaAtYieldIS != null && inputs.sigmaAtYieldIS >= inputs.fuIS8147 && (
                     <p className="text-[10px] text-rose-600 mt-1 flex items-center gap-1 font-medium">
-                      <AlertCircle className="w-3 h-3" /> Warning: σ_at should be less than fu.
+                      <AlertCircle className="w-3 h-3" /> Warning: σ_at should typically be less than FU (IS 8147 material).
                     </p>
                   )}
-                  {inputs.sigma_at_rupture >= inputs.fu && (
+                  {inputs.sigmaAtRuptureIS != null && inputs.sigmaAtRuptureIS >= inputs.fuIS8147 && (
                     <p className="text-[10px] text-rose-600 mt-1 flex items-center gap-1 font-medium">
-                      <AlertCircle className="w-3 h-3" /> Warning: σ_at_rupture should be less than fu.
+                      <AlertCircle className="w-3 h-3" /> Warning: σ_at, rupture should typically be less than FU (IS 8147 material).
                     </p>
                   )}
                 </div>
@@ -912,7 +1078,7 @@ export default function App() {
                     <ul className="list-disc pl-5 space-y-1">
                       <li><strong>Yield:</strong> P_y = σ_at × Ag</li>
                       <li><strong>Rupture:</strong> P_u = σ_at_rupture × Aeff_IS</li>
-                      <li className="font-mono text-emerald-700">Substituted: P_u = {derived.isAeff.toFixed(2)} × {inputs.sigma_at_rupture.toFixed(2)} / 1000 = {results.is8147.rupture.toFixed(2)} kN</li>
+                      <li className="font-mono text-emerald-700">Substituted: P_u = {derived.isAeff.toFixed(2)} × {sigmaRuptureDisp} / 1000 = {inputs.sigmaAtRuptureIS == null ? '—' : results.is8147.rupture.toFixed(2)} kN</li>
                       {usesIsEffectiveArea && (
                         <li className="text-xs text-neutral-600">Aeff_IS = a1 + a2 × k, with k = {derived.isK.toFixed(3)}.</li>
                       )}
@@ -967,13 +1133,18 @@ export default function App() {
                 <span className="text-xs font-medium bg-slate-700 text-slate-300 px-2 py-1 rounded-full">Working Stress</span>
               </div>
               <div className="p-6 space-y-4">
+                {(inputs.sigmaAtYieldIS == null || inputs.sigmaAtRuptureIS == null) && (
+                  <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2">
+                    Table 4 permissible stresses are not set. Enter values under Manual, or implement <span className="font-mono">getPermissibleTable4</span> for Auto. IS capacities use 0 for missing stresses.
+                  </p>
+                )}
                 <ResultRow label="Yield Strength" value={results.is8147.yield} unit="kN" isMin={results.is8147.yield === results.is8147.final} />
                 <ResultRow label="Rupture Strength" value={results.is8147.rupture} unit="kN" isMin={results.is8147.rupture === results.is8147.final} />
                 <div className="bg-slate-50 border border-slate-200 rounded-lg p-3 text-xs text-slate-700 font-mono space-y-1">
                   <div className="font-semibold text-slate-800">IS 8147 Rupture Calculation</div>
                   <div>P_u = Aeff_IS × σ_at_rupture</div>
-                  <div>= {derived.isAeff.toFixed(2)} × {inputs.sigma_at_rupture.toFixed(2)}</div>
-                  <div>= {results.is8147.rupture.toFixed(2)} kN</div>
+                  <div>= {derived.isAeff.toFixed(2)} × {sigmaRuptureDisp}</div>
+                  <div>= {inputs.sigmaAtRuptureIS == null ? '—' : results.is8147.rupture.toFixed(2)} kN</div>
                   <div className="font-sans text-[11px] text-slate-600">
                     {usesIsEffectiveArea
                       ? `Where Aeff_IS = a1 + a2 × k, with k = ${derived.isK.toFixed(3)}`
@@ -1102,7 +1273,7 @@ export default function App() {
                   {!usesIsEffectiveArea && (
                     <span className="text-xs text-neutral-500 mt-1">For this case, Aeff_IS = An.</span>
                   )}
-                  <span className="font-mono text-xs text-emerald-700 mt-1">Substituted: {derived.isAeff.toFixed(2)} × {inputs.sigma_at_rupture.toFixed(2)} / 1000 = {results.is8147.rupture.toFixed(2)} kN</span>
+                  <span className="font-mono text-xs text-emerald-700 mt-1">Substituted: {derived.isAeff.toFixed(2)} × {sigmaRuptureDisp} / 1000 = {inputs.sigmaAtRuptureIS == null ? '—' : results.is8147.rupture.toFixed(2)} kN</span>
                 </li>
                 {inputs.connection === 'Bolted' && (
                   <li className="flex flex-col">
