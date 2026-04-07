@@ -1342,7 +1342,7 @@ export function TensionMemberCalculator() {
 
                 {Number(inputs.x) === 0 && (
                   <p className="text-xs text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-2">
-                    Symmetric connection -> β = 1 (No shear lag)
+                    Symmetric connection: β = 1 (No shear lag)
                   </p>
                 )}
                 {currentXOverL > 0.5 && (
