@@ -87,6 +87,13 @@ function effectiveEurocodeBeta(inputs: { showShearLagEffect?: boolean }, betaMod
   return betaModel;
 }
 
+/** Tolerance (mm) so values equal to code minima pass; invalid only when strictly below minimum. */
+const GEOM_MIN_EPS = 1e-6;
+
+function meetsGeometryMinimum(value: number, minimum: number): boolean {
+  return Number.isFinite(value) && Number.isFinite(minimum) && value + GEOM_MIN_EPS >= minimum;
+}
+
 /** Straight transverse row: enforce b ≥ 2e + (n−1)g with effective e, g (IS-style detailing minima). */
 export function validateStraightBoltLayout({
   b,
@@ -109,9 +116,13 @@ export function validateStraightBoltLayout({
   const gEff = Math.max(gUser, gMin);
 
   const clearWidth = b - 2 * eEff;
-  const nMax = clearWidth >= 0 ? Math.floor(clearWidth / gEff) + 1 : 0;
+  // Floor can undershoot when clearWidth/gEff is almost an integer; tiny epsilon keeps boundary n valid.
+  const nMax =
+    clearWidth >= -GEOM_MIN_EPS
+      ? Math.floor(Math.max(0, clearWidth) / gEff + 1e-9) + 1
+      : 0;
   const requiredWidth = 2 * eEff + Math.max(0, nCross - 1) * gEff;
-  const noBoltCanFit = b < 2 * eEff - 1e-9;
+  const noBoltCanFit = !meetsGeometryMinimum(b, 2 * eEff);
 
   const isValid = !noBoltCanFit && nCross <= nMax && Number.isFinite(nCross) && nCross >= 0;
 
@@ -196,11 +207,15 @@ export function validateStaggeredBoltLayout({
   const pStaggerEff = Math.max(staggerP, pMin);
   const linePitchEff = Math.max(linePitch, pMin);
 
-  const staggerPitchOk = staggerP >= pMin;
-  const linePitchOk = rows <= 1 || linePitch >= pMin;
+  const staggerPitchOk = meetsGeometryMinimum(staggerP, pMin);
+  const linePitchOk = rows <= 1 || meetsGeometryMinimum(linePitch, pMin);
 
+  // Invalid only when strictly below minimum (within GEOM_MIN_EPS); g_eff = g_min is valid.
   const isValid =
-    eUser >= eMin && gUser >= gMin && staggerPitchOk && linePitchOk;
+    meetsGeometryMinimum(eUser, eMin) &&
+    meetsGeometryMinimum(gUser, gMin) &&
+    staggerPitchOk &&
+    linePitchOk;
 
   const note =
     'For staggered patterns, the straight cross-section bolt-limit rule is not applied globally; rupture is controlled by candidate zig-zag net-section paths.';
@@ -227,8 +242,8 @@ export function validateStaggeredBoltLayout({
   }
 
   const parts: string[] = [];
-  if (eUser < eMin) parts.push(`edge e < e_min (${eMin.toFixed(2)} mm)`);
-  if (gUser < gMin) parts.push(`gauge g < g_min (${gMin.toFixed(2)} mm)`);
+  if (!meetsGeometryMinimum(eUser, eMin)) parts.push(`edge e < e_min (${eMin.toFixed(2)} mm)`);
+  if (!meetsGeometryMinimum(gUser, gMin)) parts.push(`gauge g < g_min (${gMin.toFixed(2)} mm)`);
   if (!staggerPitchOk) parts.push(`stagger pitch p < p_min (${pMin.toFixed(2)} mm)`);
   if (!linePitchOk) parts.push(`line pitch s < p_min (${pMin.toFixed(2)} mm)`);
 
@@ -249,6 +264,30 @@ export function validateStaggeredBoltLayout({
     message: `Staggered layout violates minimum spacing: ${parts.join('; ')}.`,
     note,
   };
+}
+
+/**
+ * Staggered rupture/block shear need diagonal stagger pitch and gauge. If the dedicated
+ * stagger fields are empty or ≤ 0, fall back to line pitch s and transverse gauge g (same
+ * as the main bolt spacing inputs). Pattern switch to Staggered copies s→stagger_p and g→stagger_g.
+ */
+export function resolveStaggerGeometryForRupture(inputs: {
+  holePattern: string;
+  s: number;
+  g: number;
+  stagger_p: number;
+  stagger_g: number;
+}): { stagger_p: number; stagger_g: number } {
+  const s = Number(inputs.s);
+  const g = Number(inputs.g);
+  let sp = Number(inputs.stagger_p);
+  let sg = Number(inputs.stagger_g);
+  if (inputs.holePattern !== 'Staggered') {
+    return { stagger_p: sp, stagger_g: sg };
+  }
+  if (!Number.isFinite(sp) || sp <= 0) sp = Number.isFinite(s) && s > 0 ? s : sp;
+  if (!Number.isFinite(sg) || sg <= 0) sg = Number.isFinite(g) && g > 0 ? g : sg;
+  return { stagger_p: sp, stagger_g: sg };
 }
 
 /** Bolt layout validation: straight uses transverse width rule; staggered uses spacing minima only. */
@@ -294,7 +333,8 @@ function evaluateBoltLayoutGeometry(inputs: any) {
   }
 
   const rows = Number(inputs.rows);
-  const staggerP = Number(inputs.stagger_p);
+  const staggerResolved = resolveStaggerGeometryForRupture(inputs);
+  const staggerP = staggerResolved.stagger_p;
   const linePitch = Number(inputs.s);
   const stagger = validateStaggeredBoltLayout({
     eUser,
@@ -376,6 +416,8 @@ export function calculateConnectionCapacities(inputs: any) {
     bPath = 2 * connectedLegWidth;
   }
 
+  const effStagger = resolveStaggerGeometryForRupture(inputs);
+
   const ruptureEval = connection === 'Bolted'
     ? evaluateBoltedRupturePaths(
         {
@@ -383,8 +425,8 @@ export function calculateConnectionCapacities(inputs: any) {
           holePattern: inputs.holePattern,
           noOfHoles: Number(inputs.noOfHoles),
           rows: Number(inputs.rows),
-          stagger_p: Number(inputs.stagger_p),
-          stagger_g: Number(inputs.stagger_g),
+          stagger_p: effStagger.stagger_p,
+          stagger_g: effStagger.stagger_g,
         } satisfies RuptureInputs,
         bPath,
         dh,
@@ -496,8 +538,9 @@ export function calculateConnectionCapacities(inputs: any) {
 
   const bsPathsList: any[] = [];
   if (connection === 'Bolted' && n_line > 0 && p > 0) {
-    const staggerEnabled = inputs.holePattern === 'Staggered' && Number(inputs.stagger_p) > 0 && Number(inputs.stagger_g) > 0;
-    const staggerAddTerm = staggerEnabled ? (Number(inputs.stagger_p) ** 2) / (4 * Number(inputs.stagger_g)) : 0;
+    const staggerEnabled =
+      inputs.holePattern === 'Staggered' && effStagger.stagger_p > 0 && effStagger.stagger_g > 0;
+    const staggerAddTerm = staggerEnabled ? (effStagger.stagger_p ** 2) / (4 * effStagger.stagger_g) : 0;
     const staggerAddArea = staggerAddTerm * thickness * (inputs.sectionType === 'Double Angle' ? 2 : 1);
 
     const candidates = [
@@ -583,6 +626,8 @@ export function calculateConnectionCapacities(inputs: any) {
       criticalAnPath: ruptureEval.governing.id,
       rupturePaths: ruptureEval.paths,
       connectedLegWidth: bPath,
+      effectiveStagger_p: effStagger.stagger_p,
+      effectiveStagger_g: effStagger.stagger_g,
     },
     bsPathsList,
   };
@@ -646,6 +691,8 @@ export function TensionMemberCalculator() {
     connectedLegWidth: 100,
     criticalAnPath: 'Straight',
     rupturePaths: [] as any[],
+    effectiveStagger_p: 50,
+    effectiveStagger_g: 50,
   });
 
   const [results, setResults] = useState({
@@ -677,6 +724,11 @@ export function TensionMemberCalculator() {
         } else if (parsedValue === 'Single Angle') {
           newInputs.x = 20;
         }
+      }
+
+      if (name === 'holePattern' && parsedValue === 'Staggered') {
+        newInputs.stagger_p = Number(prev.s);
+        newInputs.stagger_g = Number(prev.g);
       }
 
       if (name === 'fy' && newInputs.foMode === 'Auto') {
@@ -786,6 +838,7 @@ export function TensionMemberCalculator() {
     if (inputs.connection === 'Bolted' && boltGeometry.invalid) {
       const betaModelInv = getBeta(inputs.sectionType, Number(inputs.x), Number(inputs.L), inputs.connection);
       const betaInvalid = effectiveEurocodeBeta(inputs, betaModelInv);
+      const effStInv = resolveStaggerGeometryForRupture(inputs);
       setDerived((prev) => ({
         ...prev,
         holeDia: boltGeometry.dh,
@@ -795,6 +848,8 @@ export function TensionMemberCalculator() {
         isAeff: 0,
         betaModel: betaModelInv,
         beta: betaInvalid,
+        effectiveStagger_p: effStInv.stagger_p,
+        effectiveStagger_g: effStInv.stagger_g,
         criticalAnPath: 'Geometry Invalid',
         rupturePaths: [],
       }));
@@ -847,6 +902,22 @@ export function TensionMemberCalculator() {
 
   const isDoubleAngleBolted = inputs.sectionType === 'Double Angle' && inputs.connection === 'Bolted';
   const isPlateBolted = inputs.sectionType === 'Plate' && inputs.connection === 'Bolted';
+
+  /** Same inputs except hole pattern — compares net area / rupture (β unchanged). */
+  const straightVsStaggerRuptureCompare = useMemo(() => {
+    if (inputs.connection !== 'Bolted') return null;
+    const rStr = calculateConnectionCapacities({ ...inputs, holePattern: 'Straight' });
+    const rStg = calculateConnectionCapacities({ ...inputs, holePattern: 'Staggered' });
+    return {
+      straightAn: rStr.derived.an,
+      staggerAn: rStg.derived.an,
+      straightRuptureEc: rStr.eurocode.rupture,
+      staggerRuptureEc: rStg.eurocode.rupture,
+      straightPath: rStr.derived.criticalAnPath,
+      staggerPath: rStg.derived.criticalAnPath,
+    };
+  }, [inputs]);
+
   const fuEffEurocode = useMemo(() => {
     let fu_eff = Number(inputs.fu);
     if (inputs.connection === 'Welded' && inputs.considerHAZ) {
@@ -1223,14 +1294,17 @@ export function TensionMemberCalculator() {
                       <div className="space-y-1">
                         <label className="text-xs font-semibold text-purple-700 uppercase">Stagger Pitch p (mm)</label>
                         <input type="number" name="stagger_p" value={inputs.stagger_p} onChange={handleInputChange} className="w-full px-3 py-2 bg-white border border-purple-300 rounded-lg outline-none" />
-                        <p className="text-[10px] text-purple-600 mt-1">Longitudinal distance between staggered holes.</p>
+                        <p className="text-[10px] text-purple-600 mt-1">Longitudinal stagger step (rupture zig-zag). Defaults from line pitch s when you switch to Staggered.</p>
                       </div>
                       <div className="space-y-1">
                         <label className="text-xs font-semibold text-purple-700 uppercase">Stagger Gauge g (mm)</label>
                         <input type="number" name="stagger_g" value={inputs.stagger_g} onChange={handleInputChange} className="w-full px-3 py-2 bg-white border border-purple-300 rounded-lg outline-none" />
-                        <p className="text-[10px] text-purple-600 mt-1">Transverse distance between staggered holes.</p>
+                        <p className="text-[10px] text-purple-600 mt-1">Transverse spacing for the diagonal (rupture). Defaults from gauge g; edit if it differs from bolt row spacing.</p>
                       </div>
                     </div>
+                    <p className="text-[10px] text-purple-800 bg-purple-100/80 border border-purple-200 rounded-lg px-2 py-1.5">
+                      If these fields are blank or zero, rupture uses pitch <span className="font-mono">s</span> and gauge <span className="font-mono">g</span> from the main bolt inputs above.
+                    </p>
                   </div>
                 )}
 
@@ -1505,9 +1579,12 @@ export function TensionMemberCalculator() {
                       )}
                       {inputs.holePattern === 'Staggered' && (
                         <p className="text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-md px-2 py-1.5">
-                          Staggered pattern: governing path is selected from evaluated candidate rupture paths (minimum net area). Zig-zag terms apply only when diagonal stagger geometry (p, g) is defined.
+                          Staggered pattern: governing path is the minimum net area among candidate paths (straight vs zig-zag when diagonal geometry is active).
                         </p>
                       )}
+                      <p className="text-[11px] text-amber-900 bg-amber-50 border border-amber-200 rounded-md px-2 py-1.5">
+                        Zig-zag correction applies only when stagger_p &gt; 0 and stagger_g &gt; 0.
+                      </p>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-xs text-emerald-900">
                         <div><span className="font-semibold">Hole pattern:</span> {inputs.holePattern}</div>
                         <div><span className="font-semibold">b_path:</span> {derived.connectedLegWidth.toFixed(2)} mm</div>
@@ -1516,8 +1593,13 @@ export function TensionMemberCalculator() {
                         <div><span className="font-semibold">n (holes on path):</span> {inputs.noOfHoles}</div>
                         {inputs.holePattern === 'Staggered' && (
                           <>
-                            <div><span className="font-semibold">Stagger p:</span> {inputs.stagger_p} mm</div>
-                            <div><span className="font-semibold">Stagger g:</span> {inputs.stagger_g} mm</div>
+                            <div><span className="font-semibold">Stagger p (UI):</span> {inputs.stagger_p} mm</div>
+                            <div><span className="font-semibold">Stagger g (UI):</span> {inputs.stagger_g} mm</div>
+                            <div className="md:col-span-2">
+                              <span className="font-semibold">Effective p, g (rupture):</span>{' '}
+                              {(derived as any).effectiveStagger_p != null ? Number((derived as any).effectiveStagger_p).toFixed(2) : '—'} mm,{' '}
+                              {(derived as any).effectiveStagger_g != null ? Number((derived as any).effectiveStagger_g).toFixed(2) : '—'} mm
+                            </div>
                           </>
                         )}
                         {(inputs.sectionType === 'Single Angle' || inputs.sectionType === 'Double Angle') && (
@@ -1527,6 +1609,23 @@ export function TensionMemberCalculator() {
                           <div><span className="font-semibold">Plate width b:</span> {inputs.width} mm (rupture path; not leg-based)</div>
                         )}
                         <div><span className="font-semibold">β (EC after An):</span> {derived.beta.toFixed(3)}</div>
+                      </div>
+
+                      <div className="text-[10px] font-mono text-emerald-900 bg-slate-100 border border-slate-200 rounded-lg p-2 space-y-0.5">
+                        <div className="font-sans font-semibold text-emerald-800 mb-1">Rupture debug</div>
+                        <div>holePattern: {inputs.holePattern}</div>
+                        <div>stagger_p (UI): {inputs.stagger_p}</div>
+                        <div>stagger_g (UI): {inputs.stagger_g}</div>
+                        <div>
+                          stagger_p (effective):{' '}
+                          {(derived as any).effectiveStagger_p != null ? Number((derived as any).effectiveStagger_p).toFixed(2) : '—'} mm
+                        </div>
+                        <div>
+                          stagger_g (effective):{' '}
+                          {(derived as any).effectiveStagger_g != null ? Number((derived as any).effectiveStagger_g).toFixed(2) : '—'} mm
+                        </div>
+                        <div>governing rupture path: {derived.criticalAnPath}</div>
+                        <div>An (governing): {derived.an.toFixed(3)} mm²</div>
                       </div>
 
                       <div>
@@ -1579,6 +1678,46 @@ export function TensionMemberCalculator() {
                             : 'Staggered pattern: candidate paths include straight and zig-zag (when applicable); governing rupture uses minimum An among all.'}
                         </div>
                       </div>
+
+                      {straightVsStaggerRuptureCompare && (
+                        <div className="rounded-lg border border-emerald-300 bg-white p-3 space-y-3">
+                          <h5 className="text-[11px] font-bold text-emerald-800 uppercase">Straight vs Staggered comparison</h5>
+                          <p className="text-[10px] text-emerald-700">
+                            Same bolt layout and material; only hole pattern is toggled for this table. Eurocode rupture uses current β (unchanged vs pattern). Shear-lag β charts above depend on x/L only, not hole pattern.
+                          </p>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-emerald-900">
+                            <div className="border border-emerald-200 rounded-lg p-2 bg-emerald-50/50">
+                              <div className="font-semibold text-emerald-800 mb-1">Straight</div>
+                              <div>An: {straightVsStaggerRuptureCompare.straightAn.toFixed(3)} mm²</div>
+                              <div>Nu,Rd (EC): {straightVsStaggerRuptureCompare.straightRuptureEc.toFixed(3)} kN</div>
+                              <div>Path: {straightVsStaggerRuptureCompare.straightPath}</div>
+                            </div>
+                            <div className="border border-emerald-200 rounded-lg p-2 bg-emerald-50/50">
+                              <div className="font-semibold text-emerald-800 mb-1">Staggered</div>
+                              <div>An: {straightVsStaggerRuptureCompare.staggerAn.toFixed(3)} mm²</div>
+                              <div>Nu,Rd (EC): {straightVsStaggerRuptureCompare.staggerRuptureEc.toFixed(3)} kN</div>
+                              <div>Path: {straightVsStaggerRuptureCompare.staggerPath}</div>
+                            </div>
+                          </div>
+                          <div className="h-44 w-full">
+                            <ResponsiveContainer width="100%" height="100%">
+                              <BarChart
+                                data={[
+                                  { name: 'Straight An', value: straightVsStaggerRuptureCompare.straightAn },
+                                  { name: 'Staggered An', value: straightVsStaggerRuptureCompare.staggerAn },
+                                ]}
+                                margin={{ top: 8, right: 12, left: 8, bottom: 28 }}
+                              >
+                                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
+                                <XAxis dataKey="name" tick={{ fontSize: 10 }} interval={0} height={40} />
+                                <YAxis tick={{ fontSize: 10 }} label={{ value: 'An (mm²)', angle: -90, position: 'insideLeft', fontSize: 10 }} />
+                                <Tooltip formatter={(v: number) => [`${Number(v).toFixed(2)} mm²`, 'An']} />
+                                <Bar dataKey="value" fill="#059669" radius={[4, 4, 0, 0]} maxBarSize={56} />
+                              </BarChart>
+                            </ResponsiveContainer>
+                          </div>
+                        </div>
+                      )}
 
                       {results.bsPathsList.length > 0 && (
                         <div>
@@ -1635,7 +1774,9 @@ export function TensionMemberCalculator() {
             <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-hidden">
               <div className="bg-neutral-50 px-6 py-4 border-b border-neutral-200">
                 <h2 className="text-lg font-semibold">Eurocode Shear Lag Factor (β)</h2>
-                <p className="text-xs text-neutral-500 mt-1">Shear lag effect depends on eccentricity (x/L ratio)</p>
+                <p className="text-xs text-neutral-500 mt-1">
+                  Shear lag effect depends on eccentricity (x/L ratio). These β charts do not change with Straight vs Staggered hole pattern.
+                </p>
               </div>
               <div className="p-6 space-y-4">
                 {inputs.connection === 'Bolted' && (
@@ -1866,7 +2007,7 @@ export function TensionMemberCalculator() {
               <div className="bg-neutral-50 px-6 py-4 border-b border-neutral-200">
                 <h2 className="text-lg font-semibold">Effect of Shear Lag on Tension Capacity</h2>
                 <p className="text-xs text-neutral-500 mt-1">
-                  Eurocode rupture Nu,Rd = (fu × β × An) / γM2 — other inputs fixed; x varies 0–50 mm with L = 100 mm for this chart.
+                  Eurocode rupture Nu,Rd = (fu × β × An) / γM2 — other inputs fixed; x varies 0–50 mm with L = 100 mm for this chart. An (and this curve) is independent of Straight vs Staggered; use the comparison card under rupture analysis for net-area pattern effects.
                 </p>
               </div>
               <div className="p-6 space-y-4">
