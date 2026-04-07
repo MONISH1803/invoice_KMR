@@ -812,24 +812,6 @@ export function TensionMemberCalculator() {
     return data;
   }, [inputs.sectionType, inputs.connection]);
 
-  const effectiveAreaVsLengthData = useMemo(() => {
-    if (inputs.connection === 'Bolted' && boltGeometry.invalid) {
-      return [] as Array<{ L: number; beta: number; aeff: number }>;
-    }
-    const an = Number(derived.an) || 0;
-    const x = Number(inputs.x);
-    const data: Array<{ L: number; beta: number; aeff: number }> = [];
-    for (let L = 10; L <= 200; L += 10) {
-      const beta = getBeta(inputs.sectionType, x, L, inputs.connection);
-      data.push({
-        L,
-        beta: Number(beta.toFixed(3)),
-        aeff: Number((beta * an).toFixed(2)),
-      });
-    }
-    return data;
-  }, [derived.an, inputs.x, inputs.sectionType, inputs.connection, boltGeometry.invalid]);
-
   const isDoubleAngleBolted = inputs.sectionType === 'Double Angle' && inputs.connection === 'Bolted';
 
 
@@ -1586,10 +1568,10 @@ export function TensionMemberCalculator() {
 
             <div className="bg-white rounded-2xl shadow-sm border border-neutral-200 overflow-hidden">
               <div className="bg-neutral-50 px-6 py-4 border-b border-neutral-200">
-                <h2 className="text-lg font-semibold">Shear Lag Behavior (Eurocode)</h2>
-                <p className="text-xs text-neutral-500 mt-1">Eurocode Shear Lag Visualization</p>
+                <h2 className="text-lg font-semibold">Shear Lag Visualization (Eurocode)</h2>
+                <p className="text-xs text-neutral-500 mt-1">β vs eccentricity ratio x/L</p>
               </div>
-              <div className="p-6 space-y-6">
+              <div className="p-6 space-y-5">
                 {isDoubleAngleBolted && (
                   <p className="text-xs text-neutral-600 bg-neutral-100 border border-neutral-200 rounded-lg px-3 py-2">
                     Sliders for x and L are disabled for symmetric double-angle: β stays 1.0 and does not follow 1 − x/L. Adjust x/L in the main form above if needed for other uses.
@@ -1688,35 +1670,14 @@ export function TensionMemberCalculator() {
                   </ResponsiveContainer>
                 </div>
 
-                <div className="h-64 w-full">
-                  {effectiveAreaVsLengthData.length === 0 ? (
-                    <p className="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-lg px-3 py-4 h-full flex items-center">
-                      Aeff vs L is not plotted while bolt layout validation fails or An is unavailable — resolve geometry validation first.
-                    </p>
-                  ) : (
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={effectiveAreaVsLengthData} margin={{ top: 8, right: 16, left: 8, bottom: 8 }}>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e5e7eb" />
-                        <XAxis dataKey="L" label={{ value: 'Connection length L (mm)', position: 'insideBottom', offset: -4 }} tick={{ fill: '#6b7280' }} />
-                        <YAxis label={{ value: 'Effective area Aeff (mm²)', angle: -90, position: 'insideLeft' }} tick={{ fill: '#6b7280' }} />
-                        <Tooltip
-                          formatter={(value: any, name: any, item: any) => {
-                            if (name === 'Aeff = β*An') return [`${Number(value).toFixed(2)} mm²`, `${name} (β=${item.payload.beta.toFixed(3)})`];
-                            return [`${Number(value).toFixed(3)}`, name];
-                          }}
-                          labelFormatter={(label) => `L = ${label} mm`}
-                        />
-                        <Legend />
-                        <Line type="monotone" dataKey="aeff" stroke="#0f766e" strokeWidth={3} dot={{ r: 3 }} name="Aeff = β*An" />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  )}
-                </div>
+                <p className="text-xs text-neutral-600 font-mono bg-neutral-50 border border-neutral-200 rounded-lg px-3 py-2">
+                  {isDoubleAngleBolted ? 'β = 1.0 (symmetric double angle)' : 'β = max(0, min(1 − x/L, 1))'}
+                </p>
 
                 <p className="text-sm text-neutral-700">
                   {isDoubleAngleBolted
-                    ? 'β is fixed at 1.0 for symmetric double-angle connections, so the x/L curve is flat and Aeff does not change with x/L.'
-                    : 'β typically decreases as x/L increases, reducing effective area due to shear lag.'}
+                    ? 'Symmetric double-angle connections use β = 1.0 (horizontal line on chart).'
+                    : 'Beta decreases as eccentricity increases due to shear lag.'}
                 </p>
               </div>
             </div>
