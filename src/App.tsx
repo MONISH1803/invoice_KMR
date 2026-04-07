@@ -2040,7 +2040,17 @@ export function TensionMemberCalculator() {
                         if (name === 'Gap (EC - IS)') return [`${Number(value).toFixed(2)} kN`, name];
                         return [`${Number(value).toFixed(2)} kN`, name];
                       }}
-                      labelFormatter={(label) => `${paramVar === 'thickness' ? 'Thickness' : paramVar === 'width' ? 'Width' : 'Diameter'}: ${label}`}
+                      labelFormatter={(label) => {
+                        const dim =
+                          paramVar === 'thickness'
+                            ? 'Thickness'
+                            : paramVar === 'width'
+                              ? inputs.sectionType === 'Plate'
+                                ? 'Width'
+                                : 'Leg'
+                              : 'Diameter';
+                        return `${dim}: ${label}`;
+                      }}
                       itemSorter={(item) => {
                         const order: Record<string, number> = { 'Eurocode EN 1999': 0, 'IS 8147:1976': 1, 'Gap (EC - IS)': 2 };
                         return order[item.name as string] ?? 99;
