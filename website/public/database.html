@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMR Database Manager</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="layout db-layout">
+      <section class="panel db-panel">
+        <div class="db-header">
+          <h1>Database Manager</h1>
+          <a href="/" class="secondary nav-link">Back To Billing</a>
+        </div>
+        <div id="dbStatus" class="backend-status" hidden></div>
+
+        <section class="db-section">
+          <h2>Customers</h2>
+          <form id="customerForm" class="db-form">
+            <input id="customerNameInput" placeholder="Customer Name" required />
+            <input id="customerGstinInput" placeholder="GSTIN" />
+            <input id="customerPhoneInput" placeholder="Phone" />
+            <textarea id="customerAddressInput" placeholder="Address" rows="2"></textarea>
+            <div class="db-actions">
+              <button id="customerSaveBtn" class="primary" type="submit">Add Customer</button>
+              <button id="customerCancelBtn" class="secondary" type="button" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div id="customerTable" class="db-table"></div>
+        </section>
+
+        <section class="db-section">
+          <h2>Products</h2>
+          <form id="productForm" class="db-form">
+            <input id="productDescriptionInput" placeholder="Description" required />
+            <input id="productHsnInput" placeholder="HSN Code" />
+            <input id="productPriceInput" placeholder="Rate" type="number" min="0" step="0.01" required />
+            <div class="db-actions">
+              <button id="productSaveBtn" class="primary" type="submit">Add Product</button>
+              <button id="productCancelBtn" class="secondary" type="button" hidden>Cancel Edit</button>
+            </div>
+          </form>
+          <div id="productTable" class="db-table"></div>
+        </section>
+      </section>
+    </main>
+    <script src="/database.js" type="module"></script>
+  </body>
+</html>

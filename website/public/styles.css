@@ -375,6 +375,13 @@ button {
   cursor: pointer;
 }
 
+.nav-link {
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  margin-top: 8px;
+}
+
 .stack {
   display: grid;
   gap: 8px;
@@ -404,6 +411,71 @@ button {
 
 .list-item:hover {
   background: #f6f9ff;
+}
+
+.db-layout {
+  grid-template-columns: 1fr;
+  max-width: 1400px;
+}
+
+.db-panel {
+  min-height: calc(100vh - 32px);
+}
+
+.db-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.db-section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #d9dfe8;
+}
+
+.db-form {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr 1.5fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.db-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.db-table {
+  margin-top: 10px;
+  border: 1px solid #d9dfe8;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+.db-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.db-table th,
+.db-table td {
+  border-bottom: 1px solid #eceff4;
+  padding: 8px;
+  font-size: 13px;
+  text-align: left;
+}
+
+.db-cell-actions {
+  white-space: nowrap;
+  width: 170px;
+}
+
+.db-cell-actions button {
+  width: auto;
+  margin-right: 6px;
+  padding: 6px 10px;
 }
 
 @media print {

@@ -114,6 +114,16 @@ app.post("/api/products", async (req, res) => {
   }
 });
 
+app.get("/api/products", async (_req, res) => {
+  try {
+    await ensureDbReady();
+    const result = await db.query("SELECT * FROM products ORDER BY description ASC");
+    res.json(result.rows.map((row) => ({ ...row, price: toNum(row.price) })));
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch products.", detail: String(error.message) });
+  }
+});
+
 app.put("/api/products/:id", async (req, res) => {
   const id = Number(req.params.id);
   const { description, hsnCode, price } = req.body;
@@ -140,6 +150,70 @@ app.delete("/api/products/:id", async (req, res) => {
     res.status(204).send();
   } catch (error) {
     res.status(500).json({ message: "Failed to delete product.", detail: String(error.message) });
+  }
+});
+
+app.get("/api/customers", async (_req, res) => {
+  try {
+    await ensureDbReady();
+    const result = await db.query("SELECT * FROM customers ORDER BY name ASC");
+    res.json(result.rows);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch customers.", detail: String(error.message) });
+  }
+});
+
+app.post("/api/customers", async (req, res) => {
+  const { name, address, gstin, phone } = req.body;
+  if (!name?.trim()) {
+    return res.status(400).json({ message: "Customer name is required." });
+  }
+  try {
+    await ensureDbReady();
+    const created = await db.query(
+      `INSERT INTO customers (name, address, gstin, phone)
+       VALUES ($1, $2, $3, $4)
+       RETURNING *`,
+      [name.trim(), String(address || "").trim(), String(gstin || "").trim(), String(phone || "").trim()]
+    );
+    return res.status(201).json(created.rows[0]);
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to create customer.", detail: String(error.message) });
+  }
+});
+
+app.put("/api/customers/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  const { name, address, gstin, phone } = req.body;
+  if (!name?.trim()) {
+    return res.status(400).json({ message: "Customer name is required." });
+  }
+  try {
+    await ensureDbReady();
+    const updated = await db.query(
+      `UPDATE customers
+       SET name = $1, address = $2, gstin = $3, phone = $4
+       WHERE id = $5
+       RETURNING *`,
+      [name.trim(), String(address || "").trim(), String(gstin || "").trim(), String(phone || "").trim(), id]
+    );
+    if (!updated.rowCount) return res.status(404).json({ message: "Customer not found." });
+    return res.json(updated.rows[0]);
+  } catch (error) {
+    return res.status(500).json({ message: "Failed to update customer.", detail: String(error.message) });
+  }
+});
+
+app.delete("/api/customers/:id", async (req, res) => {
+  try {
+    await ensureDbReady();
+    await db.query("DELETE FROM customers WHERE id = $1", [Number(req.params.id)]);
+    return res.status(204).send();
+  } catch (error) {
+    return res.status(500).json({
+      message: "Failed to delete customer.",
+      detail: String(error.message),
+    });
   }
 });
 

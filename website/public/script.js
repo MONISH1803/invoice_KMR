@@ -27,10 +27,6 @@ const el = {
   productList: document.getElementById("productList"),
   customersDataList: document.getElementById("customersDataList"),
   searchInvoice: document.getElementById("searchInvoice"),
-  productForm: document.getElementById("productForm"),
-  productDescription: document.getElementById("productDescription"),
-  productHsn: document.getElementById("productHsn"),
-  productPrice: document.getElementById("productPrice"),
   saveBtn: document.getElementById("saveBtn"),
   updateBtn: document.getElementById("updateBtn"),
   amountWords: document.getElementById("amountWords"),
@@ -332,6 +328,7 @@ function showCustomerSuggestions(customers) {
 }
 
 function renderProducts() {
+  if (!el.productList) return;
   const datalistId = document.getElementById("productDescriptions") || document.createElement("datalist");
   datalistId.id = "productDescriptions";
   datalistId.innerHTML = state.products
@@ -417,24 +414,6 @@ document.getElementById("newInvoiceBtn").addEventListener("click", async () => {
   try {
     const data = await request("/api/bootstrap");
     clearForm(data.nextInvoiceNo);
-  } catch (error) {
-    setBackendStatus(error.message);
-  }
-});
-
-el.productForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  try {
-    await request("/api/products", {
-      method: "POST",
-      body: JSON.stringify({
-        description: el.productDescription.value,
-        hsnCode: el.productHsn.value,
-        price: Number(el.productPrice.value),
-      }),
-    });
-    el.productForm.reset();
-    await loadBootstrap();
   } catch (error) {
     setBackendStatus(error.message);
   }

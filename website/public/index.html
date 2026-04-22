@@ -12,16 +12,8 @@
         <h2>Invoice History</h2>
         <input id="searchInvoice" placeholder="Search invoice/customer/vehicle" />
         <button id="newInvoiceBtn" class="primary">+ New Invoice</button>
+        <a href="/database.html" class="secondary nav-link">Open Database Manager</a>
         <div id="invoiceList" class="list"></div>
-
-        <h2>Products</h2>
-        <form id="productForm" class="stack">
-          <input id="productDescription" placeholder="Description" required />
-          <input id="productHsn" placeholder="HSN Code" />
-          <input id="productPrice" placeholder="Price" type="number" min="0" step="0.01" required />
-          <button class="primary" type="submit">Save Product</button>
-        </form>
-        <div id="productList" class="list compact"></div>
       </aside>
 
       <section class="panel invoice">
