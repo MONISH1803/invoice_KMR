@@ -1,14 +1,18 @@
 import express from "express";
 import cors from "cors";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { db } from "./db.js";
 
 const app = express();
 const PORT = process.env.PORT || 4010;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const publicDir = path.join(__dirname, "public");
 
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
-app.use(express.static(path.resolve("website", "public")));
+app.use(express.static(publicDir));
 
 function getNextInvoiceNo() {
   const latest = db
@@ -234,9 +238,20 @@ app.put("/api/invoices/:id", (req, res) => {
 });
 
 app.get("*", (_req, res) => {
-  res.sendFile(path.resolve("website", "public", "index.html"));
+  res.sendFile(path.join(publicDir, "index.html"));
 });
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`KMR billing website running at http://localhost:${PORT}`);
+});
+
+server.on("error", (error) => {
+  if (error?.code === "EADDRINUSE") {
+    console.warn(`Port ${PORT} is busy. Retrying on ${Number(PORT) + 1}...`);
+    app.listen(Number(PORT) + 1, () => {
+      console.log(`KMR billing website running at http://localhost:${Number(PORT) + 1}`);
+    });
+    return;
+  }
+  throw error;
 });
