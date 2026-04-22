@@ -267,17 +267,19 @@ button {
 }
 
 .summary-strip {
-  display: flex;
-  gap: 8px;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 54px 1fr 110px 86px 76px 98px;
+  gap: 0;
+  align-items: stretch;
   margin-top: 0;
   page-break-inside: avoid;
 }
 
 .summary-left {
-  flex: 1;
+  grid-column: 1 / 5;
   padding: 4px 6px 0;
   min-height: 0;
+  border-right: 1px solid #111;
 }
 
 .summary-left p {
@@ -285,7 +287,8 @@ button {
 }
 
 .totals {
-  width: 272px;
+  grid-column: 5 / 7;
+  width: 100%;
   margin-left: 0;
   margin-top: 0;
   display: grid;
@@ -608,7 +611,7 @@ button {
   }
 
   .totals {
-    width: 272px;
+    width: 100%;
   }
 
   input,
