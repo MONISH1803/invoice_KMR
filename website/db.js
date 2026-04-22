@@ -1,24 +1,40 @@
 import pg from "pg";
 
 const { Pool } = pg;
-
-if (!process.env.DATABASE_URL) {
-  throw new Error("DATABASE_URL is required. Set it to your Supabase/Postgres connection string.");
-}
+const MISSING_DB_MESSAGE =
+  "DATABASE_URL is required. Set it to your Supabase/Postgres connection string.";
 
 const globalForDb = globalThis;
-if (!globalForDb.__kmrPgPool) {
-  globalForDb.__kmrPgPool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
-  });
+
+export function isDatabaseConfigured() {
+  return Boolean(process.env.DATABASE_URL);
 }
 
-export const db = globalForDb.__kmrPgPool;
+function getPool() {
+  if (!isDatabaseConfigured()) {
+    throw new Error(MISSING_DB_MESSAGE);
+  }
+
+  if (!globalForDb.__kmrPgPool) {
+    globalForDb.__kmrPgPool = new Pool({
+      connectionString: process.env.DATABASE_URL,
+      ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
+    });
+  }
+  return globalForDb.__kmrPgPool;
+}
+
+export const db = {
+  query: (...args) => getPool().query(...args),
+  connect: (...args) => getPool().connect(...args),
+};
 
 let initialized = false;
 
 export async function ensureDbReady() {
+  if (!isDatabaseConfigured()) {
+    throw new Error(MISSING_DB_MESSAGE);
+  }
   if (initialized) return;
   await db.query(`
     CREATE TABLE IF NOT EXISTS customers (
