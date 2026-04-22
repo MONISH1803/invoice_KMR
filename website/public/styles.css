@@ -227,6 +227,11 @@ button {
   border-bottom: 1px solid #cdd5df;
 }
 
+.items tbody tr.filler-row td {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
 .items th:nth-child(1),
 .items td:nth-child(1) { width: 54px; }
 .items th:nth-child(3),
@@ -262,8 +267,8 @@ button {
 
 .summary-left {
   flex: 1;
-  padding: 8px 6px 0;
-  min-height: 160px;
+  padding: 6px 6px 0;
+  min-height: 0;
 }
 
 .summary-left p {
@@ -336,7 +341,7 @@ button {
   margin-top: 0;
   border: none;
   border-top: 1px solid #111;
-  padding: 6px 8px 0;
+  padding: 4px 8px 0;
   page-break-inside: avoid;
 }
 
@@ -567,7 +572,7 @@ button {
   .items td {
     font-size: 11pt;
     padding: 2px 3px;
-    height: 20px;
+    height: 19px;
   }
 
   .items tbody td {
@@ -582,7 +587,7 @@ button {
 
   .summary-left {
     min-height: 0;
-    padding-top: 6px;
+    padding-top: 2px;
   }
 
   .totals {
