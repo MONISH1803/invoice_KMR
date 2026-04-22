@@ -1,3 +1,6 @@
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import pg from "pg";
 
 const { Pool } = pg;
@@ -12,6 +15,9 @@ const DB_URL_KEYS = [
 const MISSING_DB_MESSAGE = `Database URL is required. Set one of: ${DB_URL_KEYS.join(", ")}.`;
 
 const globalForDb = globalThis;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const masterSeedPath = path.join(__dirname, "seeds", "master_seed.json");
 
 function readConfiguredDbUrl() {
   for (const key of DB_URL_KEYS) {
@@ -139,7 +145,16 @@ export async function ensureDbReady() {
   `);
 
   const productCount = await db.query("SELECT COUNT(*)::int AS count FROM products");
-  if (!productCount.rows[0].count) {
+  const customerCount = await db.query("SELECT COUNT(*)::int AS count FROM customers");
+  if (!productCount.rows[0].count || !customerCount.rows[0].count) {
+    const masterSeed = readMasterSeed();
+    if (masterSeed.products.length || masterSeed.customers.length) {
+      await seedFromMasterFile(masterSeed);
+    }
+  }
+
+  const postSeedProductCount = await db.query("SELECT COUNT(*)::int AS count FROM products");
+  if (!postSeedProductCount.rows[0].count) {
     await db.query(
       `INSERT INTO products (description, hsn_code, price)
        VALUES
@@ -151,4 +166,60 @@ export async function ensureDbReady() {
   }
 
   initialized = true;
+}
+
+function readMasterSeed() {
+  try {
+    if (!fs.existsSync(masterSeedPath)) {
+      return { products: [], customers: [] };
+    }
+    const parsed = JSON.parse(fs.readFileSync(masterSeedPath, "utf-8"));
+    return {
+      products: Array.isArray(parsed.products) ? parsed.products : [],
+      customers: Array.isArray(parsed.customers) ? parsed.customers : [],
+    };
+  } catch {
+    return { products: [], customers: [] };
+  }
+}
+
+async function seedFromMasterFile(seed) {
+  const client = await db.connect();
+  try {
+    await client.query("BEGIN");
+
+    for (const customer of seed.customers) {
+      const name = (customer?.name || "").trim();
+      if (!name) continue;
+      await client.query(
+        `INSERT INTO customers (name, address, gstin)
+         VALUES ($1, $2, $3)
+         ON CONFLICT (name)
+         DO UPDATE SET
+           address = CASE WHEN customers.address = '' THEN EXCLUDED.address ELSE customers.address END,
+           gstin = CASE WHEN customers.gstin = '' THEN EXCLUDED.gstin ELSE customers.gstin END`,
+        [name, (customer?.address || "").trim(), (customer?.gstin || "").trim()]
+      );
+    }
+
+    for (const product of seed.products) {
+      const description = (product?.description || "").trim();
+      if (!description) continue;
+      const rawPrice = Number(product?.price ?? 0);
+      const price = Number.isFinite(rawPrice) ? rawPrice : 0;
+      await client.query(
+        `INSERT INTO products (description, hsn_code, price)
+         VALUES ($1, $2, $3)
+         ON CONFLICT DO NOTHING`,
+        [description, (product?.hsn_code || "").trim(), price]
+      );
+    }
+
+    await client.query("COMMIT");
+  } catch (error) {
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
 }

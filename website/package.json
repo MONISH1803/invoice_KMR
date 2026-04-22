@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed:excel": "python scripts/build_master_seed.py \"C:\\Users\\monis\\Downloads\\KMR BILLING BOOK 2025-14%GST.xlsx\" \"C:\\Users\\monis\\Documents\\Business\\kmr bill invoice\\kmr invoice.xlsx\" seeds/master_seed.json",
+    "seed:db": "node scripts/import_master_seed.mjs"
   },
   "dependencies": {
     "cors": "^2.8.5",

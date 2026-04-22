@@ -1,0 +1,7274 @@
+{
+  "meta": {
+    "source_files": [
+      "C:\\Users\\monis\\Downloads\\KMR BILLING BOOK 2025-14%GST.xlsx",
+      "C:\\Users\\monis\\Documents\\Business\\kmr bill invoice\\kmr invoice.xlsx"
+    ],
+    "product_count": 1344,
+    "customer_count": 108
+  },
+  "products": [
+    {
+      "description": "1 ltr Coi Type Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "1 ltr Coil Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "1 ltr Coil Type Del Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "1 ltr Coil Type Del,Stiner Fuel Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "1 Ltr Del Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "1 ltr Del Filter New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "1141,1016 Bulb",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "1141,1016/Tag,Tape,Spray and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "1st Gear Wheel",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "24AV Reverse Horn",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "6 Mole Packing",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "700R15 CLASSIC TUBE",
+      "hsn_code": "40112010",
+      "price": 0.0
+    },
+    {
+      "description": "700R15 JK STEEL KING (12PR) TYRE",
+      "hsn_code": "40112010",
+      "price": 0.0
+    },
+    {
+      "description": "700R15 JK TUBE",
+      "hsn_code": "40112010",
+      "price": 0.0
+    },
+    {
+      "description": "9787181021",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "AC Belt Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Accelaration Cable and Waste",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Accelarator Peddal and Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Accelator Cable New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Accelator Pedal",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Accelator Pedal Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Accelerator Cable",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Accelerator Padel Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Ace Cable Bracket Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Air Boot Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Cylinder Clip",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Dryer Kit,Cutter,Waste and Glass Handle",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Dryer Kit Major",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Dryer Tank Sensor",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Fan Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter",
+      "hsn_code": "2710",
+      "price": 1830.0
+    },
+    {
+      "description": "Air Filter and Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter and Filter Assembly",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter and Paste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter and Waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Assembly",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Assembly Motor Type",
+      "hsn_code": "7321",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter B-3",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Back Side New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Back Side Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Big and Small",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Big and Small Kit",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Full Kit",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Full Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Kit",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Kit New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter N/M",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Oring",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter(PI2856)",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Pro",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Pro New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Set and Waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Filter Set New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Air Horn Full Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Hose Booster",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Hose Wheel",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air O Ring,Waste and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Oring, Waste and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Oring,Waste,Paste and Pin'",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Air Vaccum Horn Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Ait Filter and Waste Big",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Ait Filter Kit",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp and Pipe Reverts",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp ansd Center Bolt,Big Pad,Pipe,Bolt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp Bolt,Pipe,Center Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp,Bolt,Sleeve,Waste,Reverts,Washers,Nipple,C.Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp Front",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp Long",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp Long front",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp Long Heavy Duty Rear",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp Long New Model",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp Long Rear",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp,Pipe and Center Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp Rear Long",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Allu Clamp,Reverts,Bolt and Sleeve",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Aluu Clamp and Waste (M.M)",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "and Grease Nipple",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Armuture Full Set (Owner)",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Arumuture Set Assembly",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Axel Assembly Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Axel Cutter and Galss Handle",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Axel Packing,Paste,Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Axel Packing,Pin,Paste,Waste and Reverts",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Balace Rod Bush Kit",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Balance Rod Bolt and Waste",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Balance Rod Bush Full Major Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Balance Rod Bush Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Ball Joint New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Banjo Washer and Radiator Neck",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Banjo Washer and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Bearing Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Bearing Sim and Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Beather Hose and Hose Clip",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "beather Hose and Waste,Hose,Clip,Tag and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Beather Hose Clip",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Beather Hose,Waste,Paste,Pin,Terminal,Hose Clip",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Bender,Solvent Switch",
+      "hsn_code": "8511",
+      "price": 0.0
+    },
+    {
+      "description": "Bender Startor",
+      "hsn_code": "8511",
+      "price": 0.0
+    },
+    {
+      "description": "Bendex Bed",
+      "hsn_code": "8511",
+      "price": 0.0
+    },
+    {
+      "description": "Big Horn Heavy Duty",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Body Welding and Channel Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Body Welding Work Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Body Work Service Charges",
+      "hsn_code": "9985",
+      "price": 19994.0
+    },
+    {
+      "description": "Boil,Waste,Pedal Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Bolt and Nut",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Bolt,Nut,Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Booster Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Booster Brake Assembly",
+      "hsn_code": "7381",
+      "price": 0.0
+    },
+    {
+      "description": "Booster Diapragm",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Booster Diapram Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Booster Fitting Breaker",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Booster Hose,Clamp Chip",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Bottom Clutch Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Bracket Bumper",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Cylinder Assembly",
+      "hsn_code": "7381",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Hose Long",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Oil 1/4",
+      "hsn_code": "2710",
+      "price": 298.67
+    },
+    {
+      "description": "Brake Oil and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Oil and Waste",
+      "hsn_code": "8710",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Oil and Waste (B-2)",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Oil and Waste,Fly Wheel Bush",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Oil,Center Bolt,",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Brake Pad Full Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Break Air Hose Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Break Ajaptar Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Ajaptor Clamp",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Assembly ,Bolt and Nut",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Assembly Spares",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Booster",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Camp Ajector",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Break Clamp Ajator",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Break Cylinder Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Break Cylinder Assembly(Wheel)",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Drum",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Break Drum Front",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Drum Rear",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Break Hose Long",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Lining",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Break Lining Full Set",
+      "hsn_code": "6813",
+      "price": 2249.0
+    },
+    {
+      "description": "Break Lining Full Set and Reverts",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Break Lining Heavy Duty",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Break Lining New Model",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Break Lining Pro",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Lining ,Reverts,Waste,Pin,Pasteand Packing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Break Lining Set",
+      "hsn_code": "6813",
+      "price": 1660.0
+    },
+    {
+      "description": "Break Lining Shoe Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Break Lining Spring Rear",
+      "hsn_code": "4016",
+      "price": 238.0
+    },
+    {
+      "description": "Break Lining Std and Reverts",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Break Long Pipe",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil",
+      "hsn_code": "3819",
+      "price": 397.33
+    },
+    {
+      "description": "Break Oil 1/2 Red",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil 3/4",
+      "hsn_code": "2710",
+      "price": 305.33
+    },
+    {
+      "description": "Break Oil and Bolt & Nut",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil and Coolant Oil",
+      "hsn_code": "3819",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil and Waste",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Center Bolt,Coolant Oil and Wiper Blade",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Clutch Kit and RC Lock",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Crown Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil Dot 4",
+      "hsn_code": "2710",
+      "price": 305.33
+    },
+    {
+      "description": "Break Oil,Oil Cap,Cliphouse,Fly Bearing,Extra Solvent Switch",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Paste,Thread Lock and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Pin and Waste",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil ,Power Steering Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,RC Lock,Clutch kit",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil Red",
+      "hsn_code": "2710",
+      "price": 618.0
+    },
+    {
+      "description": "Break Oil Tank and Peddal Rubber",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Waste and Pressing Pin",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Waste and Washer",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Waste,Fitting,Stiner Fuel and Bolt",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Waste,Sim",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil,Wheel Cylinder Kit",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Break Oil White",
+      "hsn_code": "2710",
+      "price": 397.33
+    },
+    {
+      "description": "Break Pad",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Break Pad,Coolant Hose and Clip",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Break Pad Front",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Pad Front Heavy Duty",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Pad Rear",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Break Rack Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Break Spring Kit",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Break Switch",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Brreak Oil and Waste",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Brush Holder New Model",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Brush Holder (Owner)",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Brush Holder Set",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Bulb 1141,1016,Bolt",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Bulb Items",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Bumper Front Tinker Work Door Inches Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "By Pass Filter",
+      "hsn_code": "8421",
+      "price": 310.0
+    },
+    {
+      "description": "By Pass Filter and Stiner",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "By Pass Filter Jumbo and Waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "C.Bolt,Revert,Waste and Nipple",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "C.Bolt,U Clamp,Sleeve and Waste",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "cabin Bed",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Bed and Rear Bolt Cabin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Bed Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Bod Road",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Hose Long",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Jumping Rod Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Light,Horn Liver,HL Relay,Switches,Pressing Pin",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Mat,Door Lever,Monogram",
+      "hsn_code": "4016",
+      "price": 1333.0
+    },
+    {
+      "description": "Cabin Mirror Big",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Side Fost Assembly RH/LH",
+      "hsn_code": "8708",
+      "price": 598.0
+    },
+    {
+      "description": "Cabin Side Panel Full Set",
+      "hsn_code": "7308",
+      "price": 0.0
+    },
+    {
+      "description": "Cabin Tarpal Full Set",
+      "hsn_code": "4016",
+      "price": 17900.0
+    },
+    {
+      "description": "Cabin Top Assembly",
+      "hsn_code": "8708",
+      "price": 3810.0
+    },
+    {
+      "description": "Cabin Water Channel RH/LH",
+      "hsn_code": "4016",
+      "price": 298.0
+    },
+    {
+      "description": "Calibar plate Assembly",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Ccoolant Oil and Radiator Cap",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt and Clamp Bolt,Pipe and Sleeve(M.3)",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt and Cutter Bolt,Allu Clamp Bolt and Waste",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt and Waste",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt Long",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt Long and Waste",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt R/R",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt,Rear and Front",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt Rear and Waste",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt,Sleeve,Clamp Bolt and Waste",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt,Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt,Waste and Cutter Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Center Bolt,Waste and Relay",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Center Joint Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Center Joint Bearing and Waste Kit",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Center Joint Bearing Kit",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Center Joint Bearing Kit Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Center Joint Bolt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Center Joint Flange",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Center Joint,King Pin,Crown Pinion",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Center Joint Rubber",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Center Mirror (Car)",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Cheek Nut Lock Washer",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "City Horn Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clamp Allu Long",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Clamp Bolt and Side Washer",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Clamp Bolt,Reverts,Pipe Washer,Center Bolt,Cutter Bolt",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Clamp Bolt,reverts,washer,pipe cutter Bolt",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clip and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch and Cover Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Assembly",
+      "hsn_code": "8708",
+      "price": 4587.0
+    },
+    {
+      "description": "Clutch Assembly (B-2)",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Assembly Bottom-Top New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Bearing Fork,Boot,Lock,Ball,Fly Bearing,Waste",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Booster Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Booster Assembly Bumper Corner",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Booster Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Bracket Big and Small",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Break Drum",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Bush and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cabel Normal Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cable",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cable New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cover Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cover Assembly and Clutch Plate Heavy Duty",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cover Assembly Full Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cover Assembly Full Set,Frok and Ball",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cover Assembly,Lock,Clutch Bearing,Boot Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cover Set Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cyinder Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cylinder",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Cylinder Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Fly Bearing and Waste",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Fork",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Fork and Ball",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Fork and Waste",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Fork,Ball and Boot",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Fork,Ball,Boot,Lock",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Fork,Cluth Bearing,Waste and Boot",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Fork Inner",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Frok and Fly Wheel",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Hose New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Kit ,Bolt and Waste",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Liver Patti and Fork",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loadin Full Set",
+      "hsn_code": "8708",
+      "price": 7166.0
+    },
+    {
+      "description": "Clutch Loadin Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Assembly and Bearing",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading CSC CMC",
+      "hsn_code": "8708",
+      "price": 1541.0
+    },
+    {
+      "description": "Clutch Loading Disc Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Full",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Full Set and Waste",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Full Set Heavy Duty",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Heavy Duty Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Ring Fost Booster",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Loading Set New Model",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Major Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch,Nut ans Washer",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Oil Seal",
+      "hsn_code": "4016",
+      "price": 269.0
+    },
+    {
+      "description": "Clutch Pedal and Pedal Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Pedal and Pedal Service Kit",
+      "hsn_code": "8708",
+      "price": 763.0
+    },
+    {
+      "description": "Clutch Pedal and Repair Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Pedal Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Pedal Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Pedal Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Pipe Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Plate Heavy Duty",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Releaser",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Releaser Bearing",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Releaser,Fly Wheel(spares)",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Clutch Set Heavy",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "(Clutch Set,Pedal,Lathe,Gear)",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Cmc Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Cmc Assembly Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Cmc Assembly Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Coil,Coolant Oil and Waste",
+      "hsn_code": "3819",
+      "price": 0.0
+    },
+    {
+      "description": "Coil Type Del Filter and Waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Coil Type Del Filter Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Column Steering Rod Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Electrical Service Charges",
+      "hsn_code": "9981",
+      "price": 9981.0
+    },
+    {
+      "description": "Complete Electrical Service Charges and Self Motor Work",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Electrical Work Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Electrical Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Lathe Work Serice Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Latte Work Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Letter Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Letter Work Writing Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Mechanic Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Mechanic Service charges(steering&Gear box,Etc)",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Mechanic Service Work Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Mechanic Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Painting Service Charges",
+      "hsn_code": "9988",
+      "price": 9988.0
+    },
+    {
+      "description": "Complete Painting Work and Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Painting Work Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Painting Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Patta Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Tinkar Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Tinkar Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Tinker Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Water Service",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Water Service and Wiring Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Water Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Complete Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Belt",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Belt and Fan",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Belt and Horn Liver",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Belt Fully",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Belt Normal Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Bolt",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Bolt,Waste and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Fully",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "compressor Fully Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Idle Bolt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Kit New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Kit,Paste and Waste",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Oil,Hose and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Compressor Water Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Comption Switch",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Connecting Bearing Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Connecting Bush Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Connecting Rod Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil",
+      "hsn_code": "2710",
+      "price": 360.0
+    },
+    {
+      "description": "Coolant Oil and Break Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil and Rest Fry and Stiner",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil and Waste",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Buffer",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Green",
+      "hsn_code": "3820",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Heavu Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Heavy Duty",
+      "hsn_code": "3820",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Heavy Duty Green",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Heavy Duty,Hose Clip",
+      "hsn_code": "3820",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Heavy Duty Red",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Heavy Model",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Red",
+      "hsn_code": "3820",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil Tank",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Coolant Oil,Wiper Blade,Pedal",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Coolent Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Cooolant Oil Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Count Saft Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Count Shaft Assembly and Ring",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Count Soft Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Count Soft Pin,Cutter",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Crans Packing Set",
+      "hsn_code": "8484",
+      "price": 256.0
+    },
+    {
+      "description": "Crown and Gear Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Crown Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Crown oil and Gear Oil Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Crown Oil Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Crown Pinion,Oil Seal Normal Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Culth Loading Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Cut Outer,Horn",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Cutter Bolt and Waste",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Cutter Bolt and Waste Big Side Washer",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Cutter Bolt,Waste",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Cutter Pin and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Cutter,Pin,Waste,Lining Spring,Oil Seal",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Cutter pin,Waste,Paste and Emri Sheet",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Cap",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Cap Heavy Duty",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter",
+      "hsn_code": "8421",
+      "price": 1800.0
+    },
+    {
+      "description": "Del Filter 1/2 ltr",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter 1/2 ltr and Waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter,Air Filter and Oil Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter and waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Assembly",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Coil",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Coil Type",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Kit",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Long",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter N/M",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter New Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter New Model Jumbo",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Pro",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Sensor",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Filter Truck",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Del Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Hose Main",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Hose Main Hose Clip,Banjo Bolt,Washer and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Hose Main Long",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Hose,Return Hose,Clip",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Hose,Waste,Wiper Blade",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Main Hose Long and Clip",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Main Hose Sensor",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Del Main Hose Sleeve and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Motor Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Del Pipe Gear Wheel",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Del Pump Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Del Tank and Belt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Del Tank Patti",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Del Tank Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Dep Oil",
+      "hsn_code": "3102",
+      "price": 0.0
+    },
+    {
+      "description": "Door Beeding",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Chager Plate and Waste",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Door Changer Plate and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Changer Plate,Fitting",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Channel Beeding",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Channel Inner & Outer,Full Set Beeding",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Channel Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Door Glass and Tinkering Work Fitting",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Door Inches",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Door Inches Big and Small",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Door Inches Big and Small LH and RH",
+      "hsn_code": "8708",
+      "price": 939.0
+    },
+    {
+      "description": "Door Key and Tia Rod",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Light (inner)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Lock and Charger Plate",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Lock Assembly",
+      "hsn_code": "9030",
+      "price": 0.0
+    },
+    {
+      "description": "Door Lock Full Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Door Lock Full Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Lock,RC Lock,Charger Plate,Screw,Glass Handle",
+      "hsn_code": "8708",
+      "price": 1994.0
+    },
+    {
+      "description": "Door Lock,Screw,Door Inches,Chacher Plate,Outer Handle",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Door Lock ,Screw,Lock",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Nup and Glass Handle",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Door Pad and Cover",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Pad Bottom and Cover",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Pad LH/RH",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Pad LH/RH Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Door Pad RH/LH",
+      "hsn_code": "8708",
+      "price": 1560.0
+    },
+    {
+      "description": "Door Post Key RH/LH",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Door RC Lock",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Door RC Lock and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Weather Steep Beeding",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Door Weather Strip LH/RH Full Set",
+      "hsn_code": "4016",
+      "price": 299.0
+    },
+    {
+      "description": "Door Weather Stup",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Drag Lining Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Drag Link Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Drag Link Full Set",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Drag Link Kit",
+      "hsn_code": "8708",
+      "price": 1144.0
+    },
+    {
+      "description": "Drag Link Set Heavy Duty",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Dynamo Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Dynamo Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Dynamo Hose",
+      "hsn_code": "2710",
+      "price": 368.0
+    },
+    {
+      "description": "Dynamo Motor Coil Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Dynamo Pipe",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Dynamo Pipe (New Model)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Dynamo Spare Cut Outer Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "ECM Ajaptor Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "ECM Board Scanning Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "ECM Board Scanning Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "ECM Mother Board",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "ECR Board Vallu Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "ECU ECM Ajaptor Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "ECU-ECM Board Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Electrician General Check Up",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Electrician Work Service and Fly Sensor Work Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Electrician Work Service Charges",
+      "hsn_code": "9985",
+      "price": 2195.0
+    },
+    {
+      "description": "Electrician Work Service Charges(2 Times Scanner Work)",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "End Ball and Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Eng Bed,Waste,Paste,Pin and Hub Packing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Engine Bed and Nut",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Engine Bed With Nut",
+      "hsn_code": "8708",
+      "price": 508.0
+    },
+    {
+      "description": "Engine Fuel",
+      "hsn_code": "2710",
+      "price": 1080.0
+    },
+    {
+      "description": "Engine Injection Full Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Engine Oil 15/40 CI4",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Engine Oil 20/40",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Engine Tensor Fully Big",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Extra Bumber Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Extra Cutter and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Extra Lining Shoe",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Extra Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Extra Oil 15/40",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Extra Rear Spring Blade Heavy Duty",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Extra Solvent Switch",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Falsher,Reverse Horn,Horn Cut outer and Horn Liver",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Family Key Set and Wiper Motor Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fan Belt",
+      "hsn_code": "4016",
+      "price": 469.0
+    },
+    {
+      "description": "Fan Belt and Air Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Fan Belt and Dimo Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fan Belt and Power Steering Belt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fan Belt B.Down (8752)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fan Belt (New Model)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fan Compressor and Power Steering Belt",
+      "hsn_code": "4016",
+      "price": 456.0
+    },
+    {
+      "description": "Fan Compressor Belt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fan Fully Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Fan Tensor Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Finish Sleeve Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Fitting Bolt Nut Washer",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fitting Bracket and Bolt Nut",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Flasher Power",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Floor Mat and Door Bottom",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fly Wheel Bearing and Inner Boot Lock",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Fly Wheel Bearing and Mirror Cottor",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Fly Wheel Bearing,Ball,Lock,Waste and Boot",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fly Wheel Ring",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Fly Wheel Sensor",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Fly Wheel Sensor and Socket",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fly Wheel Sensor Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fog Lamp Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fork and Releaser Bearing and Fly Wheel",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Fork Ball and Lock Boot",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Fork,Ball,Lock,Boot,handle,Oil Dip Stick,Nup,Fan Com,Belt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fost and Wheel Arts",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Fost Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Fost Roof Handle",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Front Allu Clamp",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Front Bumber Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Front Bumper Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Front Bumper Assembly Heavy Duty",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Front Fog Lamp Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Front Fog Lamp Led",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Front Fog Led light",
+      "hsn_code": "4016",
+      "price": 695.0
+    },
+    {
+      "description": "Front Fost",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Front Grill Full Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Front Grill Full Set,Bracket,RC Lock,Door Lock",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Front Grill Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Front Grill Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Front Kit Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Front Outer Bearing Inner",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Front Panel Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Front Spring Blade 2nd Heavy Duty",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Front Spring Bush Heavy Duty",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Front Spring Bush New Model",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Front Wheel Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Front Wind Shield Assembly",
+      "hsn_code": "7007",
+      "price": 0.0
+    },
+    {
+      "description": "Front Wind Shield Assembly,Beeding and Fitting",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Front Wind Shield, Beding or Fitting Complete",
+      "hsn_code": "7007",
+      "price": 0.0
+    },
+    {
+      "description": "Front Wind Shield,Complete Beeding and Fitting",
+      "hsn_code": "7007",
+      "price": 0.0
+    },
+    {
+      "description": "Front Windshield Assembly",
+      "hsn_code": "7007",
+      "price": 9850.0
+    },
+    {
+      "description": "Front WindShield Beeding Full Set",
+      "hsn_code": "7002",
+      "price": 0.0
+    },
+    {
+      "description": "Fuel Pump Service Charges",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fuel Steering",
+      "hsn_code": "2710",
+      "price": 140.0
+    },
+    {
+      "description": "Fuel Stiner",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Fuel Stiner and Waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Fuel Stiner,Waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Full Painting Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Fuse(KA595005)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Fuses and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gasket Packing Kit",
+      "hsn_code": "8484",
+      "price": 0.0
+    },
+    {
+      "description": "Gear and Crown Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear and Crown Oil Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box 1st Gear Wheel",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Bearing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Bed",
+      "hsn_code": "8707",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Bed left/Right",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box F.N",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Flange",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Fork Inner Releaser Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Lock Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Lock Kit Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Low Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Lower Kit",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Main Shaft Wheel Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Nut",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Oil Seal",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Oil Seal and Pin",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Pin",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Remove and Fitting Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Remove and Fitting Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Top Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Top Full Assembly(New Model)",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Wheel 1st Gear",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Wheel(OD)",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Box Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Cable Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Cable End,Big and Small",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear,Crown Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Crown Oil and Waste",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear End Ball",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear End Ball G.L Kit Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear End Ball New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear End Ball Normal Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear End Rod Long",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Link Shifter",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Liver Boot",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Liver Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Liver Major Bush Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Liver Major Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Oil and Crown Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Oil (Gear Box)",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Oil Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear or Crown Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Rod Full Set Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Shifter",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Shifter and Cutter",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Shifter and Joint Bolt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Shifter Ball",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Shifter Cutter",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Shifter End",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Soft Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Gear Wheel Type",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Glass Handle N Major and Slicer Packing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Glass Handle New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Glass M/C and Handle",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Glass M/C Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Glass m/c,Channel Big New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Glass M/C New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Glass Mic and Handle",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Glass Mic Heavy Duty",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Grear Oil Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Grease",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Grease Cup",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Grease Gel",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Grease Gel Heavy Duty",
+      "hsn_code": "2710",
+      "price": 1471.0
+    },
+    {
+      "description": "Grease Gel Red",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Grease Gel Red Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Grease Oil and Crown Oil",
+      "hsn_code": "2710",
+      "price": 299.0
+    },
+    {
+      "description": "Grease Red 1 kg",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Grease Red Gel",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Grease Rod Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Grill Remove and Fitting Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "H.7 Bulb 2AV",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "H.7 Bulb Heavy Duty",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "H.L Bulb and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hand Break Assembly with Liver",
+      "hsn_code": "8481",
+      "price": 2260.0
+    },
+    {
+      "description": "Hand Break Cable Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Hanger Assembly",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Hanger Assembly,Joint Bolt,Hanger",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Blub (mgr)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Bulb",
+      "hsn_code": "4016",
+      "price": 224.0
+    },
+    {
+      "description": "Head Light Bulb and Beeding (8397)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Bulb and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Bulb and Tag",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Bulb Holder",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Bulb ,Holder and Tag",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Bulb,Horn,Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light,Bulb,Tape,Fuse,Relay and Tag",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Bulb,Tape,Tag,Side Led Light,Wiper Blade",
+      "hsn_code": "4016",
+      "price": 3639.0
+    },
+    {
+      "description": "Head Light Bulb,U Clamp,Coolant Oil",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Buzz and Fitting Grill Kit",
+      "hsn_code": "8708",
+      "price": 940.0
+    },
+    {
+      "description": "Head Light Buzzle",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Doom",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Doom (8397)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Doom and Hose Cup",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Doom New Model",
+      "hsn_code": "4016",
+      "price": 630.0
+    },
+    {
+      "description": "Head Light Doom,Tail Light Assembly,Wiper Blade,Bulb",
+      "hsn_code": "3512",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Doom,Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light (KA595005)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light ,Power Key and Indicator Wire",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Relay",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Relay and Power Relay",
+      "hsn_code": "4016",
+      "price": 299.0
+    },
+    {
+      "description": "Head Light Relay Bulb and Others",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Relay,Bulb,Tag and Wire",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Head Light Switch",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "HeadLight Bulb",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Helper Blade",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Holder Head Light",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hole Packing,Waste and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Ajaptor and Union",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Big Heavy Duty",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Big Heavy Duty Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Big L/R",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Big Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Cut Outer",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Cut Outer and Horn Clamp",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Cut Outer (B-31)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Cut Outer Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Hose Long,Hose Ajapater",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Liver",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Liver and Color Bulb",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Liver and Wiper Blade",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Liver ,Paste and Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Liver,Tape,Wire and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Set Air Type",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Set (B-32)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Set Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Set New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Set Vaccum",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Set Vaccum Type",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Horn Set,Vaccum Type,Wire Sleeve and Liver",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hose Ajapar and Paste",
+      "hsn_code": "4010",
+      "price": 0.0
+    },
+    {
+      "description": "Hose Ajator",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hose Clip",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hose Clip and Gear Ball End",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Hose Clip and Pedal Kit,Walt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hose Clip,Banjo Washer",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hose Clip,Paste,Waste,Bolt,Nut,Raditor,Water Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "HUB Gearing Kit and Waste",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Greasign Full Kit",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "(HUB Greasing and Oil Service)",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Greasing Ful Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Greasing Full Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Greasing Full Set",
+      "hsn_code": "4016",
+      "price": 1084.0
+    },
+    {
+      "description": "Hub Greasing Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Greasing Kit Full",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Greasing Kit,Packing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Greasing Kit,Pin,Packing and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Greasing Pin and Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Hub Packing,Pin,Paste,Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Idle Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Idle Bracket",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Idle Fully",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Idle Fully Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "(Include Dynamo,Self Motor Work)",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Indicator Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Indicator Assembly,Flaser and Ray",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Indicator Bracket",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Indicator Bracket and Grill Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Indicator Cover",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Indicator Flaser",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Indicator Flaser and Tape",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Indicator Flasher",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Injector Full Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Inlet Packing,Wall Door Packing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Jack 5 Ton",
+      "hsn_code": "8425",
+      "price": 0.0
+    },
+    {
+      "description": "Jack Heavy Duty",
+      "hsn_code": "8425",
+      "price": 0.0
+    },
+    {
+      "description": "Jack Rod Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Jack Rod Heavy Duty",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Bolt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Bolt ad Nut",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Bolt and Fly Wheel Bearing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Bolt and Nut",
+      "hsn_code": "7318",
+      "price": 64.0
+    },
+    {
+      "description": "Joint Bolt and Nut Full Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Bolt and Nut Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Bolt and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Bolt Nut",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Flange",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Flange New Model",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Flange Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Star",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Star and Ring Front Wheel",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Star Full Set (pro)",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Star New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Star New Model Pro",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Star Normal Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Star Pro Big Normal Model and Bolt",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Star Pro Normal Model",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Joint Youk Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Jumbo Mirror",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Jumping Rod and U Clamp",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "King Pin Full Set New Model Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "King Pin Set",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "King Pin Set and Sim",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "King Pin Set Assembly",
+      "hsn_code": "8708",
+      "price": 4660.0
+    },
+    {
+      "description": "King Pin Set New Model",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "King Pin Sim,Cutter",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "King Piston",
+      "hsn_code": "8409",
+      "price": 0.0
+    },
+    {
+      "description": "Kutti Pump Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Lathe Gear Box Work and Removing and Fitting,Setting",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Lathe King Pin Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Lathe Setting Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Lathe Work Service Charges",
+      "hsn_code": "9985",
+      "price": 5980.0
+    },
+    {
+      "description": "Lathe Work Service Charges (steering Box)",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Letter Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Letter Writing Work Service Charges",
+      "hsn_code": "9985",
+      "price": 1670.0
+    },
+    {
+      "description": "Lift Pump and Cutta",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Lift Pump and Cutta ,Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Lining",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Lining Revert",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Lining Reverts OE Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Lining Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Lining Show Assembly",
+      "hsn_code": "6813",
+      "price": 0.0
+    },
+    {
+      "description": "Lining Show Spring",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Lining Spring New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Lining Spring New Model Big",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Lipt Pump and Cutta Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Liver Assembly and Hand Break",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Lock",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Lock Kit",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Lock Kit,Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Lock,Waste,Belt Idler Pully,Head Light Holder,Wire",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Main Bearing New Model",
+      "hsn_code": "8409",
+      "price": 0.0
+    },
+    {
+      "description": "Main Bearing ,Oil Seal Full set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Main Bearing Oil Seal Kit",
+      "hsn_code": "4016",
+      "price": 1548.0
+    },
+    {
+      "description": "Main Fold Hose",
+      "hsn_code": "4009",
+      "price": 0.0
+    },
+    {
+      "description": "Main Shaft Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Main Shaft Gear Wheel",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Main Shaft Needle Bearing",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Main Soft Side Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "MATHIGIRI 635 110",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "MC Kit and Break Oil",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Mechanic and Electrician Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Mechanic Service Charges",
+      "hsn_code": "9981",
+      "price": 0.0
+    },
+    {
+      "description": "Mechanic Work Service Charges",
+      "hsn_code": "9985",
+      "price": 15440.0
+    },
+    {
+      "description": "Mechanic Work Service Charges and Break Down",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Mechanic Work Service Charges and Tinkar Work Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Mechanic Work Service Charges(Break Down)",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Mechanic Work Service & Electrician Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Mechnaic Work Sevice Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Mirror Big",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Mirror Rod",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Mirror Rod and Mirror",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Mobile Box",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Monogram and Bottom",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Needle Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Nozzle Full Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Nozzle Full Set",
+      "hsn_code": "8301",
+      "price": 0.0
+    },
+    {
+      "description": "Nozzle Full Set Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Nozzle Full Set Change",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Nozzle Hose Pipe Full Set Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Nozzle Pin Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "OD Gear Wheel",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 1 ltr",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 and Waste",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 C14",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 CH4 BS5",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 CI4",
+      "hsn_code": "2710",
+      "price": 242.93
+    },
+    {
+      "description": "Oil 15/40 CI4-0639",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 CI4 2ltr",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 CI4 and Waste",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 CI4 (BS6)",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 CI4 Engine Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 CI4 Grade",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 CI4 Heavy Duty",
+      "hsn_code": "2710",
+      "price": 364.0
+    },
+    {
+      "description": "Oil 15/40 CI4 New Model",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 Extra Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 Heavy Duty",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 15/40 Top Up",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil 2 Ltr",
+      "hsn_code": "2710",
+      "price": 810.0
+    },
+    {
+      "description": "Oil 20/40",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil and Del Filter Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Bypass Filter Kit",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil,Del Filter Full Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "oil Dip Straw",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Dost CH4",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter and Air Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter and By Pass Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter and Del Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Big",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter CI4",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Full Kit",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Full Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Kit",
+      "hsn_code": "8421",
+      "price": 704.0
+    },
+    {
+      "description": "Oil Filter Kit and Waste",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Kit New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Kit Normal Model Pro",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Kit pro",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Long",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter N/M",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter New Model Jumco",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Normal Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Pro New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Set",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Stiner",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Filter Truck",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Fiter New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Seal",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Seal and Lock Washer",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Oil seal and waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Seal Kit",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Seal,Lock Washer,Check Nut",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Seal Rear",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Oil Seal,Waste,Cutter Pin and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Outer Handle",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Outer Handle and Handle Bulb",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Outer Handle and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Outer Handle & Door Lock Full Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Outer Handle (Left Side/Right Side)",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Outer Handle RC Lock",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Outer Handle,Waste,Paste,Break Oil,Reverts",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Outer Wheel bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Packing Kit,Paste and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Packing,Pin,Handle,Reverts and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Pad Bottom and Clamp",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Painting Full Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Painting Work Service Charges",
+      "hsn_code": "9985",
+      "price": 19910.0
+    },
+    {
+      "description": "Parking Bulb and Tape",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Parking Cover",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Paste and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Paste Packing",
+      "hsn_code": "4016",
+      "price": 80.0
+    },
+    {
+      "description": "Paste,Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Paste,Pin and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Paste,Washer and Banjo",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Paste,Waste,Packing,Pin and Thread",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Patta Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Patta Work Service Charges(Cutting and Lathe)",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Patta Work Service Charges Resetting",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Pedal Bush Kit and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Pedal kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Pedal Kit and Yourk Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Pinion Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Pinion Bearing Back",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Pinion Oil Seal",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Pinion Oil Seal Normal Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Pisteen and Steering",
+      "hsn_code": "8409",
+      "price": 0.0
+    },
+    {
+      "description": "Pisteen Full Set Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Power Relay",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Power Relay Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Power Steering Belt",
+      "hsn_code": "4016",
+      "price": 444.0
+    },
+    {
+      "description": "(Power steering,Break Down and All Work )",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Power Steering Filter and Washer",
+      "hsn_code": "8421",
+      "price": 549.0
+    },
+    {
+      "description": "Power Steering Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Power Steering Hose and Clip",
+      "hsn_code": "4016",
+      "price": 916.0
+    },
+    {
+      "description": "Power Steering Oil",
+      "hsn_code": "2710",
+      "price": 254.0
+    },
+    {
+      "description": "Power Steering Oil and Wiper Blade",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Power Steering Pump",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Power Steering Pump Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Power Steering Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Pump Assembly Eng",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Pump Packing,Waste and Paste Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Pump Packing,Waste ,Paste Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "R.Cap,King Pin and Ring,Wheel Mat,G.Lock,Cabin Slicer",
+      "hsn_code": "8788",
+      "price": 0.0
+    },
+    {
+      "description": "R Cape,Neck,Tape and Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Assembly",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Assembly and Radiator Coolar",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Assembly,Center Core and Top Setting",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Assembly Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Bed,Idle shaft,Neak and Box",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Cap 8590",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Cap and Paste & Fuses and Bolt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Cap and Radiator Neck",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Cap and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Cap,Nekc and Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Cap,Waste,Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Fan Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Fan Assembly New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Fan Resetting Full Work and Spare",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Full Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Full Set Assembly,Bolt,Nut,Clip,Hose",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Hose and Clip",
+      "hsn_code": "4009",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Hose L/U",
+      "hsn_code": "4009",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Hose New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Hose Upper and Lower",
+      "hsn_code": "4009",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Neck",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Radiator Service Complete Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Raditor Hose Clip",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "RC Lock,Door and Waste",
+      "hsn_code": "4010",
+      "price": 0.0
+    },
+    {
+      "description": "Rc Lock or Outer Handel",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "RC Lock,Packing and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Realiser Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Brake Light & Side Indicator Assembly",
+      "hsn_code": "4016",
+      "price": 2119.0
+    },
+    {
+      "description": "Rear Break Hose RH/LH,Paste,Clutch Boot,Clutch Ball,",
+      "hsn_code": "4016",
+      "price": 3666.0
+    },
+    {
+      "description": "Rear Door Channel Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Fost Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Lining Show Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Oil Seal,Waste,Paste and Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Outer Bearing Big",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Shakle and Spring Pin",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Spring Blade 2nd",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Spring Bush and U Cup",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Spring Bush Heavy Duty",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Spring Bush New Model",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Spring Bush OE",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Spring Heavy Duty New Model",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Wheel Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Wheel Bearing Big",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Rear Wheel Cylinder Kit Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Regulator and Bearing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Regulator Full Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Releaser Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Releaser Bearing and Waste",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Releaser Bearing Big",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Releaser Bearing Gear Box",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Releaser Bearing Heavy Duty",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Releaser Bearing New Model",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Releaser Bearing Normal Model",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Releaser Gear Box Bearing",
+      "hsn_code": "8483",
+      "price": 1238.0
+    },
+    {
+      "description": "Releasor Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Releasor Packing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Return Hose(Del)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Reverse Gear Wheel",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Reverse Horn",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Reverse Horn 4pc",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Reverse Light Switch,Brake Light Switch,",
+      "hsn_code": "4016",
+      "price": 2439.0
+    },
+    {
+      "description": "Revert and Waste ,Paste,Pin ,Packet",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Revert,Bolt and Waste",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Revert Horn",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Reverts",
+      "hsn_code": "4016",
+      "price": 200.0
+    },
+    {
+      "description": "Reverts and Clamp Bolt,Washer,Cutter Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Reverts and Waste,Cutter Bolt'",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Reverts Lining",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Reverts,Switch,Stop Light",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Reverts,Waste and Spring",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Reverts,Waste,Center Bolt,Allu Clamp Bolt and Reverts",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Reverts,Waste,Paste,Lock Washer,Check Nut",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Reverts,Waste,Pute and Shed",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Ring's Piston",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Ring Spanner 2 Type",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Roof Handling",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Rust Fry",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Scanning Full Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Seat Cover Full Set",
+      "hsn_code": "4016",
+      "price": 7890.0
+    },
+    {
+      "description": "Seat Cover LH/RH abd Full Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Self Motor and Dinamo Spares",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Self Motor Arumutun Set",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Self Motor Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Self Motor Flange",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Self Motor New Model Assembly",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Self Motort Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Sensor Del Filter Top New Model Pro Assembly",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Sensor Filter Top Assembly New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Sensor Laptop Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Sensor Relay Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Shak Abour Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Shakel Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Shakle Assembly",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Shakle Assembly,Center Bolt and Waste",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Shakle Assembly Front",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Shakle Full Set Assembly",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Shed",
+      "hsn_code": "4016",
+      "price": 280.0
+    },
+    {
+      "description": "Shed Ful LH Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Shed Full and Set Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Shifter Bracket",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Show Lining Lock Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side and Head Light Buzzle",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Hanger Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Indicator and Bulb (8397)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Led Light",
+      "hsn_code": "4016",
+      "price": 66.0
+    },
+    {
+      "description": "Side Led Light & Bolt Nut",
+      "hsn_code": "4010",
+      "price": 0.0
+    },
+    {
+      "description": "Side Light(Led)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Light Led,Mirror and Door Pad Work",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirro Big",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror (7494)",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror and Handle (8397)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror (B-1)",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror Big",
+      "hsn_code": "7009",
+      "price": 287.0
+    },
+    {
+      "description": "Side Mirror,Break Oil,Cover,Pedal Rubber",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror Old Model",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror Rod",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror Rod Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror Rod Full Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Mirror Rod Normal Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Side Washer Thick",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Side Washer Thin and Thick and Nipple,Hanger Bolt",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Ring",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Ring and Hub Sleeve",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Ring Back Side",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Ring Big",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Ring Big,Small",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Ring Big,Small Pro",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Ring Hub New Model 4th",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Ring Pro(Big-Small)",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Sleeve Kit New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Signature Sleeve or Hub",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Sim,End Ball,Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Sleeve and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Sleeve U Cup",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Slicer Apipe Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Slicer Bracket 2 Type",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Slicer Pipe",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Solvant Switch New Model",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Solvent Switch",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Solvent Switch(Owner)",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Speeda Governer Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Spring 2nd Blade Heavy",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Balde 2nd Rear",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Balde Long and Waste",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 2A,2B",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 2nd",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 2nd Front",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 2nd (Krinap)",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 2nd Normal Model",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 2nd rear Heavy Duty",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 2RE",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 2RE (M.M)",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade 3rd (M.M)",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Extra",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Front",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Front Heavy Duty",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Full Set(Front)",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Full Set(Rear)",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Long",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade (M) 0333",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Main",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade OE",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Rear",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Rear 2A Heavy Duty",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Rear Heavy Duty",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Rear Heavy Duty 2B",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Rear Heavy Duty Long Blade",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Rear New Model 2nd",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Blade Rear New Model Main",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush and Center Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush and Washer,Side",
+      "hsn_code": "",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush Front",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush Full Set Front",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush Heavy Duty",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush Heavy Duty Full Kit",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush Kit",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush Kit and Center Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush New Model Heavy Duty",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush OE",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush Rear Heavy Duty",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Bush,Sleeve and Washer",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Busher Full Set and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Center Pad Set",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Coil Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Pad and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Pad Heavy Duty Full Set",
+      "hsn_code": "7326",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Pin 11.10",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Pin and Clamp Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Pin,Hanger Bolt",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Pin Heavy Duty",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring Pin New Model Heavy Duty",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "Spring 'U' Clamp,Cutter Bolt,Waste and Side Washer",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Spring 'U' Clamp Long Heavy Duty",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Stainer ,Waste,Pin and Tape",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Star lathe Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Starter Relay",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Starter Sensor Full Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Std Bearing Main",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Arm Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Ball Joint Kit",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Box Big Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Box Oil",
+      "hsn_code": "2710",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Column Rod",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Column Rod Power Steering",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Drag Link Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Oil Seal,Paste,Bush,Sim and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Side Warm Assembly",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Star Colmun Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Warm Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Steering Warm Bearing",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Stem Seal Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Stiner Fuel",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Suspension Bush Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Suspension Person Bush Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Switch 2 Type",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Switch On/Off",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tag Long and Tape",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tail Lamp Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tail Lamp Assembly and Bulb",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tail Lamp Assembly and Mirror",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tail Lamp Assembly andn Indicator Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tail Lamp Assembly (B-1)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tail Lamp Assembly (Break)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tail Lamp Assembly,Iditor Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tail Lamp Assembly Led",
+      "hsn_code": "4016",
+      "price": 679.0
+    },
+    {
+      "description": "Tank Belt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tank Bracket Big",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Tank Flot Unit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Tape, Tag, Fuse and Big Fuse",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tape Wiring",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tensor Bearing Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Tensor Belt,Shaft and Oil Seal",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Tensor Fully Belt",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Terminal Big",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Terminal,Horn Liver and Relay",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Terminal Hose,Clip and Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Thamos Value,Return Value Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Thrust Washer Full Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Tia Rod End",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Tia Rod End Full Set",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Tia Rod End Full Set (major)",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Tia Rod End Full Set New Model",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Tia Rod End New Model",
+      "hsn_code": "8708",
+      "price": 1907.0
+    },
+    {
+      "description": "Tia Rod End Set",
+      "hsn_code": "8708",
+      "price": 1796.0
+    },
+    {
+      "description": "Tia Rod End Set Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Tia Rod Full Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Tia Rod Full Set New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Tinkar,Bonnet,Rear Door and All Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Tinkar Work and Foot Rost Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Tinkar Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Tinkar Work Service Charges(Door and Inner Work)",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Tinkar Work Service Charges(Galss M/C Door Work)",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Tinkar Work Service Charges(Glass Mic)",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Tinker Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Tinker Work Service Charges(Bonnet,Bumper,Root,Back)",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Tinkering and Painting Work Service Charge",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Tinkering Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Toggle Switch,Tape,Tag and Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Top Assembly Setup Tinkar",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Top Channel and Side Channel Full Set",
+      "hsn_code": "7308",
+      "price": 0.0
+    },
+    {
+      "description": "Top Gear Needle Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Top Gear Oil Seal",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Top Gear Soft Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Top Gear Soft Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Top Light,RC Lock,Outer Glass,Wire,Tape,Tag",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Transport Service Charges",
+      "hsn_code": "9985",
+      "price": 1800.0
+    },
+    {
+      "description": "Trial Pump Adaptor(New Model Sensor)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Full Assembly New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Incoolar Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Incooler service Charges",
+      "hsn_code": "9981",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Mirror",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Mirror Big",
+      "hsn_code": "7009",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Packing and Bolt",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Service and Core Changes Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Shed and Bolt",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Turbo Silencer Flange Assembly",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Two Door Lock & Inner Work Tinkar Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Tyre Disc Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Tyre Disc Heavy Duty",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "U Clamp and Reverts (M.M)",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "U Clamp Body Long",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "U Clamp Heavy Duty Rear",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "U Clamp Long",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "U Clamp Long Heavy Duty",
+      "hsn_code": "7320",
+      "price": 857.0
+    },
+    {
+      "description": "U Clamp Long New Model",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "U Clamp Long rear",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "U Clamp Sleeve,Reverts,Center Bolt and Waste",
+      "hsn_code": "7412",
+      "price": 0.0
+    },
+    {
+      "description": "U Clamp Sleeve,Waste and Pin",
+      "hsn_code": "7320",
+      "price": 0.0
+    },
+    {
+      "description": "Upper Arm Bush Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Vaccum Hose Ajapter",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Vaccum Hose Long",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Vaccum Pipe Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Vaccum Union",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Vallu Set Engine",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Value Cap Piston and Sleeve Ring",
+      "hsn_code": "8409",
+      "price": 0.0
+    },
+    {
+      "description": "Value Cup,Piston,Wheel Rings",
+      "hsn_code": "8409",
+      "price": 0.0
+    },
+    {
+      "description": "W.C Kit",
+      "hsn_code": "7418",
+      "price": 110.0
+    },
+    {
+      "description": "Wall Door packing,Waste and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wall Door,Packing,Waste,Pin,Reverts and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Washers",
+      "hsn_code": "2710",
+      "price": 98.0
+    },
+    {
+      "description": "Waste",
+      "hsn_code": "4016",
+      "price": 50.0
+    },
+    {
+      "description": "Waste and Air Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Waste and Clip",
+      "hsn_code": "5201",
+      "price": 0.0
+    },
+    {
+      "description": "Waste and Paste",
+      "hsn_code": "5201",
+      "price": 0.0
+    },
+    {
+      "description": "Waste and Rust Spray",
+      "hsn_code": "5201",
+      "price": 0.0
+    },
+    {
+      "description": "Waste and Tape",
+      "hsn_code": "5201",
+      "price": 0.0
+    },
+    {
+      "description": "Waste Big",
+      "hsn_code": "5201",
+      "price": 0.0
+    },
+    {
+      "description": "Waste Cotton",
+      "hsn_code": "5201",
+      "price": 52.0
+    },
+    {
+      "description": "Waste,Paste and Packing",
+      "hsn_code": "5201",
+      "price": 0.0
+    },
+    {
+      "description": "Waste,Paste and Packing,Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Waste,Paste and Thread Lock,Pin & Packing",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Waste,Paste Glass Handle",
+      "hsn_code": "5201",
+      "price": 0.0
+    },
+    {
+      "description": "Wate Separator Assembly",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Channel In/out",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Water Pump",
+      "hsn_code": "8413",
+      "price": 0.0
+    },
+    {
+      "description": "Water Pump Cooler Assembly",
+      "hsn_code": "8413",
+      "price": 0.0
+    },
+    {
+      "description": "Water Pump New Model",
+      "hsn_code": "8413",
+      "price": 0.0
+    },
+    {
+      "description": "Water Separation Set",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Water Separator",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Separator Del Filter",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Separator Del Filter New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Separator New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Separator (Old)",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Seperator",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Seperator New Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Seperator Normal Model",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Seperator Normal Model Jumbo",
+      "hsn_code": "8421",
+      "price": 0.0
+    },
+    {
+      "description": "Water Service Charges",
+      "hsn_code": "9985",
+      "price": 1680.0
+    },
+    {
+      "description": "Water Service & Letter Writing Service Charges",
+      "hsn_code": "9985",
+      "price": 3229.0
+    },
+    {
+      "description": "Water Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Weather Door Step",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Welding Body Work Service Charges",
+      "hsn_code": "9985",
+      "price": 19966.0
+    },
+    {
+      "description": "Welding Cutting Work Service Charges",
+      "hsn_code": "9985",
+      "price": 0.0
+    },
+    {
+      "description": "Welding Work Service Charges",
+      "hsn_code": "9988",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Arts",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Arts LH/RH",
+      "hsn_code": "8708",
+      "price": 2426.0
+    },
+    {
+      "description": "Wheel Bearing",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing (Back)",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Back Side",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Big",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Big/Small",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing (Front)",
+      "hsn_code": "8483",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Heavy Duty",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Inner",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing OE",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Rare Big New Model",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing rear",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Rear Back",
+      "hsn_code": "8482",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Sensor Type",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Sim,Bolt, Nut and Washer",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bearing Small",
+      "hsn_code": "8484",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bolt",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Bolt and Nut",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Break Assembly (8 set)",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Cylinder",
+      "hsn_code": "7418",
+      "price": 1360.0
+    },
+    {
+      "description": "Wheel Cylinder Assembly",
+      "hsn_code": "8708",
+      "price": 1150.0
+    },
+    {
+      "description": "Wheel Cylinder Assembly(Front)",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Cylinder Assembly New Model",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Cylinder Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Cylinder Kit Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Cylinder Kit Rear/Front",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Diaphram",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Diaphram Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Fender Assembly RH/LH",
+      "hsn_code": "8708",
+      "price": 551.0
+    },
+    {
+      "description": "Wheel Mat and Bolt Nut Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Mat Set",
+      "hsn_code": "8512",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Metod 11.10 (Owner)",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel New Model and Nut",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Spanner",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wheel Spanner Kit",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Arm A/L Long",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Arm Long",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Arm Long (Ashok Leyland)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Balde Long (mgr)",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade and Arm Wiper Canter",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade and Bulb",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade and Side Led Light Scew",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade,Glass Mic Heavy Duty",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade Long",
+      "hsn_code": "4016",
+      "price": 198.0
+    },
+    {
+      "description": "Wiper Blade ,Pin and Paste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade Shot",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Blade Tata",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Link Rod Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Long Sinze New Model",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Milling (22/6)",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Milling Full Set,Link Red and Ball",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Milling Rod Assembly,Wiper Arm and Blade",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Milling Set Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Motor Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Motor Full Set",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Motor Wheel and Link",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Wheel Assembly",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiper Wheel Box Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Bulb,Indicator Cover",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Diaphram,Waste",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire Finelex and 1141&1016 Bulb",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire Finest Coil",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Led Light and Holder",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Led Light,holder,Girn Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Pin,Tape",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Pin,Tape,Sleeve",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Tape and Tag",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Tape,Screw,Bolt,Nut,Hose Clip,Tag,Sleeve",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Tape,Tag,Bulb and Pin",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wire,Tape,Tag,Waste,Sleeve,Switch,Adaptor Hose",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiring Full Kit,Head Light",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "Wiring Kit",
+      "hsn_code": "4016",
+      "price": 0.0
+    },
+    {
+      "description": "youk Milling and Teeth Assembly",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Youk Milling Full Set New Model",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Youk Milling,Star Full Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Young Milling Full Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Yourk Milling and Center Joint",
+      "hsn_code": "8708",
+      "price": 0.0
+    },
+    {
+      "description": "Yourk Milling and Star",
+      "hsn_code": "7318",
+      "price": 0.0
+    },
+    {
+      "description": "Yourk Milling Full Set",
+      "hsn_code": "7318",
+      "price": 0.0
+    }
+  ],
+  "customers": [
+    {
+      "name": "A V TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "ACHIEVERS ACADEMY MATRIC.HR.SEC.SCHOOL",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Advaith International School",
+      "address": "B-2 , B-8 , B-1 , B-Officer",
+      "gstin": ""
+    },
+    {
+      "name": "Agriplast Tech India Private Limited",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Amman Steel",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Amman Transport",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Ammlu Carriers",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Ammulu Carriers",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "ANNAMALAIYAR TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Archive School",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Arumugam Industrial Suppliers",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "AV TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "AV TRANSPORT HOSUR",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "BABUJI PACKAGE",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "BALAJI TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "BEST RUBBER",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "BRUNDAVAN SCHOOL",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Canter 10.90",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Chirst International School",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "CHRIST INTERNATIONAL SCHOOL",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Classic RoadWays",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Date",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "GOKUL TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Guru Moorthy Mohan Babu",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "GURU RAGHAVENDRA TRADERS",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "H S L Transport",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "HKGN",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Ineca School",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "INICA SCHOOL",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Invoice No",
+      "address": "Mobile No:",
+      "gstin": ""
+    },
+    {
+      "name": "J K ENGG INDUSTRIES",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "JAI SAI RAM TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Jaya subramya Company",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "K V M Steel",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "KA 52 B 5438",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "kadiravan Transport",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "KARTHICK",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "KLS INTERNATIONAL SCHOOL",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Laxman Naraynan",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "LAXMI STEEL",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "M S M Suppliers",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "M/s. Venkateshwara Hatcheries Pvt.Ltd.",
+      "address": "No - 1 Athibele Road HCF Post Hosur Mathigiri - 635110",
+      "gstin": ""
+    },
+    {
+      "name": "MAAVEERAN LOGISTICS",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "MTC Business Private Limited",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Nanje Gowda",
+      "address": "Clutch Bearing Fork,Boot,Lock,Ball,Fly Bearing,Waste",
+      "gstin": ""
+    },
+    {
+      "name": "NARINDER PARKASH & CO",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "NARINDER PRAKASH AND CO",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "NUMANN INDUSTRIES",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "OM ENTERPRISES",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "OMKAR GLOBAL LOGISTICS",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Omkar Global Logistics India Pvt Ltd",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Omkar Global Logistics Services India Pvt Ltd",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "PARASURAM",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "PICK UP",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Pragathi Logistics Service Pvt",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "PS AUTO COMPS PEDDA BELAGANDAPALLI",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Raj Sriya Automative Industries",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Raj Sriya Automotive Industries Pvt Ltd",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Rajendra T V S Company",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "RAJSRIYA AUTOMOTIVE INDUSTRIES PVT LTD",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "RAMRAJ TVS",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Ranga Nayaki Paper Ltd",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "RENGANAYAK PAPER MILLS",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "RENGANAYAKI PAPERS PVT LTD",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "S M L TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "S M Transport",
+      "address": "9787181021",
+      "gstin": ""
+    },
+    {
+      "name": "Santhi Nathan School",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Santhi Neathan School",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Saravana Steel",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Saravana Steel Hosur",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Sathiyaman Transport",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SATHIYMAN TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SATIYAMAN TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Selvam Auto Garage",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Shanthiniketan School",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SHREE ANMOL AND CO",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SM TRANSPORT",
+      "address": "MATHIGIRI 635 110",
+      "gstin": ""
+    },
+    {
+      "name": "SML TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SREE VIJAYA LAKSHMI ENGG WORKS",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SREE VIJAYALAKSHMI ENGG WORKS",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Sree vijayalakshmi engineering works no 36 sidco",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SRI AMMAN",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Sri Amman Industries",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Sri Manjunath Transport",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Sri Rathnagiri Murugan Enterprises",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SRI SAKTHI VELAVAN ENTERPRISES",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Sri Vaishnavi Transport",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "SRINIVAS ENTERPRISE UNIT 1",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Srinivas Enterprises",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Srinivasa Enterprises",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "St.Anne's Matriculation School",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "St.Anne's School",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Sudharshan Auto Electric Pvt Ltd",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Sunrise Engineering and Equipments",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "THIRMALA GAS AGENCY",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Thirumala Gas Agency",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Tirumala Gas Agency",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "UNIC ALUTECH PVT LTD",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "VARUN TRANSPORT",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Venco Research and Breeding Farm Pvt.Ltd.",
+      "address": "Hosur Mathigiri - 635110",
+      "gstin": ""
+    },
+    {
+      "name": "VERTEX",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Vetri Vel",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Vijay Traders",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Vijaya Traders",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "VISHAL TRANSPORT AND HR",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "Vishal Transport and HR Solutions Private Limited",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "VV PACKAGING",
+      "address": "",
+      "gstin": ""
+    },
+    {
+      "name": "YMRS TRANSPORT",
+      "address": "",
+      "gstin": ""
+    }
+  ]
+}

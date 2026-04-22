@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { db, ensureDbReady, getDbConfigInfo, isDatabaseConfigured } from "./db.js";
@@ -9,6 +10,7 @@ const PORT = process.env.PORT || 4010;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const publicDir = path.join(__dirname, "public");
+const masterSeedPath = path.join(__dirname, "seeds", "master_seed.json");
 
 app.use(cors());
 app.use(express.json({ limit: "1mb" }));
@@ -20,6 +22,9 @@ app.get("/api/diagnostics/db-config", (_req, res) => {
 });
 
 app.use("/api", (_req, res, next) => {
+  if (_req.path === "/bootstrap") {
+    return next();
+  }
   if (!isDatabaseConfigured()) {
     const info = getDbConfigInfo();
     return res.status(503).json({
@@ -52,7 +57,17 @@ app.get("/api/bootstrap", async (_req, res) => {
       today: new Date().toISOString().slice(0, 10),
     });
   } catch (error) {
-    res.status(500).json({ message: "Failed to load bootstrap data.", detail: String(error.message) });
+    const fallback = readMasterSeed();
+    if (fallback.products.length || fallback.customers.length) {
+      return res.json({
+        products: fallback.products,
+        customers: fallback.customers,
+        nextInvoiceNo: "INV-0001",
+        today: new Date().toISOString().slice(0, 10),
+        fallback: true,
+      });
+    }
+    return res.status(500).json({ message: "Failed to load bootstrap data.", detail: String(error.message) });
   }
 });
 
@@ -343,3 +358,16 @@ if (process.env.VERCEL !== "1") {
 }
 
 export default app;
+
+function readMasterSeed() {
+  try {
+    if (!fs.existsSync(masterSeedPath)) return { products: [], customers: [] };
+    const parsed = JSON.parse(fs.readFileSync(masterSeedPath, "utf-8"));
+    return {
+      products: Array.isArray(parsed.products) ? parsed.products : [],
+      customers: Array.isArray(parsed.customers) ? parsed.customers : [],
+    };
+  } catch {
+    return { products: [], customers: [] };
+  }
+}
