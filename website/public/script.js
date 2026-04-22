@@ -18,6 +18,9 @@ const el = {
   cgstPercent: document.getElementById("cgstPercent"),
   sgstPercent: document.getElementById("sgstPercent"),
   igstPercent: document.getElementById("igstPercent"),
+  cgstLabel: document.getElementById("cgstLabel"),
+  sgstLabel: document.getElementById("sgstLabel"),
+  igstLabel: document.getElementById("igstLabel"),
   useIgst: document.getElementById("useIgst"),
   cgstAmount: document.getElementById("cgstAmount"),
   sgstAmount: document.getElementById("sgstAmount"),
@@ -226,6 +229,9 @@ function recalc() {
   el.cgstAmount.textContent = amount(cgst);
   el.sgstAmount.textContent = amount(sgst);
   el.igstAmount.textContent = amount(igst);
+  el.cgstLabel.textContent = `CGST ${Number(el.cgstPercent.value || 0)}%`;
+  el.sgstLabel.textContent = `SGST ${Number(el.sgstPercent.value || 0)}%`;
+  el.igstLabel.textContent = `IGST ${Number(el.igstPercent.value || 0)}%`;
   el.grandTotal.textContent = amount(roundedGrandTotal);
   el.amountWords.textContent = `${numberToWordsIndian(roundedGrandTotal)} Only`;
 }
