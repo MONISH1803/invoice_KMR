@@ -84,7 +84,7 @@ body {
   gap: 0;
   page-break-inside: avoid;
   border-top: none;
-  border-bottom: 1px solid #111;
+  border-bottom: none;
 }
 
 .customer-table {
@@ -131,9 +131,14 @@ body {
   height: 36px;
 }
 
-.meta-spacer-row th,
-.meta-spacer-row td {
-  height: 44px;
+.meta-table tr.vehicle-row th,
+.meta-table tr.vehicle-row td {
+  height: 72px;
+}
+
+.meta-table tr.credit-row th,
+.meta-table tr.credit-row td {
+  height: 36px;
 }
 
 .meta-table tr.no-print th,
@@ -210,6 +215,7 @@ button {
   margin-top: 0;
   border-collapse: collapse;
   table-layout: fixed;
+  border-top: 1px solid #111;
   border-bottom: 1px solid #111;
 }
 
@@ -223,7 +229,7 @@ button {
 }
 
 .items thead th {
-  border-top: none;
+  border-top: 1px solid #111;
 }
 
 .items tbody td {
