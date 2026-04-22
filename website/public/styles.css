@@ -200,6 +200,16 @@ button {
   height: 32px;
 }
 
+.items tbody td {
+  border-top: none;
+  border-bottom: none;
+}
+
+.items tbody tr.filled-row td {
+  border-top: 1px solid #cdd5df;
+  border-bottom: 1px solid #cdd5df;
+}
+
 .items th:nth-child(1),
 .items td:nth-child(1) { width: 54px; }
 .items th:nth-child(3),
@@ -415,6 +425,16 @@ button {
     font-size: 11pt;
     padding: 2px 3px;
     height: 20px;
+  }
+
+  .items tbody td {
+    border-top: none;
+    border-bottom: none;
+  }
+
+  .items tbody tr.filled-row td {
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
   }
 
   input,
