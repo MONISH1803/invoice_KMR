@@ -111,7 +111,7 @@ body {
 }
 
 .customer-table tbody tr:nth-child(2) td textarea {
-  min-height: 66px;
+  min-height: 52px;
 }
 
 .meta-table {
@@ -128,7 +128,12 @@ body {
 }
 
 .meta-table tbody tr {
-  height: 41px;
+  height: 36px;
+}
+
+.meta-spacer-row th,
+.meta-spacer-row td {
+  height: 44px;
 }
 
 .meta-table tr.no-print th,
@@ -217,6 +222,10 @@ button {
   height: 32px;
 }
 
+.items thead th {
+  border-top: none;
+}
+
 .items tbody td {
   border-top: none !important;
   border-bottom: none !important;
@@ -267,7 +276,7 @@ button {
 
 .summary-left {
   flex: 1;
-  padding: 6px 6px 0;
+  padding: 4px 6px 0;
   min-height: 0;
 }
 
@@ -341,7 +350,7 @@ button {
   margin-top: 0;
   border: none;
   border-top: 1px solid #111;
-  padding: 4px 8px 0;
+  padding: 2px 8px 0;
   page-break-inside: avoid;
 }
 
@@ -359,10 +368,14 @@ button {
   line-height: 1.35;
 }
 
+.bank-details-inline {
+  margin-top: 2px;
+}
+
 .custom-notes {
   width: 100%;
-  min-height: 64px;
-  margin: 6px 0 10px;
+  min-height: 44px;
+  margin: 4px 0 6px;
   border: none !important;
   border-radius: 0;
   outline: none;
@@ -587,7 +600,7 @@ button {
 
   .summary-left {
     min-height: 0;
-    padding-top: 2px;
+    padding-top: 0;
   }
 
   .totals {

@@ -4,7 +4,6 @@ const state = {
   editingInvoiceId: null,
   backendReady: true,
 };
-const MIN_VISUAL_ITEM_ROWS = 25;
 
 const el = {
   invoiceNo: document.getElementById("invoiceNo"),
@@ -107,7 +106,6 @@ function setBackendStatus(message = "") {
 }
 
 function rowTemplate(item = {}) {
-  clearFillerRows();
   const tr = document.createElement("tr");
   tr.innerHTML = `
     <td></td>
@@ -194,7 +192,6 @@ function rowTemplate(item = {}) {
   updateSerial();
   updateRowVisualState(tr);
   recalc();
-  syncFillerRows();
 }
 
 function updateSerial() {
@@ -211,15 +208,13 @@ function updateRowVisualState(row) {
 
 function recalc() {
   let subtotal = 0;
-  Array.from(el.itemsBody.rows)
-    .filter((row) => !row.classList.contains("filler-row"))
-    .forEach((row) => {
+  Array.from(el.itemsBody.rows).forEach((row) => {
     const qty = Number(row.querySelector(".qty").value || 0);
     const rate = Number(row.querySelector(".rate").value || 0);
     const line = qty * rate;
     row.querySelector(".lineAmount").textContent = amount(line);
     subtotal += line;
-    });
+  });
   const cgst = subtotal * (Number(el.cgstPercent.value || 0) / 100);
   const sgst = subtotal * (Number(el.sgstPercent.value || 0) / 100);
   const igst = el.useIgst.checked ? subtotal * (Number(el.igstPercent.value || 0) / 100) : 0;
@@ -251,15 +246,13 @@ function applyTaxMode() {
 }
 
 function getPayload() {
-  const items = Array.from(el.itemsBody.rows)
-    .filter((row) => !row.classList.contains("filler-row"))
-    .map((row) => ({
+  const items = Array.from(el.itemsBody.rows).map((row) => ({
     description: row.querySelector(".description").value.trim(),
     hsnCode: row.querySelector(".hsnCode").value.trim(),
     qty: Number(row.querySelector(".qty").value || 0),
     rate: Number(row.querySelector(".rate").value || 0),
     amount: Number(row.querySelector(".lineAmount").textContent || 0),
-    }));
+  }));
 
   return {
     invoiceNo: el.invoiceNo.value.trim(),
@@ -392,7 +385,6 @@ async function loadInvoice(id) {
 
   el.itemsBody.innerHTML = "";
   invoice.items.forEach((item) => rowTemplate(item));
-  syncFillerRows();
   recalc();
 }
 
@@ -414,36 +406,6 @@ function clearForm(nextInvoiceNo) {
   el.useIgst.checked = false;
   el.itemsBody.innerHTML = "";
   rowTemplate();
-  syncFillerRows();
-}
-
-function clearFillerRows() {
-  Array.from(el.itemsBody.querySelectorAll("tr.filler-row")).forEach((row) => row.remove());
-}
-
-function createFillerRow() {
-  const tr = document.createElement("tr");
-  tr.className = "filler-row";
-  tr.innerHTML = `
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="no-print"></td>
-  `;
-  return tr;
-}
-
-function syncFillerRows() {
-  clearFillerRows();
-  const realRows = Array.from(el.itemsBody.rows).filter((row) => !row.classList.contains("filler-row")).length;
-  const needed = Math.max(0, MIN_VISUAL_ITEM_ROWS - realRows);
-  for (let i = 0; i < needed; i += 1) {
-    el.itemsBody.appendChild(createFillerRow());
-  }
-  updateSerial();
 }
 
 document.getElementById("addRowBtn").addEventListener("click", () => rowTemplate());

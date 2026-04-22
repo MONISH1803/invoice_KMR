@@ -77,6 +77,10 @@
                   <th>Vehicle No</th>
                   <td><input id="vehicleNo" /></td>
                 </tr>
+                <tr class="meta-spacer-row">
+                  <th></th>
+                  <td></td>
+                </tr>
                 <tr class="no-print">
                   <th>Credit Bill Date</th>
                   <td><input id="creditBillDate" type="date" /></td>
@@ -110,6 +114,11 @@
           <div class="summary-left">
             <p><strong>Amount in Words:</strong> <span id="amountWords"></span></p>
             <textarea id="customNotes" class="custom-notes" rows="3"></textarea>
+            <p class="bank-details bank-details-inline">
+              Account No:012363400000174<br />
+              IFSC Code:YESB0000123<br />
+              Bank Name:YES BANK, HOSUR BRANCH
+            </p>
           </div>
           <section class="totals">
             <div><span>Total Amount</span> <strong id="subtotal">0.00</strong></div>
@@ -126,11 +135,6 @@
         <footer class="invoice-footer">
           <div class="footer-left">
             <p class="place-line" id="placeLine"> </p>
-            <p class="bank-details">
-              Account No:012363400000174<br />
-              IFSC Code:YESB0000123<br />
-              Bank Name:YES BANK, HOSUR BRANCH
-            </p>
             <div class="signature-line">Receiver's Signature with seal</div>
           </div>
           <div class="footer-right">
