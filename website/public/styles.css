@@ -84,7 +84,7 @@ body {
   gap: 0;
   page-break-inside: avoid;
   border-top: none;
-  border-bottom: none;
+  border-bottom: 1px solid #111;
 }
 
 .customer-table {
@@ -215,7 +215,7 @@ button {
   margin-top: 0;
   border-collapse: collapse;
   table-layout: fixed;
-  border-top: 1px solid #111;
+  border-top: none;
   border-bottom: 1px solid #111;
 }
 
@@ -229,7 +229,7 @@ button {
 }
 
 .items thead th {
-  border-top: 1px solid #111;
+  border-top: none;
 }
 
 .items tbody td {
