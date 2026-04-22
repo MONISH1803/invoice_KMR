@@ -56,6 +56,8 @@ body {
 
 .gst-strip {
   border-bottom: 1px solid #111;
+  border-left: none;
+  border-right: none;
   display: flex;
   justify-content: space-between;
   gap: 12px;
