@@ -173,6 +173,8 @@ app.post("/api/customers", async (req, res) => {
     const created = await db.query(
       `INSERT INTO customers (name, address, gstin, phone)
        VALUES ($1, $2, $3, $4)
+       ON CONFLICT (name) DO UPDATE
+       SET address = EXCLUDED.address, gstin = EXCLUDED.gstin, phone = EXCLUDED.phone
        RETURNING *`,
       [name.trim(), String(address || "").trim(), String(gstin || "").trim(), String(phone || "").trim()]
     );

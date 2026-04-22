@@ -31,6 +31,7 @@ const el = {
   updateBtn: document.getElementById("updateBtn"),
   amountWords: document.getElementById("amountWords"),
   customNotes: document.getElementById("customNotes"),
+  saveNewCustomerBtn: document.getElementById("saveNewCustomerBtn"),
   backendStatus: document.getElementById("backendStatus"),
   customerSuggestions: document.getElementById("customerSuggestions"),
 };
@@ -311,6 +312,17 @@ function hideCustomerSuggestions() {
   el.customerSuggestions.innerHTML = "";
 }
 
+function updateNewCustomerButton() {
+  if (!el.saveNewCustomerBtn) return;
+  const name = el.customerName.value.trim();
+  if (!name) {
+    el.saveNewCustomerBtn.hidden = true;
+    return;
+  }
+  const exists = state.customers.some((c) => c.name.toLowerCase() === name.toLowerCase());
+  el.saveNewCustomerBtn.hidden = exists;
+}
+
 function showCustomerSuggestions(customers) {
   if (!customers.length) {
     hideCustomerSuggestions();
@@ -462,10 +474,12 @@ el.customerName.addEventListener("input", () => {
     el.customerAddress.value = match.address || "";
     el.customerGstin.value = match.gstin || "";
     hideCustomerSuggestions();
+    updateNewCustomerButton();
     return;
   }
   const filtered = state.customers.filter((c) => c.name.toLowerCase().includes(query));
   showCustomerSuggestions(query ? filtered : []);
+  updateNewCustomerButton();
 });
 
 el.customerSuggestions.addEventListener("mousedown", (event) => {
@@ -477,17 +491,45 @@ el.customerSuggestions.addEventListener("mousedown", (event) => {
   el.customerAddress.value = selected.address || "";
   el.customerGstin.value = selected.gstin || "";
   hideCustomerSuggestions();
+  updateNewCustomerButton();
 });
 
 el.customerName.addEventListener("blur", () => {
   setTimeout(hideCustomerSuggestions, 150);
 });
 
+if (el.saveNewCustomerBtn) {
+  el.saveNewCustomerBtn.addEventListener("click", async () => {
+    const name = el.customerName.value.trim();
+    if (!name) return;
+    try {
+      await request("/api/customers", {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          address: el.customerAddress.value.trim(),
+          gstin: el.customerGstin.value.trim(),
+          phone: "",
+        }),
+      });
+      const data = await request("/api/bootstrap");
+      state.customers = data.customers;
+      renderCustomerHints();
+      updateNewCustomerButton();
+      setBackendStatus("");
+      alert("Customer added to database.");
+    } catch (error) {
+      setBackendStatus(error.message);
+    }
+  });
+}
+
 async function init() {
   rowTemplate();
   applyTaxMode();
   try {
     await loadBootstrap();
+    updateNewCustomerButton();
     await loadInvoices();
   } catch (error) {
     const msg =

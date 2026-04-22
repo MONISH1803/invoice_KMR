@@ -5,6 +5,7 @@ const state = {
   editingProductId: null,
   customerSearch: "",
   productSearch: "",
+  productHsnFilter: "",
 };
 
 const el = {
@@ -25,6 +26,7 @@ const el = {
   productSaveBtn: document.getElementById("productSaveBtn"),
   productCancelBtn: document.getElementById("productCancelBtn"),
   productSearchInput: document.getElementById("productSearchInput"),
+  productHsnFilterInput: document.getElementById("productHsnFilterInput"),
   productTable: document.getElementById("productTable"),
 };
 
@@ -90,7 +92,9 @@ function renderCustomers() {
 
 function renderProducts() {
   const query = state.productSearch.trim().toLowerCase();
+  const hsnFilter = state.productHsnFilter.trim().toLowerCase();
   const filteredProducts = state.products.filter((product) => {
+    if (hsnFilter && !(product.hsn_code || "").toLowerCase().includes(hsnFilter)) return false;
     if (!query) return true;
     const haystack = `${product.description || ""} ${product.hsn_code || ""} ${Number(product.price || 0).toFixed(2)}`.toLowerCase();
     return haystack.includes(query);
@@ -204,6 +208,10 @@ el.customerSearchInput.addEventListener("input", () => {
 });
 el.productSearchInput.addEventListener("input", () => {
   state.productSearch = el.productSearchInput.value || "";
+  renderProducts();
+});
+el.productHsnFilterInput.addEventListener("input", () => {
+  state.productHsnFilter = el.productHsnFilterInput.value || "";
   renderProducts();
 });
 
