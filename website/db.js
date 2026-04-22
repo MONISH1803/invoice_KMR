@@ -87,6 +87,7 @@ export async function ensureDbReady() {
       id BIGSERIAL PRIMARY KEY,
       name TEXT NOT NULL UNIQUE,
       address TEXT DEFAULT '',
+      gstin TEXT DEFAULT '',
       phone TEXT DEFAULT '',
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
@@ -108,6 +109,7 @@ export async function ensureDbReady() {
       customer_id BIGINT REFERENCES customers(id),
       customer_name TEXT NOT NULL,
       customer_address TEXT DEFAULT '',
+      customer_gstin TEXT DEFAULT '',
       subtotal NUMERIC(12, 2) NOT NULL DEFAULT 0,
       cgst_percent NUMERIC(7, 2) NOT NULL DEFAULT 9,
       sgst_percent NUMERIC(7, 2) NOT NULL DEFAULT 9,
@@ -131,6 +133,9 @@ export async function ensureDbReady() {
       rate NUMERIC(12, 2) NOT NULL DEFAULT 0,
       amount NUMERIC(12, 2) NOT NULL DEFAULT 0
     );
+
+    ALTER TABLE customers ADD COLUMN IF NOT EXISTS gstin TEXT DEFAULT '';
+    ALTER TABLE invoices ADD COLUMN IF NOT EXISTS customer_gstin TEXT DEFAULT '';
   `);
 
   const productCount = await db.query("SELECT COUNT(*)::int AS count FROM products");

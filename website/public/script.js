@@ -12,6 +12,7 @@ const el = {
   vehicleNo: document.getElementById("vehicleNo"),
   customerName: document.getElementById("customerName"),
   customerAddress: document.getElementById("customerAddress"),
+  customerGstin: document.getElementById("customerGstin"),
   itemsBody: document.getElementById("itemsBody"),
   subtotal: document.getElementById("subtotal"),
   cgstPercent: document.getElementById("cgstPercent"),
@@ -111,8 +112,8 @@ function rowTemplate(item = {}) {
     <td></td>
     <td><input class="description" list="productDescriptions" value="${item.description || ""}" /></td>
     <td><input class="hsnCode" value="${item.hsn_code || item.hsnCode || ""}" /></td>
-    <td><input class="qty" type="number" min="0" step="0.01" value="${item.qty || 1}" /></td>
     <td><input class="rate" type="number" min="0" step="0.01" value="${item.rate || 0}" /></td>
+    <td><input class="qty" type="number" min="0" step="0.01" value="${item.qty || 1}" /></td>
     <td class="lineAmount">${amount(item.amount || 0)}</td>
     <td class="row-actions no-print"><button class="secondary deleteRowBtn">Delete</button></td>
   `;
@@ -187,6 +188,7 @@ function getPayload() {
     vehicleNo: el.vehicleNo.value.trim(),
     customerName: el.customerName.value.trim(),
     customerAddress: el.customerAddress.value.trim(),
+    customerGstin: el.customerGstin.value.trim(),
     subtotal: Number(el.subtotal.textContent || 0),
     cgstPercent: Number(el.cgstPercent.value || 0),
     sgstPercent: Number(el.sgstPercent.value || 0),
@@ -275,6 +277,7 @@ async function loadInvoice(id) {
   el.vehicleNo.value = invoice.vehicle_no || "";
   el.customerName.value = invoice.customer_name || "";
   el.customerAddress.value = invoice.customer_address || "";
+  el.customerGstin.value = invoice.customer_gstin || "";
   el.cgstPercent.value = invoice.cgst_percent || 0;
   el.sgstPercent.value = invoice.sgst_percent || 0;
   el.igstPercent.value = invoice.igst_percent || 0;
@@ -294,6 +297,7 @@ function clearForm(nextInvoiceNo) {
   el.vehicleNo.value = "";
   el.customerName.value = "";
   el.customerAddress.value = "";
+  el.customerGstin.value = "";
   el.cgstPercent.value = "9";
   el.sgstPercent.value = "9";
   el.igstPercent.value = "0";
@@ -369,6 +373,7 @@ el.customerName.addEventListener("input", () => {
   const match = state.customers.find((c) => c.name.toLowerCase() === el.customerName.value.trim().toLowerCase());
   if (match) {
     el.customerAddress.value = match.address || "";
+    el.customerGstin.value = match.gstin || "";
   }
 });
 

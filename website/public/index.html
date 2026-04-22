@@ -29,41 +29,61 @@
 
         <header class="invoice-header">
           <h1>K.M.R AUTOMOBILES</h1>
-          <p>123, Main Road, Industrial Area, Cityville, State 12345</p>
-          <p>Phone: (123) 456-7890 | Email: contact@kmrauto.com</p>
+          <p>Near Agarwal Eye Hopital, Bye-Pass Road, HOSUR-635 109.</p>
+          <p>Mobile: 9942814418, E-mail: kmrautohsr@gmail.com</p>
+          <p><strong>GSTIN:33CHZPS6333N1ZC</strong></p>
         </header>
 
         <section class="gst-strip">
-          <div>State: Tamil Nadu | State Code: 33</div>
-          <div>GSTIN: 00ABCDE1234F1Z5</div>
+          <div>State Code:33</div>
+          <div class="invoice-pill">INVOICE</div>
         </section>
 
         <section class="bill-meta-grid">
           <div class="customer">
-            <label>BILL TO</label>
-            <input id="customerName" list="customersDataList" />
-            <datalist id="customersDataList"></datalist>
-            <label>Customer Address</label>
-            <textarea id="customerAddress" rows="4"></textarea>
+            <table class="customer-table">
+              <thead>
+                <tr>
+                  <th colspan="2">BILL TO</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>To</th>
+                  <td>
+                    <input id="customerName" list="customersDataList" />
+                    <datalist id="customersDataList"></datalist>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Address</th>
+                  <td><textarea id="customerAddress" rows="4"></textarea></td>
+                </tr>
+                <tr>
+                  <th>GSTIN</th>
+                  <td><input id="customerGstin" placeholder="Customer GSTIN" /></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
           <div class="meta-table-wrap">
             <table class="meta-table">
               <tbody>
                 <tr>
-                  <th>Invoice No.</th>
-                  <td><input id="invoiceNo" /></td>
-                </tr>
-                <tr>
                   <th>Invoice Date</th>
                   <td><input id="invoiceDate" type="date" /></td>
                 </tr>
                 <tr>
-                  <th>Credit Bill Date</th>
-                  <td><input id="creditBillDate" type="date" /></td>
+                  <th>Invoice No</th>
+                  <td><input id="invoiceNo" /></td>
                 </tr>
                 <tr>
-                  <th>Vehicle No.</th>
+                  <th>Vehicle No</th>
                   <td><input id="vehicleNo" /></td>
+                </tr>
+                <tr class="no-print">
+                  <th>Credit Bill Date</th>
+                  <td><input id="creditBillDate" type="date" /></td>
                 </tr>
               </tbody>
             </table>
@@ -75,9 +95,9 @@
             <tr>
               <th>SI.No</th>
               <th>Description</th>
-              <th>HSN</th>
-              <th>QTY</th>
+              <th>HSN Code</th>
               <th>Rate</th>
+              <th>QTY</th>
               <th>Amount</th>
               <th class="no-print">Action</th>
             </tr>
@@ -87,14 +107,14 @@
         <button class="primary no-print" id="addRowBtn">+ Add Row</button>
 
         <section class="totals">
-          <div><span>Subtotal</span> <strong id="subtotal">0.00</strong></div>
+          <div><span>Total Amount</span> <strong id="subtotal">0.00</strong></div>
           <div><span>CGST %</span> <input id="cgstPercent" type="number" value="9" step="0.01" /></div>
           <div><span>CGST Amount</span> <strong id="cgstAmount">0.00</strong></div>
           <div><span>SGST %</span> <input id="sgstPercent" type="number" value="9" step="0.01" /></div>
           <div><span>SGST Amount</span> <strong id="sgstAmount">0.00</strong></div>
           <div><span>IGST %</span> <input id="igstPercent" type="number" value="0" step="0.01" /></div>
           <div><span>IGST Amount</span> <strong id="igstAmount">0.00</strong></div>
-          <div class="grand"><span>Grand Total</span> <strong id="grandTotal">0.00</strong></div>
+          <div class="grand"><span>GRAND TOTAL</span> <strong id="grandTotal">0.00</strong></div>
         </section>
 
         <footer class="invoice-footer">

@@ -177,22 +177,23 @@ app.post("/api/invoices", async (req, res) => {
     transactionStarted = true;
     const customerName = payload.customerName.trim();
     const customerAddress = (payload.customerAddress || "").trim();
+    const customerGstin = (payload.customerGstin || "").trim();
     const customerPhone = String(payload.customerPhone || "").trim();
 
     const upsertCustomer = await client.query(
-      `INSERT INTO customers (name, address, phone)
-       VALUES ($1, $2, $3)
+      `INSERT INTO customers (name, address, gstin, phone)
+       VALUES ($1, $2, $3, $4)
        ON CONFLICT (name) DO UPDATE
-       SET address = EXCLUDED.address, phone = EXCLUDED.phone
+       SET address = EXCLUDED.address, gstin = EXCLUDED.gstin, phone = EXCLUDED.phone
        RETURNING id`,
-      [customerName, customerAddress, customerPhone]
+      [customerName, customerAddress, customerGstin, customerPhone]
     );
     const customerId = upsertCustomer.rows[0].id;
 
     const invoiceInsert = await client.query(
       `INSERT INTO invoices
-      (invoice_no, invoice_date, credit_bill_date, vehicle_no, customer_id, customer_name, customer_address, subtotal, cgst_percent, sgst_percent, igst_percent, cgst_amount, sgst_amount, igst_amount, grand_total, notes)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+      (invoice_no, invoice_date, credit_bill_date, vehicle_no, customer_id, customer_name, customer_address, customer_gstin, subtotal, cgst_percent, sgst_percent, igst_percent, cgst_amount, sgst_amount, igst_amount, grand_total, notes)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
       RETURNING id`,
       [
         invoiceNo,
@@ -202,6 +203,7 @@ app.post("/api/invoices", async (req, res) => {
         customerId,
         customerName,
         customerAddress,
+        customerGstin,
         Number(payload.subtotal) || 0,
         Number(payload.cgstPercent) || 0,
         Number(payload.sgstPercent) || 0,
@@ -259,10 +261,10 @@ app.put("/api/invoices/:id", async (req, res) => {
     const invoiceUpdate = await client.query(
       `UPDATE invoices SET
        invoice_no = $1, invoice_date = $2, credit_bill_date = $3, vehicle_no = $4,
-       customer_name = $5, customer_address = $6, subtotal = $7, cgst_percent = $8, sgst_percent = $9,
-       igst_percent = $10, cgst_amount = $11, sgst_amount = $12, igst_amount = $13, grand_total = $14,
-       notes = $15, updated_at = NOW()
-       WHERE id = $16`,
+       customer_name = $5, customer_address = $6, customer_gstin = $7, subtotal = $8, cgst_percent = $9, sgst_percent = $10,
+       igst_percent = $11, cgst_amount = $12, sgst_amount = $13, igst_amount = $14, grand_total = $15,
+       notes = $16, updated_at = NOW()
+       WHERE id = $17`,
       [
         payload.invoiceNo,
         payload.invoiceDate,
@@ -270,6 +272,7 @@ app.put("/api/invoices/:id", async (req, res) => {
         String(payload.vehicleNo || "").trim(),
         String(payload.customerName || "").trim(),
         String(payload.customerAddress || "").trim(),
+        String(payload.customerGstin || "").trim(),
         Number(payload.subtotal) || 0,
         Number(payload.cgstPercent) || 0,
         Number(payload.sgstPercent) || 0,

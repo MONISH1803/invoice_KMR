@@ -31,7 +31,7 @@ body {
 
 .invoice-header {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 6px;
 }
 
 .invoice-header p {
@@ -39,7 +39,11 @@ body {
 }
 
 .invoice-header h1 {
-  margin: 0 0 8px;
+  margin: 0 0 4px;
+}
+
+.invoice-header strong {
+  font-size: 13px;
 }
 
 .gst-strip {
@@ -48,33 +52,64 @@ body {
   display: flex;
   justify-content: space-between;
   gap: 12px;
-  font-size: 13px;
-  padding: 8px 0;
+  font-size: 14px;
+  padding: 6px 0;
   margin-bottom: 12px;
+  align-items: center;
+}
+
+.invoice-pill {
+  border: 1px solid #111;
+  padding: 3px 18px;
+  font-weight: 700;
 }
 
 .bill-meta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  gap: 0;
+}
+
+.customer-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #111;
+}
+
+.customer-table th,
+.customer-table td {
+  border: 1px solid #111;
+  padding: 6px;
+}
+
+.customer-table thead th {
+  text-align: center;
+  font-size: 24px;
+}
+
+.customer-table tbody th {
+  width: 80px;
+  text-align: left;
+  font-size: 13px;
 }
 
 .meta-table {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid #111;
 }
 
 .meta-table th,
 .meta-table td {
-  padding: 6px 4px;
+  border: 1px solid #111;
+  padding: 8px 6px;
 }
 
 .meta-table th {
-  width: 42%;
-  text-align: right;
+  width: 45%;
+  text-align: left;
   font-size: 13px;
   font-weight: 700;
-  padding-right: 10px;
 }
 
 label {
@@ -98,7 +133,7 @@ button {
 
 .items {
   width: 100%;
-  margin-top: 12px;
+  margin-top: 0;
   border-collapse: collapse;
 }
 
@@ -124,9 +159,13 @@ button {
 .totals {
   width: 320px;
   margin-left: auto;
-  margin-top: 12px;
+  margin-top: 0;
   display: grid;
   gap: 6px;
+  border-left: 1px solid #111;
+  border-right: 1px solid #111;
+  border-bottom: 1px solid #111;
+  padding: 8px;
 }
 
 .totals > div {
@@ -150,7 +189,10 @@ button {
   display: flex;
   justify-content: space-between;
   gap: 18px;
-  margin-top: 18px;
+  margin-top: 4px;
+  border: 1px solid #111;
+  border-top: none;
+  padding: 10px 8px 0;
 }
 
 .footer-left {
@@ -168,8 +210,8 @@ button {
 }
 
 .signature-line {
-  margin-top: 46px;
-  border-top: 1px solid #555;
+  margin-top: 32px;
+  border-top: 1px solid #111;
   padding-top: 6px;
 }
 
@@ -270,7 +312,7 @@ button {
 
   .items th,
   .items td {
-    border-color: #bcbcbc;
+    border-color: #111;
   }
 
   .gst-strip {
