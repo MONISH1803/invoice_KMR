@@ -54,14 +54,15 @@ body {
 }
 
 .gst-strip {
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid #111;
   display: flex;
   justify-content: space-between;
   gap: 12px;
   font-size: 14px;
-  padding: 6px 0;
-  margin-bottom: 12px;
+  padding: 0;
+  margin-bottom: 0;
   align-items: center;
+  min-height: 34px;
 }
 
 .invoice-pill {
@@ -69,6 +70,7 @@ body {
   padding: 1px 16px;
   font-weight: 700;
   font-size: 22px;
+  margin-right: 2px;
 }
 
 .bill-meta-grid {
@@ -76,6 +78,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 0;
   page-break-inside: avoid;
+  border-top: none;
   border-bottom: 1px solid #111;
 }
 
