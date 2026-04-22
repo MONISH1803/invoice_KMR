@@ -51,10 +51,15 @@ function getPool() {
     throw new Error(MISSING_DB_MESSAGE);
   }
 
+  const shouldUseRelaxedSsl =
+    selected.value.includes("supabase.com") ||
+    selected.value.includes("supabase.co") ||
+    selected.value.includes("pooler");
+
   if (!globalForDb.__kmrPgPool) {
     globalForDb.__kmrPgPool = new Pool({
       connectionString: selected.value,
-      ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
+      ssl: shouldUseRelaxedSsl ? { rejectUnauthorized: false } : process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
     });
     globalForDb.__kmrPgPoolKey = selected.key;
   }
