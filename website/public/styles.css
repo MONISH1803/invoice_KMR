@@ -111,7 +111,7 @@ body {
 }
 
 .customer-table tbody tr:nth-child(2) td textarea {
-  min-height: 84px;
+  min-height: 66px;
 }
 
 .meta-table {
@@ -123,8 +123,12 @@ body {
 .meta-table th,
 .meta-table td {
   border: 1px solid #111;
-  padding: 8px 6px;
+  padding: 6px 6px;
   vertical-align: middle;
+}
+
+.meta-table tbody tr {
+  height: 41px;
 }
 
 .meta-table tr.no-print th,
@@ -214,8 +218,8 @@ button {
 }
 
 .items tbody td {
-  border-top: none;
-  border-bottom: none;
+  border-top: none !important;
+  border-bottom: none !important;
 }
 
 .items tbody tr.filled-row td {
@@ -248,9 +252,27 @@ button {
   font-size: 12px;
 }
 
+.summary-strip {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 0;
+  page-break-inside: avoid;
+}
+
+.summary-left {
+  flex: 1;
+  padding: 8px 6px 0;
+  min-height: 160px;
+}
+
+.summary-left p {
+  margin: 0;
+}
+
 .totals {
-  width: 42%;
-  margin-left: auto;
+  width: 272px;
+  margin-left: 0;
   margin-top: 0;
   display: grid;
   gap: 6px;
@@ -311,7 +333,7 @@ button {
   display: flex;
   justify-content: space-between;
   gap: 18px;
-  margin-top: 4px;
+  margin-top: 0;
   border: none;
   border-top: 1px solid #111;
   padding: 6px 8px 0;
@@ -549,13 +571,22 @@ button {
   }
 
   .items tbody td {
-    border-top: none;
-    border-bottom: none;
+    border-top: none !important;
+    border-bottom: none !important;
   }
 
   .items tbody tr.filled-row td {
     border-top: 1px solid #111;
     border-bottom: 1px solid #111;
+  }
+
+  .summary-left {
+    min-height: 0;
+    padding-top: 6px;
+  }
+
+  .totals {
+    width: 272px;
   }
 
   input,
