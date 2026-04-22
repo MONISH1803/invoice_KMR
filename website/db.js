@@ -1,25 +1,62 @@
 import pg from "pg";
 
 const { Pool } = pg;
-const MISSING_DB_MESSAGE =
-  "DATABASE_URL is required. Set it to your Supabase/Postgres connection string.";
+const DB_URL_KEYS = [
+  "DATABASE_URL",
+  "DATABASE_URL_URL",
+  "POSTGRES_URL",
+  "POSTGRES_PRISMA_URL",
+  "SUPABASE_DB_URL",
+  "STORAGE_URL",
+];
+const MISSING_DB_MESSAGE = `Database URL is required. Set one of: ${DB_URL_KEYS.join(", ")}.`;
 
 const globalForDb = globalThis;
 
+function readConfiguredDbUrl() {
+  for (const key of DB_URL_KEYS) {
+    const value = process.env[key];
+    if (!value) continue;
+    if (value.includes("[YOUR-PASSWORD]")) continue;
+    return { key, value };
+  }
+  return null;
+}
+
+function extractHost(urlValue) {
+  try {
+    return new URL(urlValue).host;
+  } catch {
+    return null;
+  }
+}
+
+export function getDbConfigInfo() {
+  const selected = readConfiguredDbUrl();
+  return {
+    configured: Boolean(selected),
+    selectedKey: selected?.key || null,
+    selectedHost: selected ? extractHost(selected.value) : null,
+    availableKeys: DB_URL_KEYS.filter((key) => Boolean(process.env[key])),
+  };
+}
+
 export function isDatabaseConfigured() {
-  return Boolean(process.env.DATABASE_URL);
+  return Boolean(readConfiguredDbUrl());
 }
 
 function getPool() {
-  if (!isDatabaseConfigured()) {
+  const selected = readConfiguredDbUrl();
+  if (!selected) {
     throw new Error(MISSING_DB_MESSAGE);
   }
 
   if (!globalForDb.__kmrPgPool) {
     globalForDb.__kmrPgPool = new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: selected.value,
       ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
     });
+    globalForDb.__kmrPgPoolKey = selected.key;
   }
   return globalForDb.__kmrPgPool;
 }

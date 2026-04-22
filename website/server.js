@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { db, ensureDbReady, isDatabaseConfigured } from "./db.js";
+import { db, ensureDbReady, getDbConfigInfo, isDatabaseConfigured } from "./db.js";
 
 const app = express();
 const PORT = process.env.PORT || 4010;
@@ -14,11 +14,17 @@ app.use(cors());
 app.use(express.json({ limit: "1mb" }));
 app.use(express.static(publicDir));
 
+app.get("/api/diagnostics/db-config", (_req, res) => {
+  const info = getDbConfigInfo();
+  res.json(info);
+});
+
 app.use("/api", (_req, res, next) => {
   if (!isDatabaseConfigured()) {
+    const info = getDbConfigInfo();
     return res.status(503).json({
       message: "Billing backend is not configured yet.",
-      detail: "Set DATABASE_URL in Vercel project settings and redeploy.",
+      detail: `Set a DB URL env var and redeploy. selectedKey=${info.selectedKey || "none"} host=${info.selectedHost || "none"}`,
     });
   }
   next();
