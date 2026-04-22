@@ -47,13 +47,37 @@ async function getNextInvoiceNo() {
 
 app.get("/api/bootstrap", async (_req, res) => {
   try {
-    await ensureDbReady();
-    const productsResult = await db.query("SELECT * FROM products ORDER BY description ASC");
-    const customersResult = await db.query("SELECT * FROM customers ORDER BY name ASC");
+    const bootstrapFromDb = await withTimeout(
+      (async () => {
+        await ensureDbReady();
+        const productsResult = await db.query("SELECT * FROM products ORDER BY description ASC");
+        const customersResult = await db.query("SELECT * FROM customers ORDER BY name ASC");
+        return {
+          products: productsResult.rows.map((row) => ({ ...row, price: toNum(row.price) })),
+          customers: customersResult.rows,
+          nextInvoiceNo: await getNextInvoiceNo(),
+          today: new Date().toISOString().slice(0, 10),
+        };
+      })(),
+      8000
+    );
+    if (bootstrapFromDb.products.length || bootstrapFromDb.customers.length) {
+      return res.json(bootstrapFromDb);
+    }
+    const fallback = readMasterSeed();
+    if (fallback.products.length || fallback.customers.length) {
+      return res.json({
+        products: fallback.products,
+        customers: fallback.customers,
+        nextInvoiceNo: "INV-0001",
+        today: new Date().toISOString().slice(0, 10),
+        fallback: true,
+      });
+    }
     res.json({
-      products: productsResult.rows.map((row) => ({ ...row, price: toNum(row.price) })),
-      customers: customersResult.rows,
-      nextInvoiceNo: await getNextInvoiceNo(),
+      products: [],
+      customers: [],
+      nextInvoiceNo: "INV-0001",
       today: new Date().toISOString().slice(0, 10),
     });
   } catch (error) {
@@ -370,4 +394,11 @@ function readMasterSeed() {
   } catch {
     return { products: [], customers: [] };
   }
+}
+
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(`Bootstrap DB timeout after ${ms}ms`)), ms)),
+  ]);
 }
