@@ -1,6 +1,6 @@
 # KMR Billing Website
 
-This folder contains a full billing web app with persistent SQLite storage.
+This folder contains a full billing web app with persistent Supabase/Postgres storage.
 
 ## Features
 
@@ -16,6 +16,7 @@ This folder contains a full billing web app with persistent SQLite storage.
 ```bash
 cd website
 npm install
+set DATABASE_URL=postgresql://postgres:password@db.your-project-ref.supabase.co:5432/postgres?sslmode=require
 npm run dev
 ```
 
@@ -23,4 +24,11 @@ Open: `http://localhost:4010`
 
 ## Storage
 
-Database file is created at `website/data/billing.db`.
+- Set `DATABASE_URL` in local environment and in Vercel project settings.
+- The app auto-creates required tables on startup.
+
+### Supabase connection string
+
+Use the direct Postgres connection URL from Supabase:
+
+`postgresql://postgres:<password>@db.<project-ref>.supabase.co:5432/postgres?sslmode=require`
