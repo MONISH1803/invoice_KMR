@@ -4,8 +4,8 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #eef2f7;
+  font-family: "Times New Roman", serif;
+  background: #e7e7e7;
 }
 
 .layout {
@@ -19,9 +19,9 @@ body {
 
 .panel {
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 18px;
 }
 
 .invoice-sheet {
@@ -44,7 +44,9 @@ body {
 }
 
 .invoice-header h1 {
-  margin: 0 0 4px;
+  margin: 0 0 2px;
+  font-size: 42px;
+  letter-spacing: 0.2px;
 }
 
 .invoice-header strong {
@@ -64,8 +66,9 @@ body {
 
 .invoice-pill {
   border: 1px solid #111;
-  padding: 3px 18px;
+  padding: 1px 16px;
   font-weight: 700;
+  font-size: 22px;
 }
 
 .bill-meta-grid {
@@ -90,7 +93,7 @@ body {
 
 .customer-table thead th {
   text-align: center;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .customer-table tbody th {
@@ -126,14 +129,14 @@ body {
 
 .invoice-no-input {
   color: #b00020;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
 }
 
 label {
   display: block;
-  font-size: 13px;
+  font-size: 12px;
   margin-bottom: 4px;
 }
 
@@ -191,22 +194,22 @@ button {
 .items th,
 .items td {
   border: 1px solid #cdd5df;
-  padding: 6px;
+  padding: 4px 5px;
   font-size: 13px;
   white-space: nowrap;
-  height: 30px;
+  height: 32px;
 }
 
 .items th:nth-child(1),
 .items td:nth-child(1) { width: 54px; }
 .items th:nth-child(3),
-.items td:nth-child(3) { width: 105px; }
+.items td:nth-child(3) { width: 110px; }
 .items th:nth-child(4),
-.items td:nth-child(4) { width: 105px; }
+.items td:nth-child(4) { width: 86px; }
 .items th:nth-child(5),
-.items td:nth-child(5) { width: 70px; }
+.items td:nth-child(5) { width: 76px; }
 .items th:nth-child(6),
-.items td:nth-child(6) { width: 110px; }
+.items td:nth-child(6) { width: 98px; }
 .items th:nth-child(7),
 .items td:nth-child(7) { width: 72px; }
 
@@ -223,7 +226,7 @@ button {
 }
 
 .totals {
-  width: 320px;
+  width: 42%;
   margin-left: auto;
   margin-top: 0;
   display: grid;
@@ -231,7 +234,7 @@ button {
   border-left: 1px solid #111;
   border-right: 1px solid #111;
   border-bottom: 1px solid #111;
-  padding: 8px;
+  padding: 6px;
   page-break-inside: avoid;
   margin-right: 0;
 }
@@ -240,17 +243,24 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  border-bottom: 1px solid #111;
+  min-height: 28px;
 }
 
 .totals input {
-  width: 80px;
+  width: 52px;
+  border: none;
+  text-align: center;
+  padding: 0;
 }
 
 .grand {
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: 700;
   border-top: 1px solid #000;
-  padding-top: 6px;
+  border-bottom: none !important;
+  padding-top: 2px;
 }
 
 .invoice-footer {
@@ -260,7 +270,7 @@ button {
   margin-top: 4px;
   border: none;
   border-top: 1px solid #111;
-  padding: 10px 8px 0;
+  padding: 6px 8px 0;
   page-break-inside: avoid;
 }
 
@@ -274,14 +284,19 @@ button {
 }
 
 .bank-details {
-  margin-top: 16px;
-  line-height: 1.5;
+  margin-top: 0;
+  line-height: 1.35;
 }
 
 .signature-line {
-  margin-top: 32px;
+  margin-top: 58px;
   border-top: 1px solid #111;
   padding-top: 6px;
+}
+
+.place-line {
+  min-height: 24px;
+  margin: 10px 0;
 }
 
 .backend-status {
@@ -355,7 +370,7 @@ button {
 
   body {
     background: #fff;
-    padding: 1in 0.6in 0.25in;
+    padding: 9mm;
   }
 
   .layout {
@@ -377,12 +392,12 @@ button {
   }
 
   .invoice-header h1 {
-    font-size: 38px;
-    margin-bottom: 4px;
+    font-size: 14pt;
+    margin-bottom: 1px;
   }
 
   .invoice-no-input {
-    font-size: 20px !important;
+    font-size: 13pt !important;
     color: #b00020 !important;
     font-weight: 700 !important;
   }
@@ -391,15 +406,15 @@ button {
   .meta-table td,
   .customer-table th,
   .customer-table td {
-    font-size: 12px;
-    padding: 5px;
+    font-size: 11pt;
+    padding: 4px;
   }
 
   .items th,
   .items td {
-    font-size: 11px;
-    padding: 4px;
-    height: 24px;
+    font-size: 11pt;
+    padding: 2px 3px;
+    height: 20px;
   }
 
   input,
@@ -410,6 +425,7 @@ button {
     box-shadow: none !important;
     background: transparent !important;
     color: #000;
+    font-family: "Times New Roman", serif;
   }
 
   .items th,
