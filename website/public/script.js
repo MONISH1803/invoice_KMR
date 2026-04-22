@@ -14,6 +14,7 @@ const el = {
   customerAddress: document.getElementById("customerAddress"),
   customerGstin: document.getElementById("customerGstin"),
   itemsBody: document.getElementById("itemsBody"),
+  itemsFiller: document.getElementById("itemsFiller"),
   subtotal: document.getElementById("subtotal"),
   cgstPercent: document.getElementById("cgstPercent"),
   sgstPercent: document.getElementById("sgstPercent"),
@@ -128,6 +129,7 @@ function rowTemplate(item = {}) {
     tr.remove();
     recalc();
     updateSerial();
+    syncFillerRows();
   });
 
   const descriptionInput = tr.querySelector(".description");
@@ -191,6 +193,7 @@ function rowTemplate(item = {}) {
 
   el.itemsBody.appendChild(tr);
   updateSerial();
+  syncFillerRows();
   recalc();
 }
 
@@ -198,6 +201,28 @@ function updateSerial() {
   Array.from(el.itemsBody.rows).forEach((row, index) => {
     row.cells[0].textContent = String(index + 1);
   });
+}
+
+function syncFillerRows() {
+  const minRows = 18;
+  const usedRows = el.itemsBody.rows.length;
+  const neededRows = Math.max(minRows - usedRows, 0);
+  el.itemsFiller.innerHTML = "";
+
+  for (let i = 0; i < neededRows; i += 1) {
+    const tr = document.createElement("tr");
+    tr.className = "filler-row";
+    tr.innerHTML = `
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="no-print"></td>
+    `;
+    el.itemsFiller.appendChild(tr);
+  }
 }
 
 function recalc() {
@@ -357,6 +382,7 @@ async function loadInvoice(id) {
 
   el.itemsBody.innerHTML = "";
   invoice.items.forEach((item) => rowTemplate(item));
+  syncFillerRows();
   recalc();
 }
 
@@ -375,7 +401,9 @@ function clearForm(nextInvoiceNo) {
   el.sgstPercent.value = "9";
   el.igstPercent.value = "0";
   el.itemsBody.innerHTML = "";
+  el.itemsFiller.innerHTML = "";
   rowTemplate();
+  syncFillerRows();
 }
 
 document.getElementById("addRowBtn").addEventListener("click", () => rowTemplate());
@@ -472,6 +500,7 @@ el.customerName.addEventListener("blur", () => {
 
 async function init() {
   rowTemplate();
+  syncFillerRows();
   try {
     await loadBootstrap();
     await loadInvoices();

@@ -24,6 +24,11 @@ body {
   padding: 16px;
 }
 
+.invoice-sheet {
+  border: 1px solid #111;
+  padding: 0;
+}
+
 .sidebar {
   max-height: calc(100vh - 32px);
   overflow: auto;
@@ -47,7 +52,6 @@ body {
 }
 
 .gst-strip {
-  border-top: 1px solid #222;
   border-bottom: 1px solid #222;
   display: flex;
   justify-content: space-between;
@@ -69,12 +73,13 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 0;
   page-break-inside: avoid;
+  border-bottom: 1px solid #111;
 }
 
 .customer-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #111;
+  border: none;
 }
 
 .customer-table th,
@@ -94,10 +99,14 @@ body {
   font-size: 13px;
 }
 
+.customer-table tbody tr:nth-child(2) td textarea {
+  min-height: 84px;
+}
+
 .meta-table {
   width: 100%;
   border-collapse: collapse;
-  border: 1px solid #111;
+  border: none;
 }
 
 .meta-table th,
@@ -176,6 +185,7 @@ button {
   margin-top: 0;
   border-collapse: collapse;
   table-layout: fixed;
+  border-bottom: 1px solid #111;
 }
 
 .items th,
@@ -184,6 +194,7 @@ button {
   padding: 6px;
   font-size: 13px;
   white-space: nowrap;
+  height: 30px;
 }
 
 .items th:nth-child(1),
@@ -222,6 +233,7 @@ button {
   border-bottom: 1px solid #111;
   padding: 8px;
   page-break-inside: avoid;
+  margin-right: 0;
 }
 
 .totals > div {
@@ -246,8 +258,8 @@ button {
   justify-content: space-between;
   gap: 18px;
   margin-top: 4px;
-  border: 1px solid #111;
-  border-top: none;
+  border: none;
+  border-top: 1px solid #111;
   padding: 10px 8px 0;
   page-break-inside: avoid;
 }
@@ -360,6 +372,10 @@ button {
     overflow: hidden;
   }
 
+  .invoice-sheet {
+    border: 1px solid #111;
+  }
+
   .invoice-header h1 {
     font-size: 38px;
     margin-bottom: 4px;
@@ -383,6 +399,7 @@ button {
   .items td {
     font-size: 11px;
     padding: 4px;
+    height: 24px;
   }
 
   input,
