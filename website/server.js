@@ -241,17 +241,21 @@ app.get("*", (_req, res) => {
   res.sendFile(path.join(publicDir, "index.html"));
 });
 
-const server = app.listen(PORT, () => {
-  console.log(`KMR billing website running at http://localhost:${PORT}`);
-});
+if (process.env.VERCEL !== "1") {
+  const server = app.listen(PORT, () => {
+    console.log(`KMR billing website running at http://localhost:${PORT}`);
+  });
 
-server.on("error", (error) => {
-  if (error?.code === "EADDRINUSE") {
-    console.warn(`Port ${PORT} is busy. Retrying on ${Number(PORT) + 1}...`);
-    app.listen(Number(PORT) + 1, () => {
-      console.log(`KMR billing website running at http://localhost:${Number(PORT) + 1}`);
-    });
-    return;
-  }
-  throw error;
-});
+  server.on("error", (error) => {
+    if (error?.code === "EADDRINUSE") {
+      console.warn(`Port ${PORT} is busy. Retrying on ${Number(PORT) + 1}...`);
+      app.listen(Number(PORT) + 1, () => {
+        console.log(`KMR billing website running at http://localhost:${Number(PORT) + 1}`);
+      });
+      return;
+    }
+    throw error;
+  });
+}
+
+export default app;

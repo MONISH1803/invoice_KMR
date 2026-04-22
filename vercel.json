@@ -1,6 +1,5 @@
 {
-  "framework": "vite",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install"
+  "version": 2,
+  "builds": [{ "src": "website/server.js", "use": "@vercel/node" }],
+  "routes": [{ "src": "/(.*)", "dest": "website/server.js" }]
 }
