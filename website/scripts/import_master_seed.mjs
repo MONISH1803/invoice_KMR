@@ -47,13 +47,11 @@ async function main() {
   const customers = Array.isArray(seed.customers) ? seed.customers : [];
   const products = Array.isArray(seed.products) ? seed.products : [];
   const pool = getPool(dbUrl);
-  const client = await pool.connect();
   let importedCustomers = 0;
   let importedProducts = 0;
 
   try {
-    await client.query("BEGIN");
-    await client.query(`
+    await pool.query(`
       CREATE TABLE IF NOT EXISTS customers (
         id BIGSERIAL PRIMARY KEY,
         name TEXT NOT NULL UNIQUE,
@@ -63,7 +61,7 @@ async function main() {
         created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
       );
     `);
-    await client.query(`
+    await pool.query(`
       CREATE TABLE IF NOT EXISTS products (
         id BIGSERIAL PRIMARY KEY,
         description TEXT NOT NULL,
@@ -73,50 +71,63 @@ async function main() {
       );
     `);
 
-    for (const customer of customers) {
-      const name = String(customer?.name || "").trim();
-      if (!name) continue;
-      const result = await client.query(
+    const cleanedCustomers = customers
+      .map((c) => ({
+        name: String(c?.name || "").trim(),
+        address: String(c?.address || "").trim(),
+        gstin: String(c?.gstin || "").trim(),
+      }))
+      .filter((c) => c.name);
+    const cleanedProducts = products
+      .map((p) => ({
+        description: String(p?.description || "").trim(),
+        hsn_code: String(p?.hsn_code || "").trim(),
+        price: Number(p?.price || 0) || 0,
+      }))
+      .filter((p) => p.description);
+
+    let i = 0;
+    for (const customer of cleanedCustomers) {
+      await pool.query(
         `INSERT INTO customers (name, address, gstin)
          VALUES ($1, $2, $3)
          ON CONFLICT (name) DO UPDATE
          SET address = CASE WHEN customers.address = '' THEN EXCLUDED.address ELSE customers.address END,
-             gstin = CASE WHEN customers.gstin = '' THEN EXCLUDED.gstin ELSE customers.gstin END
-         RETURNING id`,
-        [name, String(customer?.address || "").trim(), String(customer?.gstin || "").trim()]
+             gstin = CASE WHEN customers.gstin = '' THEN EXCLUDED.gstin ELSE customers.gstin END`,
+        [customer.name, customer.address, customer.gstin]
       );
-      if (result.rowCount) importedCustomers += 1;
-    }
-
-    for (const product of products) {
-      const description = String(product?.description || "").trim();
-      if (!description) continue;
-      const hsnCode = String(product?.hsn_code || "").trim();
-      const price = Number(product?.price || 0);
-      const existing = await client.query("SELECT id, hsn_code, price FROM products WHERE LOWER(description)=LOWER($1) LIMIT 1", [
-        description,
-      ]);
-      if (existing.rowCount) {
-        const row = existing.rows[0];
-        const nextHsn = row.hsn_code || hsnCode;
-        const nextPrice = Number(row.price) > 0 ? Number(row.price) : price;
-        await client.query("UPDATE products SET hsn_code = $1, price = $2 WHERE id = $3", [nextHsn, nextPrice || 0, row.id]);
-      } else {
-        await client.query("INSERT INTO products (description, hsn_code, price) VALUES ($1, $2, $3)", [
-          description,
-          hsnCode,
-          price || 0,
-        ]);
+      importedCustomers += 1;
+      i += 1;
+      if (i % 50 === 0) {
+        console.log(`Customer upserts: ${i}/${cleanedCustomers.length}`);
       }
-      importedProducts += 1;
     }
 
-    await client.query("COMMIT");
-  } catch (error) {
-    await client.query("ROLLBACK");
-    throw error;
+    let j = 0;
+    for (const product of cleanedProducts) {
+      await pool.query(
+        `INSERT INTO products (description, hsn_code, price)
+         SELECT $1, $2, $3
+         WHERE NOT EXISTS (
+           SELECT 1 FROM products p WHERE LOWER(p.description) = LOWER($1)
+         )`,
+        [product.description, product.hsn_code, product.price]
+      );
+      await pool.query(
+        `UPDATE products
+         SET
+           hsn_code = CASE WHEN COALESCE(hsn_code, '') = '' THEN $2 ELSE hsn_code END,
+           price = CASE WHEN COALESCE(price, 0) = 0 THEN $3 ELSE price END
+         WHERE LOWER(description) = LOWER($1)`,
+        [product.description, product.hsn_code, product.price]
+      );
+      importedProducts += 1;
+      j += 1;
+      if (j % 200 === 0) {
+        console.log(`Product upserts: ${j}/${cleanedProducts.length}`);
+      }
+    }
   } finally {
-    client.release();
     await pool.end();
   }
 
