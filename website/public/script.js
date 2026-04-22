@@ -18,6 +18,7 @@ const el = {
   cgstPercent: document.getElementById("cgstPercent"),
   sgstPercent: document.getElementById("sgstPercent"),
   igstPercent: document.getElementById("igstPercent"),
+  useIgst: document.getElementById("useIgst"),
   cgstAmount: document.getElementById("cgstAmount"),
   sgstAmount: document.getElementById("sgstAmount"),
   igstAmount: document.getElementById("igstAmount"),
@@ -219,7 +220,7 @@ function recalc() {
   });
   const cgst = subtotal * (Number(el.cgstPercent.value || 0) / 100);
   const sgst = subtotal * (Number(el.sgstPercent.value || 0) / 100);
-  const igst = subtotal * (Number(el.igstPercent.value || 0) / 100);
+  const igst = el.useIgst.checked ? subtotal * (Number(el.igstPercent.value || 0) / 100) : 0;
   const grandTotal = subtotal + cgst + sgst + igst;
   const roundedGrandTotal = Math.round(grandTotal);
 
@@ -229,6 +230,17 @@ function recalc() {
   el.igstAmount.textContent = amount(igst);
   el.grandTotal.textContent = amount(roundedGrandTotal);
   el.amountWords.textContent = `${numberToWordsIndian(roundedGrandTotal)} Only`;
+}
+
+function applyTaxMode() {
+  const igstRows = document.querySelectorAll(".igst-row");
+  if (el.useIgst.checked) {
+    igstRows.forEach((row) => row.classList.remove("hidden-tax"));
+  } else {
+    igstRows.forEach((row) => row.classList.add("hidden-tax"));
+    el.igstAmount.textContent = "0.00";
+  }
+  recalc();
 }
 
 function getPayload() {
@@ -251,10 +263,10 @@ function getPayload() {
     subtotal: Number(el.subtotal.textContent || 0),
     cgstPercent: Number(el.cgstPercent.value || 0),
     sgstPercent: Number(el.sgstPercent.value || 0),
-    igstPercent: Number(el.igstPercent.value || 0),
+    igstPercent: el.useIgst.checked ? Number(el.igstPercent.value || 0) : 0,
     cgstAmount: Number(el.cgstAmount.textContent || 0),
     sgstAmount: Number(el.sgstAmount.textContent || 0),
-    igstAmount: Number(el.igstAmount.textContent || 0),
+    igstAmount: el.useIgst.checked ? Number(el.igstAmount.textContent || 0) : 0,
     grandTotal: Number(el.grandTotal.textContent || 0),
     items: items.filter((item) => item.description),
   };
@@ -363,6 +375,8 @@ async function loadInvoice(id) {
   el.cgstPercent.value = invoice.cgst_percent || 0;
   el.sgstPercent.value = invoice.sgst_percent || 0;
   el.igstPercent.value = invoice.igst_percent || 0;
+  el.useIgst.checked = Number(invoice.igst_percent || 0) > 0 || Number(invoice.igst_amount || 0) > 0;
+  applyTaxMode();
 
   el.itemsBody.innerHTML = "";
   invoice.items.forEach((item) => rowTemplate(item));
@@ -383,12 +397,14 @@ function clearForm(nextInvoiceNo) {
   el.cgstPercent.value = "9";
   el.sgstPercent.value = "9";
   el.igstPercent.value = "0";
+  el.useIgst.checked = false;
   el.itemsBody.innerHTML = "";
   rowTemplate();
 }
 
 document.getElementById("addRowBtn").addEventListener("click", () => rowTemplate());
 [el.cgstPercent, el.sgstPercent, el.igstPercent].forEach((field) => field.addEventListener("input", recalc));
+el.useIgst.addEventListener("change", applyTaxMode);
 
 el.searchInvoice.addEventListener("input", () => loadInvoices(el.searchInvoice.value));
 
@@ -481,6 +497,7 @@ el.customerName.addEventListener("blur", () => {
 
 async function init() {
   rowTemplate();
+  applyTaxMode();
   try {
     await loadBootstrap();
     await loadInvoices();

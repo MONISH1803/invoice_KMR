@@ -276,6 +276,27 @@ button {
   padding: 0;
 }
 
+.tax-mode {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.tax-mode label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.tax-mode input[type="checkbox"] {
+  width: auto;
+}
+
+.hidden-tax {
+  display: none !important;
+}
+
 .grand {
   font-size: 20px;
   font-weight: 700;
