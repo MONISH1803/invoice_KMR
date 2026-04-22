@@ -125,6 +125,7 @@ export async function ensureDbReady() {
       igst_amount NUMERIC(12, 2) NOT NULL DEFAULT 0,
       grand_total NUMERIC(12, 2) NOT NULL DEFAULT 0,
       notes TEXT DEFAULT '',
+      footer_text TEXT DEFAULT '',
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
       updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
@@ -142,6 +143,7 @@ export async function ensureDbReady() {
 
     ALTER TABLE customers ADD COLUMN IF NOT EXISTS gstin TEXT DEFAULT '';
     ALTER TABLE invoices ADD COLUMN IF NOT EXISTS customer_gstin TEXT DEFAULT '';
+    ALTER TABLE invoices ADD COLUMN IF NOT EXISTS footer_text TEXT DEFAULT '';
   `);
 
   const productCount = await db.query("SELECT COUNT(*)::int AS count FROM products");

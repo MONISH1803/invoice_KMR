@@ -307,8 +307,8 @@ app.post("/api/invoices", async (req, res) => {
 
     const invoiceInsert = await client.query(
       `INSERT INTO invoices
-      (invoice_no, invoice_date, credit_bill_date, vehicle_no, customer_id, customer_name, customer_address, customer_gstin, subtotal, cgst_percent, sgst_percent, igst_percent, cgst_amount, sgst_amount, igst_amount, grand_total, notes)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
+      (invoice_no, invoice_date, credit_bill_date, vehicle_no, customer_id, customer_name, customer_address, customer_gstin, subtotal, cgst_percent, sgst_percent, igst_percent, cgst_amount, sgst_amount, igst_amount, grand_total, notes, footer_text)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
       RETURNING id`,
       [
         invoiceNo,
@@ -328,6 +328,12 @@ app.post("/api/invoices", async (req, res) => {
         Number(payload.igstAmount) || 0,
         Number(payload.grandTotal) || 0,
         String(payload.notes || "").trim(),
+        String(payload.footerText || "")
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0, 16)
+          .join(" "),
       ]
     );
     const invoiceId = Number(invoiceInsert.rows[0].id);
@@ -378,8 +384,8 @@ app.put("/api/invoices/:id", async (req, res) => {
        invoice_no = $1, invoice_date = $2, credit_bill_date = $3, vehicle_no = $4,
        customer_name = $5, customer_address = $6, customer_gstin = $7, subtotal = $8, cgst_percent = $9, sgst_percent = $10,
        igst_percent = $11, cgst_amount = $12, sgst_amount = $13, igst_amount = $14, grand_total = $15,
-       notes = $16, updated_at = NOW()
-       WHERE id = $17`,
+       notes = $16, footer_text = $17, updated_at = NOW()
+       WHERE id = $18`,
       [
         payload.invoiceNo,
         payload.invoiceDate,
@@ -397,6 +403,12 @@ app.put("/api/invoices/:id", async (req, res) => {
         Number(payload.igstAmount) || 0,
         Number(payload.grandTotal) || 0,
         String(payload.notes || "").trim(),
+        String(payload.footerText || "")
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0, 16)
+          .join(" "),
         id,
       ]
     );

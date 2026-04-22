@@ -34,6 +34,7 @@ const el = {
   updateBtn: document.getElementById("updateBtn"),
   amountWords: document.getElementById("amountWords"),
   customNotes: document.getElementById("customNotes"),
+  footerCustomText: document.getElementById("footerCustomText"),
   saveNewCustomerBtn: document.getElementById("saveNewCustomerBtn"),
   backendStatus: document.getElementById("backendStatus"),
   customerSuggestions: document.getElementById("customerSuggestions"),
@@ -41,6 +42,14 @@ const el = {
 
 function amount(value) {
   return Number(value || 0).toFixed(2);
+}
+
+function limitWords(text, maxWords) {
+  const words = String(text || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+  return words.slice(0, maxWords).join(" ");
 }
 
 function numberToWordsIndian(num) {
@@ -278,6 +287,7 @@ function getPayload() {
     igstAmount: el.useIgst.checked ? Number(el.igstAmount.textContent || 0) : 0,
     grandTotal: Number(el.grandTotal.textContent || 0),
     notes: el.customNotes?.value?.trim() || "",
+    footerText: limitWords(el.footerCustomText?.value || "", 16),
     items: items.filter((item) => item.description),
   };
 }
@@ -395,6 +405,7 @@ async function loadInvoice(id) {
   el.customerAddress.value = invoice.customer_address || "";
   el.customerGstin.value = invoice.customer_gstin || "";
   if (el.customNotes) el.customNotes.value = invoice.notes || "";
+  if (el.footerCustomText) el.footerCustomText.value = invoice.footer_text || "";
   el.cgstPercent.value = invoice.cgst_percent || 0;
   el.sgstPercent.value = invoice.sgst_percent || 0;
   el.igstPercent.value = invoice.igst_percent || 0;
@@ -418,6 +429,7 @@ function clearForm(nextInvoiceNo) {
   el.customerAddress.value = "";
   el.customerGstin.value = "";
   if (el.customNotes) el.customNotes.value = "";
+  if (el.footerCustomText) el.footerCustomText.value = "";
   el.cgstPercent.value = "9";
   el.sgstPercent.value = "9";
   el.igstPercent.value = "0";
@@ -526,6 +538,15 @@ if (el.saveNewCustomerBtn) {
       alert("Customer added to database.");
     } catch (error) {
       setBackendStatus(error.message);
+    }
+  });
+}
+
+if (el.footerCustomText) {
+  el.footerCustomText.addEventListener("input", () => {
+    const limited = limitWords(el.footerCustomText.value, 16);
+    if (limited !== el.footerCustomText.value.trim()) {
+      el.footerCustomText.value = limited;
     }
   });
 }
