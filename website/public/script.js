@@ -36,6 +36,7 @@ const el = {
   customNotes: document.getElementById("customNotes"),
   footerCustomText: document.getElementById("footerCustomText"),
   saveNewCustomerBtn: document.getElementById("saveNewCustomerBtn"),
+  customerQuickAddRow: document.getElementById("customerQuickAddRow"),
   backendStatus: document.getElementById("backendStatus"),
   customerSuggestions: document.getElementById("customerSuggestions"),
 };
@@ -333,10 +334,12 @@ function updateNewCustomerButton() {
   const name = el.customerName.value.trim();
   if (!name) {
     el.saveNewCustomerBtn.hidden = true;
+    if (el.customerQuickAddRow) el.customerQuickAddRow.hidden = true;
     return;
   }
   const exists = state.customers.some((c) => c.name.toLowerCase() === name.toLowerCase());
   el.saveNewCustomerBtn.hidden = exists;
+  if (el.customerQuickAddRow) el.customerQuickAddRow.hidden = exists;
 }
 
 function showCustomerSuggestions(customers) {
