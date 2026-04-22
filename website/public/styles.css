@@ -27,6 +27,8 @@ body {
 .invoice-sheet {
   border: 1px solid #111;
   border-top: none;
+  border-left: none;
+  border-right: none;
   padding: 0;
 }
 
@@ -431,6 +433,8 @@ button {
 
   .invoice-sheet {
     border: 1px solid #111;
+    border-left: none;
+    border-right: none;
   }
 
   .invoice-header h1 {

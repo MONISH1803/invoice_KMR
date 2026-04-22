@@ -234,10 +234,15 @@ function recalc() {
 
 function applyTaxMode() {
   const igstRows = document.querySelectorAll(".igst-row");
+  const cgstSgstRows = document.querySelectorAll(".cgst-sgst-row");
   if (el.useIgst.checked) {
     igstRows.forEach((row) => row.classList.remove("hidden-tax"));
+    cgstSgstRows.forEach((row) => row.classList.add("hidden-tax"));
+    el.cgstAmount.textContent = "0.00";
+    el.sgstAmount.textContent = "0.00";
   } else {
     igstRows.forEach((row) => row.classList.add("hidden-tax"));
+    cgstSgstRows.forEach((row) => row.classList.remove("hidden-tax"));
     el.igstAmount.textContent = "0.00";
   }
   recalc();
