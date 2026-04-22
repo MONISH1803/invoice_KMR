@@ -3,6 +3,8 @@ const state = {
   products: [],
   editingCustomerId: null,
   editingProductId: null,
+  customerSearch: "",
+  productSearch: "",
 };
 
 const el = {
@@ -14,6 +16,7 @@ const el = {
   customerAddressInput: document.getElementById("customerAddressInput"),
   customerSaveBtn: document.getElementById("customerSaveBtn"),
   customerCancelBtn: document.getElementById("customerCancelBtn"),
+  customerSearchInput: document.getElementById("customerSearchInput"),
   customerTable: document.getElementById("customerTable"),
   productForm: document.getElementById("productForm"),
   productDescriptionInput: document.getElementById("productDescriptionInput"),
@@ -21,6 +24,7 @@ const el = {
   productPriceInput: document.getElementById("productPriceInput"),
   productSaveBtn: document.getElementById("productSaveBtn"),
   productCancelBtn: document.getElementById("productCancelBtn"),
+  productSearchInput: document.getElementById("productSearchInput"),
   productTable: document.getElementById("productTable"),
 };
 
@@ -48,7 +52,14 @@ async function request(url, options = {}) {
 }
 
 function renderCustomers() {
-  const rows = state.customers
+  const query = state.customerSearch.trim().toLowerCase();
+  const filteredCustomers = state.customers.filter((customer) => {
+    if (!query) return true;
+    const haystack = `${customer.name || ""} ${customer.gstin || ""} ${customer.phone || ""} ${customer.address || ""}`.toLowerCase();
+    return haystack.includes(query);
+  });
+
+  const rows = filteredCustomers
     .map(
       (customer) => `<tr>
       <td>${escapeHtml(customer.name || "")}</td>
@@ -73,12 +84,19 @@ function renderCustomers() {
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>${rows || '<tr><td colspan="5">No customers yet.</td></tr>'}</tbody>
+    <tbody>${rows || '<tr><td colspan="5">No matching customers.</td></tr>'}</tbody>
   </table>`;
 }
 
 function renderProducts() {
-  const rows = state.products
+  const query = state.productSearch.trim().toLowerCase();
+  const filteredProducts = state.products.filter((product) => {
+    if (!query) return true;
+    const haystack = `${product.description || ""} ${product.hsn_code || ""} ${Number(product.price || 0).toFixed(2)}`.toLowerCase();
+    return haystack.includes(query);
+  });
+
+  const rows = filteredProducts
     .map(
       (product) => `<tr>
       <td>${escapeHtml(product.description || "")}</td>
@@ -101,7 +119,7 @@ function renderProducts() {
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>${rows || '<tr><td colspan="4">No products yet.</td></tr>'}</tbody>
+    <tbody>${rows || '<tr><td colspan="4">No matching products.</td></tr>'}</tbody>
   </table>`;
 }
 
@@ -180,6 +198,14 @@ el.productForm.addEventListener("submit", async (event) => {
 
 el.customerCancelBtn.addEventListener("click", resetCustomerForm);
 el.productCancelBtn.addEventListener("click", resetProductForm);
+el.customerSearchInput.addEventListener("input", () => {
+  state.customerSearch = el.customerSearchInput.value || "";
+  renderCustomers();
+});
+el.productSearchInput.addEventListener("input", () => {
+  state.productSearch = el.productSearchInput.value || "";
+  renderProducts();
+});
 
 el.customerTable.addEventListener("click", async (event) => {
   const editBtn = event.target.closest(".customer-edit");

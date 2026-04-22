@@ -488,6 +488,10 @@ button {
   border-top: 1px solid #d9dfe8;
 }
 
+.db-search {
+  margin-bottom: 8px;
+}
+
 .db-form {
   display: grid;
   grid-template-columns: 1.3fr 1fr 1fr 1.5fr auto;
