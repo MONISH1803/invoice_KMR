@@ -221,13 +221,14 @@ function recalc() {
   const sgst = subtotal * (Number(el.sgstPercent.value || 0) / 100);
   const igst = subtotal * (Number(el.igstPercent.value || 0) / 100);
   const grandTotal = subtotal + cgst + sgst + igst;
+  const roundedGrandTotal = Math.round(grandTotal);
 
   el.subtotal.textContent = amount(subtotal);
   el.cgstAmount.textContent = amount(cgst);
   el.sgstAmount.textContent = amount(sgst);
   el.igstAmount.textContent = amount(igst);
-  el.grandTotal.textContent = amount(grandTotal);
-  el.amountWords.textContent = `${numberToWordsIndian(Math.round(grandTotal))} Only`;
+  el.grandTotal.textContent = amount(roundedGrandTotal);
+  el.amountWords.textContent = `${numberToWordsIndian(roundedGrandTotal)} Only`;
 }
 
 function getPayload() {
