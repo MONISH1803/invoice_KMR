@@ -34,6 +34,7 @@ const el = {
   updateBtn: document.getElementById("updateBtn"),
   amountWords: document.getElementById("amountWords"),
   backendStatus: document.getElementById("backendStatus"),
+  customerSuggestions: document.getElementById("customerSuggestions"),
 };
 
 function amount(value) {
@@ -110,7 +111,12 @@ function rowTemplate(item = {}) {
   const tr = document.createElement("tr");
   tr.innerHTML = `
     <td></td>
-    <td><input class="description" list="productDescriptions" value="${item.description || ""}" /></td>
+    <td>
+      <div class="suggestion-wrap">
+        <input class="description" value="${item.description || ""}" autocomplete="off" />
+        <div class="suggestions product-suggestions" hidden></div>
+      </div>
+    </td>
     <td><input class="hsnCode" value="${item.hsn_code || item.hsnCode || ""}" /></td>
     <td><input class="rate" type="number" min="0" step="0.01" value="${item.rate || 0}" /></td>
     <td><input class="qty" type="number" min="0" step="0.01" value="${item.qty || 1}" /></td>
@@ -124,19 +130,63 @@ function rowTemplate(item = {}) {
     updateSerial();
   });
 
+  const descriptionInput = tr.querySelector(".description");
+  const productSuggestionsEl = tr.querySelector(".product-suggestions");
+
+  const hideProductSuggestions = () => {
+    productSuggestionsEl.hidden = true;
+    productSuggestionsEl.innerHTML = "";
+  };
+
+  const showProductSuggestions = (products) => {
+    if (!products.length) {
+      hideProductSuggestions();
+      return;
+    }
+    productSuggestionsEl.innerHTML = products
+      .slice(0, 8)
+      .map(
+        (p) =>
+          `<div class="suggestion-item" data-id="${p.id}"><strong>${p.description}</strong><br/>HSN: ${p.hsn_code} | Rate: ${amount(
+            p.price
+          )}</div>`
+      )
+      .join("");
+    productSuggestionsEl.hidden = false;
+  };
+
+  productSuggestionsEl.addEventListener("mousedown", (event) => {
+    const target = event.target.closest(".suggestion-item");
+    if (!target) return;
+    const product = state.products.find((p) => String(p.id) === target.dataset.id);
+    if (!product) return;
+    descriptionInput.value = product.description;
+    tr.querySelector(".hsnCode").value = product.hsn_code || "";
+    tr.querySelector(".rate").value = Number(product.price || 0);
+    hideProductSuggestions();
+    recalc();
+  });
+
   tr.querySelectorAll("input").forEach((input) => {
     input.addEventListener("input", () => {
       if (input.classList.contains("description")) {
-        const product = state.products.find(
-          (p) => p.description.toLowerCase() === input.value.trim().toLowerCase()
-        );
+        const query = input.value.trim().toLowerCase();
+        const product = state.products.find((p) => p.description.toLowerCase() === query);
         if (product) {
           tr.querySelector(".hsnCode").value = product.hsn_code;
           tr.querySelector(".rate").value = product.price;
+          hideProductSuggestions();
+        } else {
+          const filtered = state.products.filter((p) => p.description.toLowerCase().includes(query));
+          showProductSuggestions(query ? filtered : []);
         }
       }
       recalc();
     });
+  });
+
+  descriptionInput.addEventListener("blur", () => {
+    setTimeout(hideProductSuggestions, 150);
   });
 
   el.itemsBody.appendChild(tr);
@@ -230,6 +280,29 @@ function renderCustomerHints() {
   el.customersDataList.innerHTML = state.customers
     .map((c) => `<option value="${c.name}"></option>`)
     .join("");
+}
+
+function hideCustomerSuggestions() {
+  el.customerSuggestions.hidden = true;
+  el.customerSuggestions.innerHTML = "";
+}
+
+function showCustomerSuggestions(customers) {
+  if (!customers.length) {
+    hideCustomerSuggestions();
+    return;
+  }
+  el.customerSuggestions.innerHTML = customers
+    .slice(0, 8)
+    .map(
+      (c) =>
+        `<div class="suggestion-item" data-id="${c.id}">
+          <strong>${c.name}</strong><br/>
+          ${c.address || ""}${c.gstin ? ` | GSTIN: ${c.gstin}` : ""}
+        </div>`
+    )
+    .join("");
+  el.customerSuggestions.hidden = false;
 }
 
 function renderProducts() {
@@ -370,11 +443,31 @@ el.updateBtn.addEventListener("click", async () => {
 });
 
 el.customerName.addEventListener("input", () => {
-  const match = state.customers.find((c) => c.name.toLowerCase() === el.customerName.value.trim().toLowerCase());
+  const query = el.customerName.value.trim().toLowerCase();
+  const match = state.customers.find((c) => c.name.toLowerCase() === query);
   if (match) {
     el.customerAddress.value = match.address || "";
     el.customerGstin.value = match.gstin || "";
+    hideCustomerSuggestions();
+    return;
   }
+  const filtered = state.customers.filter((c) => c.name.toLowerCase().includes(query));
+  showCustomerSuggestions(query ? filtered : []);
+});
+
+el.customerSuggestions.addEventListener("mousedown", (event) => {
+  const item = event.target.closest(".suggestion-item");
+  if (!item) return;
+  const selected = state.customers.find((c) => String(c.id) === item.dataset.id);
+  if (!selected) return;
+  el.customerName.value = selected.name || "";
+  el.customerAddress.value = selected.address || "";
+  el.customerGstin.value = selected.gstin || "";
+  hideCustomerSuggestions();
+});
+
+el.customerName.addEventListener("blur", () => {
+  setTimeout(hideCustomerSuggestions, 150);
 });
 
 async function init() {

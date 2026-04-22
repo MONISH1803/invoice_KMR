@@ -9,7 +9,7 @@ body {
 }
 
 .layout {
-  max-width: 1400px;
+  max-width: 1500px;
   margin: 0 auto;
   padding: 16px;
   display: grid;
@@ -68,6 +68,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0;
+  page-break-inside: avoid;
 }
 
 .customer-table {
@@ -103,6 +104,7 @@ body {
 .meta-table td {
   border: 1px solid #111;
   padding: 8px 6px;
+  vertical-align: middle;
 }
 
 .meta-table th {
@@ -110,6 +112,14 @@ body {
   text-align: left;
   font-size: 13px;
   font-weight: 700;
+  white-space: nowrap;
+}
+
+.invoice-no-input {
+  color: #b00020;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 label {
@@ -127,6 +137,36 @@ button {
   padding: 8px;
 }
 
+.suggestion-wrap {
+  position: relative;
+}
+
+.suggestions {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  right: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  border: 1px solid #b9c2cf;
+  background: #fff;
+  z-index: 50;
+}
+
+.suggestion-item {
+  padding: 8px;
+  border-bottom: 1px solid #edf0f4;
+  cursor: pointer;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: #f5f8ff;
+}
+
 .customer {
   margin-top: 0;
 }
@@ -135,6 +175,7 @@ button {
   width: 100%;
   margin-top: 0;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .items th,
@@ -142,7 +183,21 @@ button {
   border: 1px solid #cdd5df;
   padding: 6px;
   font-size: 13px;
+  white-space: nowrap;
 }
+
+.items th:nth-child(1),
+.items td:nth-child(1) { width: 54px; }
+.items th:nth-child(3),
+.items td:nth-child(3) { width: 105px; }
+.items th:nth-child(4),
+.items td:nth-child(4) { width: 105px; }
+.items th:nth-child(5),
+.items td:nth-child(5) { width: 70px; }
+.items th:nth-child(6),
+.items td:nth-child(6) { width: 110px; }
+.items th:nth-child(7),
+.items td:nth-child(7) { width: 72px; }
 
 .items td:nth-child(1),
 .items td:nth-child(4),
@@ -166,6 +221,7 @@ button {
   border-right: 1px solid #111;
   border-bottom: 1px solid #111;
   padding: 8px;
+  page-break-inside: avoid;
 }
 
 .totals > div {
@@ -193,6 +249,7 @@ button {
   border: 1px solid #111;
   border-top: none;
   padding: 10px 8px 0;
+  page-break-inside: avoid;
 }
 
 .footer-left {
@@ -298,6 +355,34 @@ button {
     box-shadow: none;
     padding: 0;
     border-radius: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .invoice-header h1 {
+    font-size: 38px;
+    margin-bottom: 4px;
+  }
+
+  .invoice-no-input {
+    font-size: 20px !important;
+    color: #b00020 !important;
+    font-weight: 700 !important;
+  }
+
+  .meta-table th,
+  .meta-table td,
+  .customer-table th,
+  .customer-table td {
+    font-size: 12px;
+    padding: 5px;
+  }
+
+  .items th,
+  .items td {
+    font-size: 11px;
+    padding: 4px;
   }
 
   input,
