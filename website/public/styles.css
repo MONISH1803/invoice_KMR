@@ -31,19 +31,50 @@ body {
 
 .invoice-header {
   text-align: center;
-  border-bottom: 1px solid #d7dce3;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 12px;
+}
+
+.invoice-header p {
+  margin: 2px 0;
 }
 
 .invoice-header h1 {
   margin: 0 0 8px;
 }
 
-.meta-grid {
+.gst-strip {
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  padding: 8px 0;
+  margin-bottom: 12px;
+}
+
+.bill-meta-grid {
   display: grid;
-  gap: 10px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.meta-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.meta-table th,
+.meta-table td {
+  padding: 6px 4px;
+}
+
+.meta-table th {
+  width: 42%;
+  text-align: right;
+  font-size: 13px;
+  font-weight: 700;
+  padding-right: 10px;
 }
 
 label {
@@ -62,7 +93,7 @@ button {
 }
 
 .customer {
-  margin-top: 12px;
+  margin-top: 0;
 }
 
 .items {
@@ -113,6 +144,43 @@ button {
   font-size: 18px;
   border-top: 1px solid #000;
   padding-top: 6px;
+}
+
+.invoice-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.footer-left {
+  width: 62%;
+}
+
+.footer-right {
+  width: 38%;
+  text-align: center;
+}
+
+.bank-details {
+  margin-top: 16px;
+  line-height: 1.5;
+}
+
+.signature-line {
+  margin-top: 46px;
+  border-top: 1px solid #555;
+  padding-top: 6px;
+}
+
+.backend-status {
+  border: 1px solid #f5c2c7;
+  background: #fff5f6;
+  color: #842029;
+  padding: 10px 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 13px;
 }
 
 .actions {
@@ -171,11 +239,12 @@ button {
 @media print {
   @page {
     size: A4;
-    margin: 10mm;
+    margin: 0;
   }
 
   body {
     background: #fff;
+    padding: 1in 0.6in 0.25in;
   }
 
   .layout {
@@ -186,6 +255,26 @@ button {
   .invoice {
     box-shadow: none;
     padding: 0;
+    border-radius: 0;
+  }
+
+  input,
+  textarea {
+    border: none !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #000;
+  }
+
+  .items th,
+  .items td {
+    border-color: #bcbcbc;
+  }
+
+  .gst-strip {
+    border-color: #000;
   }
 
   .no-print {

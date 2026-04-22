@@ -25,37 +25,49 @@
       </aside>
 
       <section class="panel invoice">
+        <div id="backendStatus" class="backend-status no-print" hidden></div>
+
         <header class="invoice-header">
           <h1>K.M.R AUTOMOBILES</h1>
           <p>123, Main Road, Industrial Area, Cityville, State 12345</p>
           <p>Phone: (123) 456-7890 | Email: contact@kmrauto.com</p>
         </header>
 
-        <section class="meta-grid">
-          <div>
-            <label>Invoice No.</label>
-            <input id="invoiceNo" />
-          </div>
-          <div>
-            <label>Invoice Date</label>
-            <input id="invoiceDate" type="date" />
-          </div>
-          <div>
-            <label>Credit Bill Date</label>
-            <input id="creditBillDate" type="date" />
-          </div>
-          <div>
-            <label>Vehicle No.</label>
-            <input id="vehicleNo" />
-          </div>
+        <section class="gst-strip">
+          <div>State: Tamil Nadu | State Code: 33</div>
+          <div>GSTIN: 00ABCDE1234F1Z5</div>
         </section>
 
-        <section class="customer">
-          <label>Customer Name</label>
-          <input id="customerName" list="customersDataList" />
-          <datalist id="customersDataList"></datalist>
-          <label>Customer Address</label>
-          <textarea id="customerAddress" rows="3"></textarea>
+        <section class="bill-meta-grid">
+          <div class="customer">
+            <label>BILL TO</label>
+            <input id="customerName" list="customersDataList" />
+            <datalist id="customersDataList"></datalist>
+            <label>Customer Address</label>
+            <textarea id="customerAddress" rows="4"></textarea>
+          </div>
+          <div class="meta-table-wrap">
+            <table class="meta-table">
+              <tbody>
+                <tr>
+                  <th>Invoice No.</th>
+                  <td><input id="invoiceNo" /></td>
+                </tr>
+                <tr>
+                  <th>Invoice Date</th>
+                  <td><input id="invoiceDate" type="date" /></td>
+                </tr>
+                <tr>
+                  <th>Credit Bill Date</th>
+                  <td><input id="creditBillDate" type="date" /></td>
+                </tr>
+                <tr>
+                  <th>Vehicle No.</th>
+                  <td><input id="vehicleNo" /></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
 
         <table class="items">
@@ -84,6 +96,23 @@
           <div><span>IGST Amount</span> <strong id="igstAmount">0.00</strong></div>
           <div class="grand"><span>Grand Total</span> <strong id="grandTotal">0.00</strong></div>
         </section>
+
+        <footer class="invoice-footer">
+          <div class="footer-left">
+            <p><strong>Amount in Words:</strong> <span id="amountWords"></span></p>
+            <p class="bank-details">
+              <strong>Bank Details:</strong><br />
+              Bank Name: Example Bank<br />
+              A/C No: 1234567890<br />
+              IFSC Code: EXBK0001234
+            </p>
+            <div class="signature-line">Receiver's Signature</div>
+          </div>
+          <div class="footer-right">
+            <p>For K.M.R AUTOMOBILES</p>
+            <div class="signature-line">Authorised Signatory</div>
+          </div>
+        </footer>
 
         <div class="actions no-print">
           <button id="saveBtn" class="primary">Save Invoice</button>

@@ -2,6 +2,7 @@ const state = {
   products: [],
   customers: [],
   editingInvoiceId: null,
+  backendReady: true,
 };
 
 const el = {
@@ -30,10 +31,78 @@ const el = {
   productPrice: document.getElementById("productPrice"),
   saveBtn: document.getElementById("saveBtn"),
   updateBtn: document.getElementById("updateBtn"),
+  amountWords: document.getElementById("amountWords"),
+  backendStatus: document.getElementById("backendStatus"),
 };
 
 function amount(value) {
   return Number(value || 0).toFixed(2);
+}
+
+function numberToWordsIndian(num) {
+  const units = [
+    "",
+    "One",
+    "Two",
+    "Three",
+    "Four",
+    "Five",
+    "Six",
+    "Seven",
+    "Eight",
+    "Nine",
+    "Ten",
+    "Eleven",
+    "Twelve",
+    "Thirteen",
+    "Fourteen",
+    "Fifteen",
+    "Sixteen",
+    "Seventeen",
+    "Eighteen",
+    "Nineteen",
+  ];
+  const tens = ["", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"];
+  if (num === 0) return "Zero";
+  if (num > 999999999) return "Number too large";
+  let words = "";
+  if (num >= 10000000) {
+    words += `${numberToWordsIndian(Math.floor(num / 10000000))} Crore `;
+    num %= 10000000;
+  }
+  if (num >= 100000) {
+    words += `${numberToWordsIndian(Math.floor(num / 100000))} Lakh `;
+    num %= 100000;
+  }
+  if (num >= 1000) {
+    words += `${numberToWordsIndian(Math.floor(num / 1000))} Thousand `;
+    num %= 1000;
+  }
+  if (num >= 100) {
+    words += `${numberToWordsIndian(Math.floor(num / 100))} Hundred `;
+    num %= 100;
+  }
+  if (num > 0) {
+    if (num < 20) {
+      words += units[num];
+    } else {
+      words += tens[Math.floor(num / 10)];
+      if (num % 10) {
+        words += ` ${units[num % 10]}`;
+      }
+    }
+  }
+  return words.trim();
+}
+
+function setBackendStatus(message = "") {
+  if (!message) {
+    el.backendStatus.hidden = true;
+    el.backendStatus.textContent = "";
+    return;
+  }
+  el.backendStatus.hidden = false;
+  el.backendStatus.textContent = message;
 }
 
 function rowTemplate(item = {}) {
@@ -99,6 +168,7 @@ function recalc() {
   el.sgstAmount.textContent = amount(sgst);
   el.igstAmount.textContent = amount(igst);
   el.grandTotal.textContent = amount(grandTotal);
+  el.amountWords.textContent = `${numberToWordsIndian(Math.round(grandTotal))} Only`;
 }
 
 function getPayload() {
@@ -136,7 +206,7 @@ async function request(url, options = {}) {
   });
   if (!res.ok) {
     const body = await res.json().catch(() => ({}));
-    throw new Error(body.message || "Request failed");
+    throw new Error(body.detail ? `${body.message || "Request failed"}: ${body.detail}` : body.message || "Request failed");
   }
   if (res.status === 204) return null;
   return res.json();
@@ -144,6 +214,8 @@ async function request(url, options = {}) {
 
 async function loadBootstrap() {
   const data = await request("/api/bootstrap");
+  state.backendReady = true;
+  setBackendStatus("");
   state.products = data.products;
   state.customers = data.customers;
   el.invoiceNo.value = data.nextInvoiceNo;
@@ -235,22 +307,30 @@ document.getElementById("addRowBtn").addEventListener("click", () => rowTemplate
 el.searchInvoice.addEventListener("input", () => loadInvoices(el.searchInvoice.value));
 
 document.getElementById("newInvoiceBtn").addEventListener("click", async () => {
-  const data = await request("/api/bootstrap");
-  clearForm(data.nextInvoiceNo);
+  try {
+    const data = await request("/api/bootstrap");
+    clearForm(data.nextInvoiceNo);
+  } catch (error) {
+    setBackendStatus(error.message);
+  }
 });
 
 el.productForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  await request("/api/products", {
-    method: "POST",
-    body: JSON.stringify({
-      description: el.productDescription.value,
-      hsnCode: el.productHsn.value,
-      price: Number(el.productPrice.value),
-    }),
-  });
-  el.productForm.reset();
-  await loadBootstrap();
+  try {
+    await request("/api/products", {
+      method: "POST",
+      body: JSON.stringify({
+        description: el.productDescription.value,
+        hsnCode: el.productHsn.value,
+        price: Number(el.productPrice.value),
+      }),
+    });
+    el.productForm.reset();
+    await loadBootstrap();
+  } catch (error) {
+    setBackendStatus(error.message);
+  }
 });
 
 el.saveBtn.addEventListener("click", async () => {
@@ -259,22 +339,30 @@ el.saveBtn.addEventListener("click", async () => {
     alert("Customer and at least one item are required.");
     return;
   }
-  await request("/api/invoices", { method: "POST", body: JSON.stringify(payload) });
-  const data = await request("/api/bootstrap");
-  clearForm(data.nextInvoiceNo);
-  await loadInvoices();
-  alert("Invoice saved.");
+  try {
+    await request("/api/invoices", { method: "POST", body: JSON.stringify(payload) });
+    const data = await request("/api/bootstrap");
+    clearForm(data.nextInvoiceNo);
+    await loadInvoices();
+    alert("Invoice saved.");
+  } catch (error) {
+    setBackendStatus(error.message);
+  }
 });
 
 el.updateBtn.addEventListener("click", async () => {
   if (!state.editingInvoiceId) return;
   const payload = getPayload();
-  await request(`/api/invoices/${state.editingInvoiceId}`, {
-    method: "PUT",
-    body: JSON.stringify(payload),
-  });
-  await loadInvoices();
-  alert("Invoice updated.");
+  try {
+    await request(`/api/invoices/${state.editingInvoiceId}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    });
+    await loadInvoices();
+    alert("Invoice updated.");
+  } catch (error) {
+    setBackendStatus(error.message);
+  }
 });
 
 el.customerName.addEventListener("input", () => {
@@ -285,11 +373,15 @@ el.customerName.addEventListener("input", () => {
 });
 
 async function init() {
-  await loadBootstrap();
   rowTemplate();
-  await loadInvoices();
+  try {
+    await loadBootstrap();
+    await loadInvoices();
+  } catch (error) {
+    const msg =
+      "Backend disconnected. Add DATABASE_URL in Vercel settings, then redeploy. Error: " + error.message;
+    setBackendStatus(msg);
+  }
 }
 
-init().catch((error) => {
-  alert(error.message);
-});
+init();
