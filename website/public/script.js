@@ -30,6 +30,7 @@ const el = {
   saveBtn: document.getElementById("saveBtn"),
   updateBtn: document.getElementById("updateBtn"),
   amountWords: document.getElementById("amountWords"),
+  customNotes: document.getElementById("customNotes"),
   backendStatus: document.getElementById("backendStatus"),
   customerSuggestions: document.getElementById("customerSuggestions"),
 };
@@ -269,6 +270,7 @@ function getPayload() {
     sgstAmount: Number(el.sgstAmount.textContent || 0),
     igstAmount: el.useIgst.checked ? Number(el.igstAmount.textContent || 0) : 0,
     grandTotal: Number(el.grandTotal.textContent || 0),
+    notes: el.customNotes?.value?.trim() || "",
     items: items.filter((item) => item.description),
   };
 }
@@ -374,6 +376,7 @@ async function loadInvoice(id) {
   el.customerName.value = invoice.customer_name || "";
   el.customerAddress.value = invoice.customer_address || "";
   el.customerGstin.value = invoice.customer_gstin || "";
+  if (el.customNotes) el.customNotes.value = invoice.notes || "";
   el.cgstPercent.value = invoice.cgst_percent || 0;
   el.sgstPercent.value = invoice.sgst_percent || 0;
   el.igstPercent.value = invoice.igst_percent || 0;
@@ -396,6 +399,7 @@ function clearForm(nextInvoiceNo) {
   el.customerName.value = "";
   el.customerAddress.value = "";
   el.customerGstin.value = "";
+  if (el.customNotes) el.customNotes.value = "";
   el.cgstPercent.value = "9";
   el.sgstPercent.value = "9";
   el.igstPercent.value = "0";

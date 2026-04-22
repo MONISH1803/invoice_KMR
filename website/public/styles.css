@@ -332,6 +332,19 @@ button {
   line-height: 1.35;
 }
 
+.custom-notes {
+  width: 100%;
+  min-height: 64px;
+  margin: 6px 0 10px;
+  border: none !important;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  padding: 0;
+  resize: none;
+}
+
 .signature-line {
   margin-top: 58px;
   border-top: 1px solid #111;
