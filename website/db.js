@@ -55,10 +55,14 @@ function getPool() {
     selected.value.includes("supabase.com") ||
     selected.value.includes("supabase.co") ||
     selected.value.includes("pooler");
+  const normalizedConnectionString =
+    shouldUseRelaxedSsl && selected.value.includes("sslmode=require")
+      ? selected.value.replace("sslmode=require", "sslmode=no-verify")
+      : selected.value;
 
   if (!globalForDb.__kmrPgPool) {
     globalForDb.__kmrPgPool = new Pool({
-      connectionString: selected.value,
+      connectionString: normalizedConnectionString,
       ssl: shouldUseRelaxedSsl ? { rejectUnauthorized: false } : process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : undefined,
     });
     globalForDb.__kmrPgPoolKey = selected.key;
