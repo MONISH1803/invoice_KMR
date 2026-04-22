@@ -151,13 +151,28 @@ def extract_customers_from_sheet(ws) -> list[dict]:
         customer_name = name_candidate
 
         address_parts = []
-        for j in range(i + 1, min(i + 8, len(rows))):
+        for j in range(i + 1, min(i + 10, len(rows))):
             r = rows[j]
-            line = first_non_empty(r)
+            left_side = tuple(r[:6])
+            right_side = tuple(r[6:])
+            line = first_non_empty(left_side) or first_non_empty(r)
             lower_line = line.lower()
             joined_lower = " ".join([x for x in r if x]).lower()
-            if "gstin" in joined_lower or "invoice no" in joined_lower or "invoice date" in joined_lower:
-                continue
+            right_joined = " ".join([x for x in right_side if x]).lower()
+            if "gstin" in joined_lower:
+                gstin_inline = GSTIN_RE.search(joined_lower.upper())
+                if gstin_inline:
+                    customer_gstin = gstin_inline.group(0)
+                break
+            if (
+                "invoice no" in right_joined
+                or "invoice date" in right_joined
+                or "vehicle no" in right_joined
+                or "si.no" in joined_lower
+            ):
+                # Keep left-side address text even when invoice metadata exists on the right side.
+                if not line:
+                    continue
             if (
                 line
                 and lower_line not in {"to", "address"}
@@ -166,7 +181,8 @@ def extract_customers_from_sheet(ws) -> list[dict]:
             ):
                 address_parts.append(line)
         customer_address = ", ".join(dict.fromkeys(address_parts))[:250]
-        break
+        if customer_name:
+            break
 
     return [{"name": customer_name, "address": customer_address, "gstin": customer_gstin}] if customer_name else []
 
