@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KMR Billing Website</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <aside class="panel sidebar no-print">
+        <h2>Invoice History</h2>
+        <input id="searchInvoice" placeholder="Search invoice/customer/vehicle" />
+        <button id="newInvoiceBtn" class="primary">+ New Invoice</button>
+        <div id="invoiceList" class="list"></div>
+
+        <h2>Products</h2>
+        <form id="productForm" class="stack">
+          <input id="productDescription" placeholder="Description" required />
+          <input id="productHsn" placeholder="HSN Code" />
+          <input id="productPrice" placeholder="Price" type="number" min="0" step="0.01" required />
+          <button class="primary" type="submit">Save Product</button>
+        </form>
+        <div id="productList" class="list compact"></div>
+      </aside>
+
+      <section class="panel invoice">
+        <header class="invoice-header">
+          <h1>K.M.R AUTOMOBILES</h1>
+          <p>123, Main Road, Industrial Area, Cityville, State 12345</p>
+          <p>Phone: (123) 456-7890 | Email: contact@kmrauto.com</p>
+        </header>
+
+        <section class="meta-grid">
+          <div>
+            <label>Invoice No.</label>
+            <input id="invoiceNo" />
+          </div>
+          <div>
+            <label>Invoice Date</label>
+            <input id="invoiceDate" type="date" />
+          </div>
+          <div>
+            <label>Credit Bill Date</label>
+            <input id="creditBillDate" type="date" />
+          </div>
+          <div>
+            <label>Vehicle No.</label>
+            <input id="vehicleNo" />
+          </div>
+        </section>
+
+        <section class="customer">
+          <label>Customer Name</label>
+          <input id="customerName" list="customersDataList" />
+          <datalist id="customersDataList"></datalist>
+          <label>Customer Address</label>
+          <textarea id="customerAddress" rows="3"></textarea>
+        </section>
+
+        <table class="items">
+          <thead>
+            <tr>
+              <th>SI.No</th>
+              <th>Description</th>
+              <th>HSN</th>
+              <th>QTY</th>
+              <th>Rate</th>
+              <th>Amount</th>
+              <th class="no-print">Action</th>
+            </tr>
+          </thead>
+          <tbody id="itemsBody"></tbody>
+        </table>
+        <button class="primary no-print" id="addRowBtn">+ Add Row</button>
+
+        <section class="totals">
+          <div><span>Subtotal</span> <strong id="subtotal">0.00</strong></div>
+          <div><span>CGST %</span> <input id="cgstPercent" type="number" value="9" step="0.01" /></div>
+          <div><span>CGST Amount</span> <strong id="cgstAmount">0.00</strong></div>
+          <div><span>SGST %</span> <input id="sgstPercent" type="number" value="9" step="0.01" /></div>
+          <div><span>SGST Amount</span> <strong id="sgstAmount">0.00</strong></div>
+          <div><span>IGST %</span> <input id="igstPercent" type="number" value="0" step="0.01" /></div>
+          <div><span>IGST Amount</span> <strong id="igstAmount">0.00</strong></div>
+          <div class="grand"><span>Grand Total</span> <strong id="grandTotal">0.00</strong></div>
+        </section>
+
+        <div class="actions no-print">
+          <button id="saveBtn" class="primary">Save Invoice</button>
+          <button id="updateBtn" class="secondary" disabled>Update Invoice</button>
+          <button class="secondary" onclick="window.print()">Print A4</button>
+        </div>
+      </section>
+    </main>
+    <script src="/script.js" type="module"></script>
+  </body>
+  </html>
