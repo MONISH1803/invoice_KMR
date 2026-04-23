@@ -194,6 +194,17 @@ function clearDraft() {
   }
 }
 
+function toCsv(rows) {
+  if (!rows.length) return "";
+  const headers = Object.keys(rows[0]);
+  const esc = (value) => `"${String(value ?? "").replaceAll('"', '""')}"`;
+  const lines = [headers.join(",")];
+  rows.forEach((row) => {
+    lines.push(headers.map((h) => esc(row[h])).join(","));
+  });
+  return lines.join("\n");
+}
+
 function rowTemplate(item = {}) {
   const tr = document.createElement("tr");
   tr.innerHTML = `
@@ -607,11 +618,29 @@ if (el.exportBtn) {
   el.exportBtn.addEventListener("click", async () => {
     try {
       const data = await request("/api/export");
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const asCsv = window.confirm("Click OK for CSV export, Cancel for JSON export.");
+      let blob;
+      let fileName;
+      if (asCsv) {
+        const sections = [
+          ["customers", data.customers || []],
+          ["products", data.products || []],
+          ["invoices", data.invoices || []],
+          ["invoice_items", data.invoice_items || []],
+        ];
+        const csvText = sections
+          .map(([name, rows]) => `# ${name}\n${toCsv(rows)}\n`)
+          .join("\n");
+        blob = new Blob([csvText], { type: "text/csv" });
+        fileName = `kmr-backup-${new Date().toISOString().slice(0, 10)}.csv`;
+      } else {
+        blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        fileName = `kmr-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      }
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = `kmr-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       a.remove();
