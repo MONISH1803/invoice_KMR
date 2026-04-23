@@ -79,7 +79,10 @@
                 </tr>
                 <tr>
                   <th>Invoice No</th>
-                  <td><input id="invoiceNo" class="invoice-no-input" /></td>
+                  <td>
+                    <input id="invoiceNo" class="invoice-no-input" readonly />
+                    <label class="invoice-no-unlock no-print"><input id="unlockInvoiceNo" type="checkbox" /> Unlock invoice no</label>
+                  </td>
                 </tr>
                 <tr class="vehicle-row">
                   <th>Vehicle No</th>
@@ -158,6 +161,9 @@
         <div class="actions no-print">
           <button id="saveBtn" class="primary">Save Invoice</button>
           <button id="updateBtn" class="secondary" disabled>Update Invoice</button>
+          <button id="duplicateBtn" class="secondary" disabled>Duplicate Invoice</button>
+          <button id="deleteBtn" class="secondary" disabled>Delete Invoice</button>
+          <button id="exportBtn" class="secondary">Export Backup</button>
           <button class="secondary" onclick="window.print()">Print A4</button>
         </div>
       </section>

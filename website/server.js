@@ -448,6 +448,117 @@ app.put("/api/invoices/:id", async (req, res) => {
   }
 });
 
+app.post("/api/invoices/:id/duplicate", async (req, res) => {
+  const id = Number(req.params.id);
+  const client = await db.connect();
+  let transactionStarted = false;
+  try {
+    await ensureDbReady();
+    const sourceInvoice = await client.query("SELECT * FROM invoices WHERE id = $1", [id]);
+    if (!sourceInvoice.rowCount) return res.status(404).json({ message: "Invoice not found." });
+    const sourceItems = await client.query(
+      "SELECT * FROM invoice_items WHERE invoice_id = $1 ORDER BY item_index ASC",
+      [id]
+    );
+
+    await client.query("BEGIN");
+    transactionStarted = true;
+    const newInvoiceNo = await getNextInvoiceNo();
+    const row = sourceInvoice.rows[0];
+    const insert = await client.query(
+      `INSERT INTO invoices
+      (invoice_no, invoice_date, credit_bill_date, vehicle_no, customer_id, customer_name, customer_address, customer_gstin, subtotal, cgst_percent, sgst_percent, igst_percent, cgst_amount, sgst_amount, igst_amount, grand_total, notes, footer_text)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
+      RETURNING id`,
+      [
+        newInvoiceNo,
+        row.invoice_date,
+        row.credit_bill_date,
+        row.vehicle_no || "",
+        row.customer_id,
+        row.customer_name,
+        row.customer_address || "",
+        row.customer_gstin || "",
+        toNum(row.subtotal),
+        toNum(row.cgst_percent),
+        toNum(row.sgst_percent),
+        toNum(row.igst_percent),
+        toNum(row.cgst_amount),
+        toNum(row.sgst_amount),
+        toNum(row.igst_amount),
+        toNum(row.grand_total),
+        row.notes || "",
+        row.footer_text || "",
+      ]
+    );
+    const newInvoiceId = Number(insert.rows[0].id);
+    for (let index = 0; index < sourceItems.rows.length; index += 1) {
+      const item = sourceItems.rows[index];
+      await client.query(
+        `INSERT INTO invoice_items (invoice_id, item_index, description, hsn_code, qty, rate, amount)
+         VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+        [newInvoiceId, index + 1, item.description || "", item.hsn_code || "", toNum(item.qty), toNum(item.rate), toNum(item.amount)]
+      );
+    }
+    await client.query("COMMIT");
+    transactionStarted = false;
+    res.status(201).json({ id: newInvoiceId, invoiceNo: newInvoiceNo });
+  } catch (error) {
+    if (transactionStarted) await client.query("ROLLBACK");
+    res.status(400).json({ message: "Unable to duplicate invoice.", detail: String(error.message) });
+  } finally {
+    client.release();
+  }
+});
+
+app.delete("/api/invoices/:id", async (req, res) => {
+  const id = Number(req.params.id);
+  try {
+    await ensureDbReady();
+    const deleted = await db.query("DELETE FROM invoices WHERE id = $1 RETURNING id", [id]);
+    if (!deleted.rowCount) return res.status(404).json({ message: "Invoice not found." });
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ message: "Unable to delete invoice.", detail: String(error.message) });
+  }
+});
+
+app.get("/api/export", async (_req, res) => {
+  try {
+    await ensureDbReady();
+    const [customers, products, invoices, items] = await Promise.all([
+      db.query("SELECT * FROM customers ORDER BY name ASC"),
+      db.query("SELECT * FROM products ORDER BY description ASC"),
+      db.query("SELECT * FROM invoices ORDER BY id ASC"),
+      db.query("SELECT * FROM invoice_items ORDER BY invoice_id ASC, item_index ASC"),
+    ]);
+    res.json({
+      exported_at: new Date().toISOString(),
+      customers: customers.rows,
+      products: products.rows.map((row) => ({ ...row, price: toNum(row.price) })),
+      invoices: invoices.rows.map((row) => ({
+        ...row,
+        subtotal: toNum(row.subtotal),
+        cgst_percent: toNum(row.cgst_percent),
+        sgst_percent: toNum(row.sgst_percent),
+        igst_percent: toNum(row.igst_percent),
+        cgst_amount: toNum(row.cgst_amount),
+        sgst_amount: toNum(row.sgst_amount),
+        igst_amount: toNum(row.igst_amount),
+        grand_total: toNum(row.grand_total),
+      })),
+      invoice_items: items.rows.map((row) => ({
+        ...row,
+        qty: toNum(row.qty),
+        rate: toNum(row.rate),
+        amount: toNum(row.amount),
+      })),
+    });
+  } catch (error) {
+    res.status(500).json({ message: "Unable to export backup.", detail: String(error.message) });
+  }
+});
+
 app.get("*", (_req, res) => {
   res.sendFile(path.join(publicDir, "index.html"));
 });

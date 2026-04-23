@@ -4,6 +4,8 @@ const state = {
   editingInvoiceId: null,
   backendReady: true,
 };
+const DRAFT_STORAGE_KEY = "kmr_invoice_draft_v1";
+const GSTIN_PATTERN = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/;
 
 const el = {
   invoiceNo: document.getElementById("invoiceNo"),
@@ -32,6 +34,10 @@ const el = {
   searchInvoice: document.getElementById("searchInvoice"),
   saveBtn: document.getElementById("saveBtn"),
   updateBtn: document.getElementById("updateBtn"),
+  duplicateBtn: document.getElementById("duplicateBtn"),
+  deleteBtn: document.getElementById("deleteBtn"),
+  exportBtn: document.getElementById("exportBtn"),
+  unlockInvoiceNo: document.getElementById("unlockInvoiceNo"),
   amountWords: document.getElementById("amountWords"),
   customNotes: document.getElementById("customNotes"),
   footerCustomText: document.getElementById("footerCustomText"),
@@ -117,6 +123,75 @@ function setBackendStatus(message = "") {
   }
   el.backendStatus.hidden = false;
   el.backendStatus.textContent = message;
+}
+
+function setActionButtonsForEditing(isEditing) {
+  if (el.updateBtn) el.updateBtn.disabled = !isEditing;
+  if (el.saveBtn) el.saveBtn.disabled = isEditing;
+  if (el.duplicateBtn) el.duplicateBtn.disabled = !isEditing;
+  if (el.deleteBtn) el.deleteBtn.disabled = !isEditing;
+}
+
+function validatePayload(payload) {
+  if (!payload.customerName) {
+    return "Customer name is required.";
+  }
+  if (payload.customerGstin && !GSTIN_PATTERN.test(payload.customerGstin.toUpperCase())) {
+    return "Customer GSTIN format is invalid.";
+  }
+  if (!payload.items.length) {
+    return "At least one item is required.";
+  }
+  for (const item of payload.items) {
+    if (Number(item.qty) <= 0) return "Item quantity must be greater than zero.";
+    if (Number(item.rate) < 0) return "Item rate cannot be negative.";
+  }
+  return "";
+}
+
+function persistDraft() {
+  try {
+    if (state.editingInvoiceId) return;
+    const payload = getPayload();
+    localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify(payload));
+  } catch {
+    // ignore storage failures
+  }
+}
+
+function restoreDraftIfAny() {
+  try {
+    const raw = localStorage.getItem(DRAFT_STORAGE_KEY);
+    if (!raw) return;
+    const draft = JSON.parse(raw);
+    if (!draft || !Array.isArray(draft.items)) return;
+    if (draft.invoiceDate) el.invoiceDate.value = draft.invoiceDate;
+    el.creditBillDate.value = draft.creditBillDate || "";
+    el.vehicleNo.value = draft.vehicleNo || "";
+    el.customerName.value = draft.customerName || "";
+    el.customerAddress.value = draft.customerAddress || "";
+    el.customerGstin.value = draft.customerGstin || "";
+    if (el.customNotes) el.customNotes.value = draft.notes || "";
+    if (el.footerCustomText) el.footerCustomText.value = draft.footerText || "";
+    el.cgstPercent.value = String(draft.cgstPercent ?? el.cgstPercent.value);
+    el.sgstPercent.value = String(draft.sgstPercent ?? el.sgstPercent.value);
+    el.igstPercent.value = String(draft.igstPercent ?? el.igstPercent.value);
+    el.useIgst.checked = Number(draft.igstPercent || 0) > 0 || Number(draft.igstAmount || 0) > 0;
+    applyTaxMode();
+    el.itemsBody.innerHTML = "";
+    (draft.items.length ? draft.items : [{}]).forEach((item) => rowTemplate(item));
+    recalc();
+  } catch {
+    // ignore malformed draft
+  }
+}
+
+function clearDraft() {
+  try {
+    localStorage.removeItem(DRAFT_STORAGE_KEY);
+  } catch {
+    // ignore storage failures
+  }
 }
 
 function rowTemplate(item = {}) {
@@ -398,8 +473,7 @@ async function loadInvoices(search = "") {
 async function loadInvoice(id) {
   const invoice = await request(`/api/invoices/${id}`);
   state.editingInvoiceId = invoice.id;
-  el.updateBtn.disabled = false;
-  el.saveBtn.disabled = true;
+  setActionButtonsForEditing(true);
 
   el.invoiceNo.value = invoice.invoice_no;
   el.invoiceDate.value = invoice.invoice_date;
@@ -419,12 +493,15 @@ async function loadInvoice(id) {
   el.itemsBody.innerHTML = "";
   invoice.items.forEach((item) => rowTemplate(item));
   recalc();
+  if (el.unlockInvoiceNo) {
+    el.unlockInvoiceNo.checked = false;
+    el.invoiceNo.readOnly = true;
+  }
 }
 
 function clearForm(nextInvoiceNo) {
   state.editingInvoiceId = null;
-  el.updateBtn.disabled = true;
-  el.saveBtn.disabled = false;
+  setActionButtonsForEditing(false);
   el.invoiceNo.value = nextInvoiceNo;
   el.invoiceDate.value = new Date().toISOString().slice(0, 10);
   el.creditBillDate.value = "";
@@ -440,6 +517,11 @@ function clearForm(nextInvoiceNo) {
   el.useIgst.checked = false;
   el.itemsBody.innerHTML = "";
   rowTemplate();
+  if (el.unlockInvoiceNo) {
+    el.unlockInvoiceNo.checked = false;
+    el.invoiceNo.readOnly = true;
+  }
+  updateNewCustomerButton();
 }
 
 document.getElementById("addRowBtn").addEventListener("click", () => rowTemplate());
@@ -452,6 +534,7 @@ document.getElementById("newInvoiceBtn").addEventListener("click", async () => {
   try {
     const data = await request("/api/bootstrap");
     clearForm(data.nextInvoiceNo);
+    clearDraft();
   } catch (error) {
     setBackendStatus(error.message);
   }
@@ -459,14 +542,13 @@ document.getElementById("newInvoiceBtn").addEventListener("click", async () => {
 
 el.saveBtn.addEventListener("click", async () => {
   const payload = getPayload();
-  if (!payload.customerName || !payload.items.length) {
-    alert("Customer and at least one item are required.");
-    return;
-  }
+  const validationError = validatePayload(payload);
+  if (validationError) return alert(validationError);
   try {
     await request("/api/invoices", { method: "POST", body: JSON.stringify(payload) });
     const data = await request("/api/bootstrap");
     clearForm(data.nextInvoiceNo);
+    clearDraft();
     await loadInvoices();
     alert("Invoice saved.");
   } catch (error) {
@@ -477,6 +559,8 @@ el.saveBtn.addEventListener("click", async () => {
 el.updateBtn.addEventListener("click", async () => {
   if (!state.editingInvoiceId) return;
   const payload = getPayload();
+  const validationError = validatePayload(payload);
+  if (validationError) return alert(validationError);
   try {
     await request(`/api/invoices/${state.editingInvoiceId}`, {
       method: "PUT",
@@ -488,6 +572,61 @@ el.updateBtn.addEventListener("click", async () => {
     setBackendStatus(error.message);
   }
 });
+
+if (el.duplicateBtn) {
+  el.duplicateBtn.addEventListener("click", async () => {
+    if (!state.editingInvoiceId) return;
+    try {
+      const created = await request(`/api/invoices/${state.editingInvoiceId}/duplicate`, { method: "POST" });
+      await loadInvoices();
+      await loadInvoice(created.id);
+      alert(`Invoice duplicated as ${created.invoiceNo}.`);
+    } catch (error) {
+      setBackendStatus(error.message);
+    }
+  });
+}
+
+if (el.deleteBtn) {
+  el.deleteBtn.addEventListener("click", async () => {
+    if (!state.editingInvoiceId) return;
+    if (!window.confirm("Delete this invoice permanently?")) return;
+    try {
+      await request(`/api/invoices/${state.editingInvoiceId}`, { method: "DELETE" });
+      const data = await request("/api/bootstrap");
+      clearForm(data.nextInvoiceNo);
+      await loadInvoices();
+      alert("Invoice deleted.");
+    } catch (error) {
+      setBackendStatus(error.message);
+    }
+  });
+}
+
+if (el.exportBtn) {
+  el.exportBtn.addEventListener("click", async () => {
+    try {
+      const data = await request("/api/export");
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `kmr-backup-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      setBackendStatus(error.message);
+    }
+  });
+}
+
+if (el.unlockInvoiceNo) {
+  el.unlockInvoiceNo.addEventListener("change", () => {
+    el.invoiceNo.readOnly = !el.unlockInvoiceNo.checked;
+  });
+}
 
 el.customerName.addEventListener("input", () => {
   const query = el.customerName.value.trim().toLowerCase();
@@ -555,13 +694,38 @@ if (el.footerCustomText) {
   });
 }
 
+function attachDraftListeners() {
+  const directInputs = [
+    el.invoiceDate,
+    el.creditBillDate,
+    el.vehicleNo,
+    el.customerName,
+    el.customerAddress,
+    el.customerGstin,
+    el.cgstPercent,
+    el.sgstPercent,
+    el.igstPercent,
+    el.customNotes,
+    el.footerCustomText,
+  ].filter(Boolean);
+  directInputs.forEach((node) => node.addEventListener("input", persistDraft));
+  directInputs.forEach((node) => node.addEventListener("change", persistDraft));
+  if (el.useIgst) el.useIgst.addEventListener("change", persistDraft);
+  if (el.itemsBody) {
+    el.itemsBody.addEventListener("input", persistDraft);
+    el.itemsBody.addEventListener("change", persistDraft);
+  }
+}
+
 async function init() {
   rowTemplate();
   applyTaxMode();
+  attachDraftListeners();
   try {
     await loadBootstrap();
     updateNewCustomerButton();
     await loadInvoices();
+    restoreDraftIfAny();
   } catch (error) {
     const msg =
       "Backend disconnected. Add DATABASE_URL in Vercel settings, then redeploy. Error: " + error.message;
