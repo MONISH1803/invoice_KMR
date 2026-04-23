@@ -467,6 +467,18 @@ button {
   width: auto;
 }
 
+.mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.mode-toggle input[type="checkbox"] {
+  width: auto;
+}
+
 .primary {
   background: #1a73e8;
   color: #fff;

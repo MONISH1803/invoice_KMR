@@ -3,10 +3,11 @@ const state = {
   customers: [],
   editingInvoiceId: null,
   backendReady: true,
+  strictMode: false,
 };
 const DRAFT_STORAGE_KEY = "kmr_invoice_draft_v1";
 const GSTIN_PATTERN = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/;
-const ALLOW_EVERYTHING_MODE = true;
+const STRICT_MODE_STORAGE_KEY = "kmr_strict_mode_enabled";
 
 const el = {
   invoiceNo: document.getElementById("invoiceNo"),
@@ -39,6 +40,7 @@ const el = {
   deleteBtn: document.getElementById("deleteBtn"),
   exportBtn: document.getElementById("exportBtn"),
   unlockInvoiceNo: document.getElementById("unlockInvoiceNo"),
+  strictModeToggle: document.getElementById("strictModeToggle"),
   amountWords: document.getElementById("amountWords"),
   customNotes: document.getElementById("customNotes"),
   footerCustomText: document.getElementById("footerCustomText"),
@@ -134,7 +136,7 @@ function setActionButtonsForEditing(isEditing) {
 }
 
 function validatePayload(payload) {
-  if (ALLOW_EVERYTHING_MODE) return "";
+  if (!state.strictMode) return "";
   if (!payload.customerName) {
     return "Customer name is required.";
   }
@@ -742,9 +744,28 @@ function attachDraftListeners() {
   }
 }
 
+function loadStrictModeSetting() {
+  try {
+    state.strictMode = localStorage.getItem(STRICT_MODE_STORAGE_KEY) === "1";
+  } catch {
+    state.strictMode = false;
+  }
+  if (el.strictModeToggle) el.strictModeToggle.checked = state.strictMode;
+}
+
+function saveStrictModeSetting(enabled) {
+  state.strictMode = Boolean(enabled);
+  try {
+    localStorage.setItem(STRICT_MODE_STORAGE_KEY, state.strictMode ? "1" : "0");
+  } catch {
+    // ignore storage failures
+  }
+}
+
 async function init() {
   rowTemplate();
   applyTaxMode();
+  loadStrictModeSetting();
   attachDraftListeners();
   try {
     await loadBootstrap();
@@ -759,3 +780,10 @@ async function init() {
 }
 
 init();
+
+if (el.strictModeToggle) {
+  el.strictModeToggle.addEventListener("change", () => {
+    saveStrictModeSetting(el.strictModeToggle.checked);
+    setBackendStatus(state.strictMode ? "Strict mode enabled." : "");
+  });
+}
