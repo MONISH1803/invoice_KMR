@@ -6,6 +6,7 @@ const state = {
 };
 const DRAFT_STORAGE_KEY = "kmr_invoice_draft_v1";
 const GSTIN_PATTERN = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/;
+const ALLOW_EVERYTHING_MODE = true;
 
 const el = {
   invoiceNo: document.getElementById("invoiceNo"),
@@ -133,6 +134,7 @@ function setActionButtonsForEditing(isEditing) {
 }
 
 function validatePayload(payload) {
+  if (ALLOW_EVERYTHING_MODE) return "";
   if (!payload.customerName) {
     return "Customer name is required.";
   }
@@ -504,10 +506,7 @@ async function loadInvoice(id) {
   el.itemsBody.innerHTML = "";
   invoice.items.forEach((item) => rowTemplate(item));
   recalc();
-  if (el.unlockInvoiceNo) {
-    el.unlockInvoiceNo.checked = false;
-    el.invoiceNo.readOnly = true;
-  }
+  if (el.invoiceNo) el.invoiceNo.readOnly = false;
 }
 
 function clearForm(nextInvoiceNo) {
@@ -528,10 +527,7 @@ function clearForm(nextInvoiceNo) {
   el.useIgst.checked = false;
   el.itemsBody.innerHTML = "";
   rowTemplate();
-  if (el.unlockInvoiceNo) {
-    el.unlockInvoiceNo.checked = false;
-    el.invoiceNo.readOnly = true;
-  }
+  if (el.invoiceNo) el.invoiceNo.readOnly = false;
   updateNewCustomerButton();
 }
 
