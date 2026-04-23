@@ -229,9 +229,10 @@ function recalc() {
     row.querySelector(".lineAmount").textContent = amount(line);
     subtotal += line;
   });
-  const cgst = subtotal * (Number(el.cgstPercent.value || 0) / 100);
-  const sgst = subtotal * (Number(el.sgstPercent.value || 0) / 100);
-  const igst = el.useIgst.checked ? subtotal * (Number(el.igstPercent.value || 0) / 100) : 0;
+  const useIgst = el.useIgst.checked;
+  const cgst = useIgst ? 0 : subtotal * (Number(el.cgstPercent.value || 0) / 100);
+  const sgst = useIgst ? 0 : subtotal * (Number(el.sgstPercent.value || 0) / 100);
+  const igst = useIgst ? subtotal * (Number(el.igstPercent.value || 0) / 100) : 0;
   const grandTotal = subtotal + cgst + sgst + igst;
   const roundedGrandTotal = Math.round(grandTotal);
 

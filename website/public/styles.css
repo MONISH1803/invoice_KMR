@@ -84,7 +84,7 @@ body {
   gap: 0;
   page-break-inside: avoid;
   border-top: none;
-  border-bottom: 1px solid #111;
+  border-bottom: none;
 }
 
 .customer-table {
@@ -212,7 +212,7 @@ button {
 
 .items {
   width: 100%;
-  margin-top: -1px;
+  margin-top: 0;
   border-collapse: collapse;
   table-layout: fixed;
   border-top: none;
@@ -327,6 +327,8 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tax-inline-input {
