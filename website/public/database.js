@@ -6,6 +6,9 @@ const state = {
   customerSearch: "",
   productSearch: "",
   productHsnFilter: "",
+  customerPage: 1,
+  productPage: 1,
+  pageSize: 25,
 };
 
 const el = {
@@ -19,6 +22,7 @@ const el = {
   customerCancelBtn: document.getElementById("customerCancelBtn"),
   customerSearchInput: document.getElementById("customerSearchInput"),
   customerTable: document.getElementById("customerTable"),
+  customerPagination: document.getElementById("customerPagination"),
   productForm: document.getElementById("productForm"),
   productDescriptionInput: document.getElementById("productDescriptionInput"),
   productHsnInput: document.getElementById("productHsnInput"),
@@ -28,6 +32,8 @@ const el = {
   productSearchInput: document.getElementById("productSearchInput"),
   productHsnFilterInput: document.getElementById("productHsnFilterInput"),
   productTable: document.getElementById("productTable"),
+  productPagination: document.getElementById("productPagination"),
+  duplicatesPanel: document.getElementById("duplicatesPanel"),
 };
 
 function setStatus(message = "") {
@@ -60,14 +66,20 @@ function renderCustomers() {
     const haystack = `${customer.name || ""} ${customer.gstin || ""} ${customer.phone || ""} ${customer.address || ""}`.toLowerCase();
     return haystack.includes(query);
   });
+  const pageCount = Math.max(1, Math.ceil(filteredCustomers.length / state.pageSize));
+  state.customerPage = Math.min(state.customerPage, pageCount);
+  const start = (state.customerPage - 1) * state.pageSize;
+  const pagedCustomers = filteredCustomers.slice(start, start + state.pageSize);
 
-  const rows = filteredCustomers
+  const rows = pagedCustomers
     .map(
       (customer) => `<tr>
       <td>${escapeHtml(customer.name || "")}</td>
       <td>${escapeHtml(customer.gstin || "")}</td>
       <td>${escapeHtml(customer.phone || "")}</td>
       <td>${escapeHtml(customer.address || "")}</td>
+      <td>${formatDateTime(customer.created_at)}</td>
+      <td>${formatDateTime(customer.updated_at)}</td>
       <td class="db-cell-actions">
         <button class="secondary customer-edit" data-id="${customer.id}">Edit</button>
         <button class="secondary customer-delete" data-id="${customer.id}">Delete</button>
@@ -83,11 +95,14 @@ function renderCustomers() {
         <th>GSTIN</th>
         <th>Phone</th>
         <th>Address</th>
+        <th>Created</th>
+        <th>Updated</th>
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>${rows || '<tr><td colspan="5">No matching customers.</td></tr>'}</tbody>
+    <tbody>${rows || '<tr><td colspan="7">No matching customers.</td></tr>'}</tbody>
   </table>`;
+  renderPagination(el.customerPagination, state.customerPage, pageCount, "customer");
 }
 
 function renderProducts() {
@@ -99,13 +114,19 @@ function renderProducts() {
     const haystack = `${product.description || ""} ${product.hsn_code || ""} ${Number(product.price || 0).toFixed(2)}`.toLowerCase();
     return haystack.includes(query);
   });
+  const pageCount = Math.max(1, Math.ceil(filteredProducts.length / state.pageSize));
+  state.productPage = Math.min(state.productPage, pageCount);
+  const start = (state.productPage - 1) * state.pageSize;
+  const pagedProducts = filteredProducts.slice(start, start + state.pageSize);
 
-  const rows = filteredProducts
+  const rows = pagedProducts
     .map(
       (product) => `<tr>
       <td>${escapeHtml(product.description || "")}</td>
       <td>${escapeHtml(product.hsn_code || "")}</td>
       <td>${Number(product.price || 0).toFixed(2)}</td>
+      <td>${formatDateTime(product.created_at)}</td>
+      <td>${formatDateTime(product.updated_at)}</td>
       <td class="db-cell-actions">
         <button class="secondary product-edit" data-id="${product.id}">Edit</button>
         <button class="secondary product-delete" data-id="${product.id}">Delete</button>
@@ -120,10 +141,37 @@ function renderProducts() {
         <th>Description</th>
         <th>HSN</th>
         <th>Rate</th>
+        <th>Created</th>
+        <th>Updated</th>
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>${rows || '<tr><td colspan="4">No matching products.</td></tr>'}</tbody>
+    <tbody>${rows || '<tr><td colspan="6">No matching products.</td></tr>'}</tbody>
+  </table>`;
+  renderPagination(el.productPagination, state.productPage, pageCount, "product");
+}
+
+function renderDuplicates() {
+  const customerDupes = collectDuplicates(state.customers, "name");
+  const productDupes = collectDuplicates(state.products, "description");
+  const customerRows = customerDupes.length
+    ? customerDupes
+        .map(
+          (group) => `<tr><td>Customer</td><td>${escapeHtml(group.key)}</td><td>${group.count}</td><td>${escapeHtml(group.values.join(" | "))}</td></tr>`
+        )
+        .join("")
+    : "";
+  const productRows = productDupes.length
+    ? productDupes
+        .map(
+          (group) => `<tr><td>Product</td><td>${escapeHtml(group.key)}</td><td>${group.count}</td><td>${escapeHtml(group.values.join(" | "))}</td></tr>`
+        )
+        .join("")
+    : "";
+  const rows = customerRows + productRows;
+  el.duplicatesPanel.innerHTML = `<table>
+    <thead><tr><th>Type</th><th>Normalized Key</th><th>Matches</th><th>Records</th></tr></thead>
+    <tbody>${rows || '<tr><td colspan="4">No possible duplicates detected.</td></tr>'}</tbody>
   </table>`;
 }
 
@@ -147,6 +195,7 @@ async function loadData() {
   state.products = products;
   renderCustomers();
   renderProducts();
+  renderDuplicates();
 }
 
 el.customerForm.addEventListener("submit", async (event) => {
@@ -204,14 +253,17 @@ el.customerCancelBtn.addEventListener("click", resetCustomerForm);
 el.productCancelBtn.addEventListener("click", resetProductForm);
 el.customerSearchInput.addEventListener("input", () => {
   state.customerSearch = el.customerSearchInput.value || "";
+  state.customerPage = 1;
   renderCustomers();
 });
 el.productSearchInput.addEventListener("input", () => {
   state.productSearch = el.productSearchInput.value || "";
+  state.productPage = 1;
   renderProducts();
 });
 el.productHsnFilterInput.addEventListener("input", () => {
   state.productHsnFilter = el.productHsnFilterInput.value || "";
+  state.productPage = 1;
   renderProducts();
 });
 
@@ -272,6 +324,24 @@ el.productTable.addEventListener("click", async (event) => {
   }
 });
 
+if (el.customerPagination) {
+  el.customerPagination.addEventListener("click", (event) => {
+    const btn = event.target.closest(".db-page-btn");
+    if (!btn || btn.dataset.type !== "customer") return;
+    state.customerPage = Number(btn.dataset.page || 1);
+    renderCustomers();
+  });
+}
+
+if (el.productPagination) {
+  el.productPagination.addEventListener("click", (event) => {
+    const btn = event.target.closest(".db-page-btn");
+    if (!btn || btn.dataset.type !== "product") return;
+    state.productPage = Number(btn.dataset.page || 1);
+    renderProducts();
+  });
+}
+
 function escapeHtml(text) {
   return String(text)
     .replaceAll("&", "&amp;")
@@ -279,6 +349,51 @@ function escapeHtml(text) {
     .replaceAll(">", "&gt;")
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
+}
+
+function normalizeKey(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function collectDuplicates(rows, field) {
+  const groups = new Map();
+  rows.forEach((row) => {
+    const raw = String(row[field] || "").trim();
+    if (!raw) return;
+    const key = normalizeKey(raw);
+    if (!key) return;
+    if (!groups.has(key)) groups.set(key, new Set());
+    groups.get(key).add(raw);
+  });
+  return [...groups.entries()]
+    .map(([key, values]) => ({ key, count: values.size, values: [...values] }))
+    .filter((group) => group.count > 1)
+    .sort((a, b) => b.count - a.count || a.key.localeCompare(b.key));
+}
+
+function formatDateTime(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleString();
+}
+
+function renderPagination(target, currentPage, pageCount, type) {
+  if (!target) return;
+  if (pageCount <= 1) {
+    target.innerHTML = "";
+    return;
+  }
+  target.innerHTML = `<button class="secondary db-page-btn" data-type="${type}" data-page="${Math.max(1, currentPage - 1)}" ${
+    currentPage === 1 ? "disabled" : ""
+  }>Prev</button>
+  <span>Page ${currentPage} of ${pageCount}</span>
+  <button class="secondary db-page-btn" data-type="${type}" data-page="${Math.min(pageCount, currentPage + 1)}" ${
+    currentPage === pageCount ? "disabled" : ""
+  }>Next</button>`;
 }
 
 async function init() {
