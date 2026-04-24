@@ -4,10 +4,12 @@ const state = {
   editingInvoiceId: null,
   backendReady: true,
   strictMode: false,
+  showCreditBillDate: true,
 };
 const DRAFT_STORAGE_KEY = "kmr_invoice_draft_v1";
 const GSTIN_PATTERN = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/;
 const STRICT_MODE_STORAGE_KEY = "kmr_strict_mode_enabled";
+const CREDIT_DATE_VISIBLE_STORAGE_KEY = "kmr_credit_date_visible";
 
 const el = {
   invoiceNo: document.getElementById("invoiceNo"),
@@ -41,6 +43,7 @@ const el = {
   exportBtn: document.getElementById("exportBtn"),
   unlockInvoiceNo: document.getElementById("unlockInvoiceNo"),
   strictModeToggle: document.getElementById("strictModeToggle"),
+  creditDateToggle: document.getElementById("creditDateToggle"),
   amountWords: document.getElementById("amountWords"),
   customNotes: document.getElementById("customNotes"),
   footerCustomText: document.getElementById("footerCustomText"),
@@ -48,6 +51,7 @@ const el = {
   customerQuickAddRow: document.getElementById("customerQuickAddRow"),
   backendStatus: document.getElementById("backendStatus"),
   customerSuggestions: document.getElementById("customerSuggestions"),
+  creditRow: document.querySelector(".credit-row"),
 };
 
 function amount(value) {
@@ -365,7 +369,7 @@ function getPayload() {
   return {
     invoiceNo: el.invoiceNo.value.trim(),
     invoiceDate: el.invoiceDate.value,
-    creditBillDate: el.creditBillDate.value || null,
+    creditBillDate: state.showCreditBillDate ? el.creditBillDate.value || null : null,
     vehicleNo: el.vehicleNo.value.trim(),
     customerName: el.customerName.value.trim(),
     customerAddress: el.customerAddress.value.trim(),
@@ -762,10 +766,37 @@ function saveStrictModeSetting(enabled) {
   }
 }
 
+function applyCreditDateVisibility() {
+  if (el.creditRow) el.creditRow.style.display = state.showCreditBillDate ? "" : "none";
+  if (el.creditBillDate) el.creditBillDate.disabled = !state.showCreditBillDate;
+  if (el.creditDateToggle) el.creditDateToggle.checked = state.showCreditBillDate;
+}
+
+function loadCreditDateSetting() {
+  try {
+    const stored = localStorage.getItem(CREDIT_DATE_VISIBLE_STORAGE_KEY);
+    state.showCreditBillDate = stored !== "0";
+  } catch {
+    state.showCreditBillDate = true;
+  }
+  applyCreditDateVisibility();
+}
+
+function saveCreditDateSetting(enabled) {
+  state.showCreditBillDate = Boolean(enabled);
+  try {
+    localStorage.setItem(CREDIT_DATE_VISIBLE_STORAGE_KEY, state.showCreditBillDate ? "1" : "0");
+  } catch {
+    // ignore storage failures
+  }
+  applyCreditDateVisibility();
+}
+
 async function init() {
   rowTemplate();
   applyTaxMode();
   loadStrictModeSetting();
+  loadCreditDateSetting();
   attachDraftListeners();
   try {
     await loadBootstrap();
@@ -785,5 +816,11 @@ if (el.strictModeToggle) {
   el.strictModeToggle.addEventListener("change", () => {
     saveStrictModeSetting(el.strictModeToggle.checked);
     setBackendStatus(state.strictMode ? "Strict mode enabled." : "");
+  });
+}
+
+if (el.creditDateToggle) {
+  el.creditDateToggle.addEventListener("change", () => {
+    saveCreditDateSetting(el.creditDateToggle.checked);
   });
 }
