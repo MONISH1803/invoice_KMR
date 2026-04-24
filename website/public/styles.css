@@ -145,6 +145,12 @@ body.credit-date-hidden .meta-table tr.credit-row {
   display: none !important;
 }
 
+body.credit-date-hidden .meta-table tr.vehicle-row th,
+body.credit-date-hidden .meta-table tr.vehicle-row td {
+  vertical-align: top;
+  padding-top: 6px;
+}
+
 .meta-table tr.no-print th,
 .meta-table tr.no-print td {
   border-bottom: none;
@@ -722,5 +728,11 @@ button {
 
   body.credit-date-hidden .meta-table tr.credit-row {
     display: none !important;
+  }
+
+  body.credit-date-hidden .meta-table tr.vehicle-row th,
+  body.credit-date-hidden .meta-table tr.vehicle-row td {
+    vertical-align: top;
+    padding-top: 4px;
   }
 }
