@@ -147,6 +147,7 @@ body.credit-date-hidden .meta-table tr.credit-row {
 
 body.credit-date-hidden .meta-table tr.vehicle-row th,
 body.credit-date-hidden .meta-table tr.vehicle-row td {
+  height: 108px;
   vertical-align: top;
   padding-top: 6px;
 }
@@ -732,6 +733,7 @@ button {
 
   body.credit-date-hidden .meta-table tr.vehicle-row th,
   body.credit-date-hidden .meta-table tr.vehicle-row td {
+    height: 108px;
     vertical-align: top;
     padding-top: 4px;
   }
