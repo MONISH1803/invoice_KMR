@@ -141,6 +141,10 @@ body {
   height: 36px;
 }
 
+body.credit-date-hidden .meta-table tr.credit-row {
+  display: none !important;
+}
+
 .meta-table tr.no-print th,
 .meta-table tr.no-print td {
   border-bottom: none;
@@ -713,6 +717,10 @@ button {
   }
 
   .no-print {
+    display: none !important;
+  }
+
+  body.credit-date-hidden .meta-table tr.credit-row {
     display: none !important;
   }
 }

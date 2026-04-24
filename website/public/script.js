@@ -768,8 +768,12 @@ function saveStrictModeSetting(enabled) {
 
 function applyCreditDateVisibility() {
   if (el.creditRow) el.creditRow.style.display = state.showCreditBillDate ? "" : "none";
-  if (el.creditBillDate) el.creditBillDate.disabled = !state.showCreditBillDate;
+  if (el.creditBillDate) {
+    el.creditBillDate.disabled = !state.showCreditBillDate;
+    if (!state.showCreditBillDate) el.creditBillDate.value = "";
+  }
   if (el.creditDateToggle) el.creditDateToggle.checked = state.showCreditBillDate;
+  document.body.classList.toggle("credit-date-hidden", !state.showCreditBillDate);
 }
 
 function loadCreditDateSetting() {
